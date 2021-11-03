@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@EntityListeners(value = BaseModelListener.class)
 public class Service extends BaseModel {
 
     @Column(name = "name", length = 250)

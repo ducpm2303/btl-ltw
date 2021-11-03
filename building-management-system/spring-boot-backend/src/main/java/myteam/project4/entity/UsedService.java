@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@EntityListeners(value = BaseModelListener.class)
 public class UsedService extends BaseModel{
 
     @Column(name = "start_date")
