@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@EntityListeners(value = BaseModelListener.class)
 public class CompanyEmployee extends BaseModel {
 
     @Column(name = "code", length = 50)

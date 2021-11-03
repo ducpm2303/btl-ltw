@@ -25,6 +25,7 @@ spring:
     basename: messages
     use-code-as-default-message: true
 
+#
 #cloud:
 #  aws:
 #    region:
@@ -41,10 +42,10 @@ spring:
 #          InstanceMetadataServiceResourceFetcher: error
 #        util:
 #          EC2MetadataUtils: error
-
-#application:
+#
+application:
 #  swagger:
 #    base-url: localhost:8080
-#  jwt:
-#    confirmation-secret: 123456
-#    time-to-live: 3600 # seconds
+  jwt:
+    confirmation-secret: 123456
+    time-to-live: 3600 # seconds

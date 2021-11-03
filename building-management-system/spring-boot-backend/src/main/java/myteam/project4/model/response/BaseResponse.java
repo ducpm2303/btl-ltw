@@ -3,9 +3,7 @@ package myteam.project4.model.response;
 
 import lombok.Getter;
 import lombok.Setter;
-import myteam.project4.constant.DemoConstant;
 import myteam.project4.exception.ErrorResponse;
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.http.HttpStatus;
 
 @Getter
@@ -13,12 +11,10 @@ import org.springframework.http.HttpStatus;
 public class BaseResponse<T> {
     private int code;
     private T data;
-    private String traceId;
 
     private BaseResponse(int code, T data) {
         this.code = code;
         this.data = data;
-        this.traceId = ThreadContext.get(DemoConstant.Tracing.TRACE_ID);
     }
 
     public static <T> BaseResponse<T> ofSuccess(T data) {
