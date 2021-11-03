@@ -7,7 +7,6 @@ import myteam.project4.exception.BusinessCode;
 import myteam.project4.exception.BusinessException;
 import myteam.project4.mapper.CompanyEmployeeMapper;
 import myteam.project4.model.request.CompanyEmployeeRequest;
-import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.CompanyEmployeeResponse;
 import myteam.project4.repository.CompanyEmployeeRepository;
 import myteam.project4.service.CompanyEmployeeService;
