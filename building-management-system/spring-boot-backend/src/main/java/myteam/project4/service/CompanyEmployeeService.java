@@ -1,7 +1,6 @@
 package myteam.project4.service;
 
 import myteam.project4.model.request.CompanyEmployeeRequest;
-import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.CompanyEmployeeResponse;
 
 import java.util.List;

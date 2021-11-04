@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+
 @Transactional
 public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee, Long> {
 
@@ -21,4 +22,5 @@ public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee
             "where id = :id"
     )
     void updateById(Long id, String code, Timestamp dateOfBirth, String identification, String name, String phone, Long company_id);
+
 }
