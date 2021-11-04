@@ -1,5 +1,6 @@
 package myteam.project4.controller;
 
+import lombok.AllArgsConstructor;
 import myteam.project4.model.request.CompanyEmployeeRequest;
 import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.CompanyEmployeeResponse;
@@ -8,16 +9,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("public-api/v1.0.0/company_employee")
 public class CompanyEmployeeController {
     private final CompanyEmployeeService companyEmployeeService;
 
-    public CompanyEmployeeController(CompanyEmployeeService companyEmployeeService) {
-        this.companyEmployeeService = companyEmployeeService;
-    }
 
-    @PostMapping
+    @PostMapping("create")
     public BaseResponse<CompanyEmployeeResponse> createCompanyEmployee(@RequestBody CompanyEmployeeRequest request){
         return BaseResponse.ofSuccess(companyEmployeeService.save(request));
     }

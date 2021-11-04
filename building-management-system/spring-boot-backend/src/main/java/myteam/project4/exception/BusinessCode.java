@@ -15,4 +15,7 @@ public class BusinessCode {
 
     public static final ErrorResponse NOT_FOUND_COMPANY_EMPLOYEE =
             new ErrorResponse("NOT_FOUND_COMPANY_EMPLOYEE", "Not found company employee with id", HttpStatus.NOT_FOUND);
+
+    public static final ErrorResponse NOT_FOUND_BUILDING_EMPLOYEE =
+            new ErrorResponse("NOT_FOUND_BUILDING_EMPLOYEE", "Not found building employee with id", HttpStatus.NOT_FOUND);
 }
