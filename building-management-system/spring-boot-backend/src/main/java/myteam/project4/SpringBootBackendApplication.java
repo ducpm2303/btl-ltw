@@ -8,7 +8,7 @@ public class SpringBootBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootBackendApplication.class, args);
-		System.out.println("Duc dz");
+		System.out.println("Duc xl");
 	}
 
 }
