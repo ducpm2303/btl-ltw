@@ -66,8 +66,8 @@ class CompanyTable extends Component {
                                                     <td>0988405038</td>
                                                     <td>1000</td>
                                                     <td>
-                                                        <button type="button" class="btn btn-primary">Delete</button>
-                                                        <button type="button" class="btn btn-primary">Edit</button>
+                                                        <button type="button" class="btn btn-outline-success">Delete</button>
+                                                        <button type="button" class="btn btn-outline-success">Edit</button>
                                                     </td>
                                                 </tr>
                                                 <tr>
