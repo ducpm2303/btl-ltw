@@ -8,7 +8,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "parking_service", schema = "btl_ltw")
+@Table(name = "parking_service")
 @PrimaryKeyJoinColumn(name = "service_id")
 @Data
 @SuperBuilder(toBuilder = true)

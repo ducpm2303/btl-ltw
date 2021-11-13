@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "company", schema = "btl_ltw")
+@Table(name = "company")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor

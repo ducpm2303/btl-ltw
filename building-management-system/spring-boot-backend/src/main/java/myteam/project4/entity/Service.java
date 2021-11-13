@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "service", schema = "btl_ltw")
+@Table(name = "service")
 @Inheritance(strategy=InheritanceType.JOINED)
 @Data
 @SuperBuilder(toBuilder = true)

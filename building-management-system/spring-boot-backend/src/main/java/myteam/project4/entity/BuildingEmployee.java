@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "building_employee", schema = "btl_ltw")
+@Table(name = "building_employee")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor

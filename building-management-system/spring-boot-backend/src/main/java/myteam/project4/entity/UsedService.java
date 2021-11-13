@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "used_service", schema = "btl_ltw")
+@Table(name = "used_service")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor

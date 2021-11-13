@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "maintenance_service", schema = "btl_ltw")
+@Table(name = "maintenance_service")
 @PrimaryKeyJoinColumn(name = "service_id")
 @Data
 @SuperBuilder(toBuilder = true)
