@@ -40,7 +40,4 @@ public class BuildingEmployee extends BaseModel {
     @Column(name = "level", length = 250)
     private String level;
 
-    @ManyToOne()
-    @JoinColumn(name = "building_id")
-    private Building building;
 }

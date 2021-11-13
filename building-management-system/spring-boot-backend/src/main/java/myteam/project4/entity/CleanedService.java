@@ -10,26 +10,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "service", schema = "btl_ltw")
-@Inheritance(strategy=InheritanceType.JOINED)
+@Table(name = "cleaned_service", schema = "btl_ltw")
+@PrimaryKeyJoinColumn(name = "service_id")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @EntityListeners(value = BaseModelListener.class)
-public class Service extends BaseModel {
+public class CleanedService extends  Service{
 
-    @Column(name = "name", length = 250)
-    private String name;
-
-    @Column(name = "type", length = 250)
-    private String type;
-
-    @Column(name = "price")
-    private Float price;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
-    private List<UsedService> usedServiceList;
-
+    @Column(name = "any")
+    private String any;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cleaned_service")
+//    private List<UsedService> usedServiceList;
 }

@@ -17,7 +17,7 @@ import java.sql.Timestamp;
 public class BaseModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, insertable = false, updatable = false)
     @EqualsAndHashCode.Include
     protected Long id;

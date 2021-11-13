@@ -10,24 +10,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "building", schema = "btl_ltw")
+@Table(name = "maintenance_service", schema = "btl_ltw")
+@PrimaryKeyJoinColumn(name = "service_id")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @EntityListeners(value = BaseModelListener.class)
-public class Building extends BaseModel {
+public class MaintenanceService extends Service{
 
-    @Column(name = "name", length = 200)
-    private String name;
+    @Column(name = "period")
+    private Long period;
 
-    @Column(name = "address", length = 200)
-    private String address;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "building")
-    private List<BuildingEmployee> buildingEmployeeList;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "building")
-    private List<Company> companyList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "maintenance_service")
+//    private List<UsedService> usedServiceList;
 }
