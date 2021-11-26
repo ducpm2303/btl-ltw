@@ -29,23 +29,4 @@ public class UsedService extends BaseModel{
     @JoinColumn(name = "service_id")
     private Service service;
 
-//    @ManyToOne()
-//    @JoinColumn(name = "food_service_id")
-//    private FoodService foodService;
-//
-//    @ManyToOne()
-//    @JoinColumn(name = "maintenance_service_id")
-//    private MaintenanceService maintenanceService;
-//
-//    @ManyToOne()
-//    @JoinColumn(name = "parking_service")
-//    private ParkingService parkingService;
-//
-//    @ManyToOne()
-//    @JoinColumn(name = "protected_service")
-//    private ProtectedService protectedService;
-//
-//    @ManyToOne()
-//    @JoinColumn(name = "cleaned_service_id")
-//    private CleanedService cleanedService;
 }

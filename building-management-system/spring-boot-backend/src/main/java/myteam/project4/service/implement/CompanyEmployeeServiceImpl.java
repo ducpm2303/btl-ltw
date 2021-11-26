@@ -66,4 +66,10 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
         List<CompanyEmployee> list = repository.findAll();
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
+
+    @Override
+    public List<CompanyEmployeeResponse> findByCompanyId(Long company_id) {
+        List<CompanyEmployee> list = repository.findByCompanyId(company_id);
+        return list.stream().map(mapper::to).collect(Collectors.toList());
+    }
 }

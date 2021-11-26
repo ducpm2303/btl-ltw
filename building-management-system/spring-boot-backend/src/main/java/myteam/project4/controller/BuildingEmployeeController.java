@@ -32,11 +32,11 @@ public class BuildingEmployeeController {
         return BaseResponse.ofSuccess(buildingEmployeeService.save(request));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/update/{id}")
     BaseResponse<BuildingEmployeeResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody BuildingEmployeeRequest request){
         return BaseResponse.ofSuccess(buildingEmployeeService.updateById(id,request));
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping("/delete/{id}")
     BaseResponse<String> deleteBuildingEmployeeById(@PathVariable Long id){
         return BaseResponse.ofSuccess(buildingEmployeeService.deleteById(id));
     }

@@ -31,9 +31,6 @@ public class Company extends BaseModel {
     @Column(name = "field_of_activity", length = 250)
     private String fieldOfActivity;
 
-    @Column(name = "number_of_employee")
-    private Long numberOfEmployee;
-
     @Column(name = "floor", length = 250)
     private String floor;
 
@@ -42,7 +39,6 @@ public class Company extends BaseModel {
 
     @Column(name = "area")
     private Float area;
-
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<CompanyEmployee> companyEmployeeList;
