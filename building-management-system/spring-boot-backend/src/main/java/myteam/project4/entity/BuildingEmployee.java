@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "building_employee", schema = "btl_ltw")
+@Table(name = "building_employee")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
@@ -40,7 +40,4 @@ public class BuildingEmployee extends BaseModel {
     @Column(name = "level", length = 250)
     private String level;
 
-    @ManyToOne()
-    @JoinColumn(name = "building_id")
-    private Building building;
 }

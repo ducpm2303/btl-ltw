@@ -19,8 +19,7 @@ public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmploy
             "level = :level, " +
             "position = :position, " +
             "name = :name, " +
-            "phone = :phone, " +
-            "building.id = :building_id " +
+            "phone = :phone " +
             "where id = :id")
-    void updateById(Long id, String code, Timestamp dateOfBirth, String address, String level, String position, String name, String phone, Long building_id);
+    void updateById(Long id, String code, Timestamp dateOfBirth, String address, String level, String position, String name, String phone);
 }

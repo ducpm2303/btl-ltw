@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "company", schema = "btl_ltw")
+@Table(name = "company")
 @Data
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
@@ -43,9 +43,6 @@ public class Company extends BaseModel {
     @Column(name = "area")
     private Float area;
 
-    @ManyToOne()
-    @JoinColumn(name = "building_id")
-    private Building building;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<CompanyEmployee> companyEmployeeList;

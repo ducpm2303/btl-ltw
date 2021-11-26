@@ -12,5 +12,4 @@ public class BuildingEmployeeResponse {
     private String phone;
     private String position;
     private String level;
-    private Long building_id;
 }

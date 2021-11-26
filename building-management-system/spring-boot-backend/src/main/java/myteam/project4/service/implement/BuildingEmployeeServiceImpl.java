@@ -40,8 +40,7 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
                 buildingEmployee.getLevel(),
                 buildingEmployee.getPosition(),
                 buildingEmployee.getName(),
-                buildingEmployee.getPhone(),
-                buildingEmployee.getBuilding().getId()
+                buildingEmployee.getPhone()
         );
         buildingEmployee.setId(id);
         return mapper.to(buildingEmployee);
