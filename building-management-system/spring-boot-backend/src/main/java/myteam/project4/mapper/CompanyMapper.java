@@ -26,6 +26,10 @@ public class CompanyMapper implements Mapper<Company> {
     public CompanyResponse to(Company company){
         CompanyResponse companyResponse = new CompanyResponse();
         BeanUtils.copyProperties(company,companyResponse);
+        if(company.getCompanyEmployeeList() != null){
+            Long numberOfEmployee = Long.valueOf(company.getCompanyEmployeeList().size());
+            companyResponse.setNumberOfEmployee(Long.valueOf(company.getCompanyEmployeeList().size()));
+        }
         return companyResponse;
     }
 
