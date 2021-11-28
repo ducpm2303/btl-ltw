@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
     private Timestamp convertStringToTimestamp(String dateOfBirth) {
-        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localDateTime = LocalDateTime.from(formatDateTime.parse(dateOfBirth + " 00:00:00"));
         return Timestamp.valueOf(localDateTime);
     }

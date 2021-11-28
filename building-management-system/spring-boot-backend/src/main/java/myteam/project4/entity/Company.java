@@ -31,9 +31,6 @@ public class Company extends BaseModel {
     @Column(name = "field_of_activity", length = 250)
     private String fieldOfActivity;
 
-    @Column(name = "number_of_employee")
-    private Long numberOfEmployee;
-
     @Column(name = "floor", length = 250)
     private String floor;
 
