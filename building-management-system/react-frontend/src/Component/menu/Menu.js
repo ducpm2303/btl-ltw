@@ -21,7 +21,7 @@ class Menu extends Component {
                                     <div class="collapse" id="collapseCompany" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="/companies">Company Table</a>
-                                            <a class="nav-link" href="/companyEmployee">Company Employee</a>
+                                            <a class="nav-link" href="/company-employee">Company Employee</a>
                                         </nav>
                                     </div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseBuilding" aria-expanded="false" aria-controls="collapseBuilding">
@@ -30,8 +30,8 @@ class Menu extends Component {
                                     </a>
                                     <div class="collapse" id="collapseBuilding" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="/buildingEmployee">Building Employee</a>
-                                            <a class="nav-link" href="/buildingService">Building Service</a>
+                                            <a class="nav-link" href="/building-employee">Building Employee</a>
+                                            <a class="nav-link" href="/building-service">Building Service</a>
                                         </nav>
                                     </div>
                                 </nav>

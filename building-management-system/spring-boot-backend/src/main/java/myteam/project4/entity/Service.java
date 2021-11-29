@@ -29,8 +29,8 @@ public class Service extends BaseModel {
     @Column(name = "price")
     private Float price;
 
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "active", columnDefinition = "boolean default true")
+    private boolean active = true;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
     private List<UsedService> usedServiceList;

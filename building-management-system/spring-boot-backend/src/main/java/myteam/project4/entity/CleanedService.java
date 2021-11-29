@@ -19,8 +19,8 @@ import javax.persistence.*;
 @EntityListeners(value = BaseModelListener.class)
 public class CleanedService extends Service{
 
-    @Column(name = "any")
-    private String any;
+    @Column(name = "time_per_week")
+    private Integer timesPerWeek;
 //
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cleaned_service")
 //    private List<UsedService> usedServiceList;
