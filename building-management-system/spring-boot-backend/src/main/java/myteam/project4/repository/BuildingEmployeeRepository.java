@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Transactional
 public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmployee, Long> {
@@ -22,4 +23,6 @@ public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmploy
             "phone = :phone " +
             "where id = :id")
     void updateById(Long id, String code, Timestamp dateOfBirth, String address, String level, String position, String name, String phone);
+
+    List<BuildingEmployee> findByNameLike(String name);
 }

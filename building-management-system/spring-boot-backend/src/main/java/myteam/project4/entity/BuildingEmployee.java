@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "building_employee")
@@ -40,4 +41,6 @@ public class BuildingEmployee extends BaseModel {
     @Column(name = "level", length = 250)
     private String level;
 
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buildingEmployee")
+//    private List<Salary> salaryList;
 }

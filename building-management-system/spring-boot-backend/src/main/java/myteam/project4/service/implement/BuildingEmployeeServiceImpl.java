@@ -68,4 +68,11 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
         List<BuildingEmployee> list = repository.findAll();
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
+
+    @Override
+    public List<BuildingEmployeeResponse> getBuildingEmployeeByName(String name) {
+        name = "%"+name+"%";
+        List<BuildingEmployee> listBuildingEmployee = repository.findByNameLike(name);
+        return listBuildingEmployee.stream().map(mapper::to).collect(Collectors.toList());
+    }
 }

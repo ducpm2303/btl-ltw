@@ -36,9 +36,15 @@ public class BuildingEmployeeController {
     BaseResponse<BuildingEmployeeResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody BuildingEmployeeRequest request){
         return BaseResponse.ofSuccess(buildingEmployeeService.updateById(id,request));
     }
+
     @DeleteMapping("/delete/{id}")
     BaseResponse<String> deleteBuildingEmployeeById(@PathVariable Long id){
         return BaseResponse.ofSuccess(buildingEmployeeService.deleteById(id));
+    }
+
+    @GetMapping("/search")
+    BaseResponse<List<BuildingEmployeeResponse>> getBuildingEmployeeByName(@RequestParam String name){
+        return BaseResponse.ofSuccess(buildingEmployeeService.getBuildingEmployeeByName(name));
     }
 
 }

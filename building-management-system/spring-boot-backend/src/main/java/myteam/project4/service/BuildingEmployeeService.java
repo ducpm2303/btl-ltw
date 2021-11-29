@@ -16,4 +16,6 @@ public interface BuildingEmployeeService {
     String deleteById(Long id);
 
     List<BuildingEmployeeResponse> getAllBuildingEmployee();
+
+    List<BuildingEmployeeResponse> getBuildingEmployeeByName(String name);
 }
