@@ -25,7 +25,6 @@ class BuildingEmployee extends Component {
         this.setState({
             [name]:value
         })
-        
     }
     getName = (nameLike) => {
         const name = nameLike.target.name;

@@ -7,8 +7,6 @@ import myteam.project4.model.response.CleanedResponse;
 import myteam.project4.service.CleanedServiceBusinessService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("public-api/v1.0.0/cleaned-service")
 @AllArgsConstructor

@@ -32,7 +32,7 @@ public class CleanedServiceBusinessServiceImpl implements CleanedServiceBusiness
     @Override
     public CleanedResponse createNewCleanedService(CleanedRequest cleanedRequest) {
         if(serviceRepository.findCleanedServiceByActiveIs(true).isPresent()) {
-            serviceRepository.deactivateAll();
+            serviceRepository.deactivateAllCleanedService();
         }
         CleanedService cleanedService = serviceRepository.save(cleanedServiceMapper.to(cleanedRequest));
         return cleanedServiceMapper.to(cleanedService);

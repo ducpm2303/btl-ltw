@@ -1,7 +1,7 @@
 
 import './App.css';
-import Menu from "./Component/menu/Menu";
-import Header from "./Component/header/Header";
+import Menu from "./Component/home/menu/Menu";
+import Header from "./Component/home/header/Header";
 import RouterSystem from "./router/RouterSystem";
 
 
