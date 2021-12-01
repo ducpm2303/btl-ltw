@@ -10,6 +10,5 @@ public class BuildingEmployeeResponse {
     private String dateOfBirth;
     private String address;
     private String phone;
-    private String position;
-    private String level;
+    private SalaryResponse salaryResponse;
 }

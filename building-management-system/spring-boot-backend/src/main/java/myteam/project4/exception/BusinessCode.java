@@ -21,8 +21,6 @@ public class BusinessCode {
 
     public static final ErrorResponse NOT_FOUND_COMPANY =
             new ErrorResponse("NOT_FOUND_COMPANY", "Not found company with id", HttpStatus.NOT_FOUND);
-
-
     // Service Error Response
     public static final ErrorResponse NOT_FOUND_CURRENT_SERVICE =
             new ErrorResponse("NOT_FOUND_CURRENT_SERVICE", "Not found current service", HttpStatus.NOT_FOUND);
