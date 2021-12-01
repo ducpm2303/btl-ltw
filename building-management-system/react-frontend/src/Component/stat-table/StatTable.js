@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Header from '../header/Header';
-import Menu from '../menu/Menu';
+import Header from '../home/header/Header';
+import Menu from '../home/menu/Menu';
 
-class EmployeeTable extends Component {
+class StatTable extends Component {
     render() {
         return (
             <div className="container-fluid">
@@ -16,16 +16,18 @@ class EmployeeTable extends Component {
                     <div class="col-lg-10 ml-auto" id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Company Employee</h1>
+                                <h1 class="mt-4">Statitic Table</h1>
                                 <div class="card mb-4">
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-lg btn-success">Add new Employee</button>
+                                        <button type="button" class="btn btn-lg btn-success">Week Statitic</button>
+                                        <button type="button" class="btn btn-lg btn-success">Month Statitic</button>
+                                        <button type="button" class="btn btn-lg btn-success">Year Statitic</button>
                                     </div>
                                 </div>
                                 <div class="card mb-4">
                                     <div class="card-header">
                                         <i class="fas fa-table me-1"></i>
-                                        DataTable Employee
+                                        DataTable Statitic
                                     </div>
                                     <div class="card-body">
                                         <table id="datatablesSimple">
@@ -36,7 +38,6 @@ class EmployeeTable extends Component {
                                                     <th>Name</th>
                                                     <th>Birthday</th>
                                                     <th>PhoneNumber</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -46,7 +47,6 @@ class EmployeeTable extends Component {
                                                     <th>Name</th>
                                                     <th>Birthday</th>
                                                     <th>PhoneNumber</th>
-                                                    <th>Action</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
@@ -56,10 +56,6 @@ class EmployeeTable extends Component {
                                                     <td>Mincy</td>
                                                     <td>21/11/2000</td>
                                                     <td>0988405038</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-primary">Delete</button>
-                                                        <button type="button" class="btn btn-primary">Edit</button>
-                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>12345</td>
@@ -89,4 +85,4 @@ class EmployeeTable extends Component {
     }
 }
 
-export default EmployeeTable;
+export default StatTable;

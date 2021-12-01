@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "cleaned_service")
@@ -18,10 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @EntityListeners(value = BaseModelListener.class)
-public class CleanedService extends  Service{
+public class CleanedService extends Service{
 
-    @Column(name = "any")
-    private String any;
+    @Column(name = "time_per_week")
+    private Integer timesPerWeek;
 //
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cleaned_service")
 //    private List<UsedService> usedServiceList;
