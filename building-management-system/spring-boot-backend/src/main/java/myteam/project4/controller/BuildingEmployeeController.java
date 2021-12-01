@@ -2,6 +2,7 @@ package myteam.project4.controller;
 
 import lombok.AllArgsConstructor;
 import myteam.project4.model.request.BuildingEmployeeRequest;
+import myteam.project4.model.request.SalaryRequest;
 import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.BuildingEmployeeResponse;
 import myteam.project4.service.BuildingEmployeeService;
@@ -28,13 +29,13 @@ public class BuildingEmployeeController {
     }
 
     @PostMapping("/create")
-    BaseResponse<BuildingEmployeeResponse> createBuildingEmployee(@RequestBody BuildingEmployeeRequest request){
-        return BaseResponse.ofSuccess(buildingEmployeeService.save(request));
+    BaseResponse<BuildingEmployeeResponse> createBuildingEmployee(@RequestBody BuildingEmployeeRequest buildingEmployeeRequest){
+        return BaseResponse.ofSuccess(buildingEmployeeService.save(buildingEmployeeRequest));
     }
 
     @PutMapping("/update/{id}")
     BaseResponse<BuildingEmployeeResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody BuildingEmployeeRequest request){
-        return BaseResponse.ofSuccess(buildingEmployeeService.updateById(id,request));
+        return BaseResponse.ofSuccess(buildingEmployeeService.save(id,request));
     }
 
     @DeleteMapping("/delete/{id}")

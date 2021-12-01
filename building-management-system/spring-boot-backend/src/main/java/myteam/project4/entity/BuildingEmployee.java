@@ -35,12 +35,7 @@ public class BuildingEmployee extends BaseModel {
     @Column(name = "phone", length = 250)
     private String phone;
 
-    @Column(name = "position", length = 250)
-    private String position;
-
-    @Column(name = "level", length = 250)
-    private String level;
-
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "buildingEmployee")
-//    private List<Salary> salaryList;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "building_employee_id" )
+    private List<MonthSalary> monthSalaryList;
 }

@@ -15,15 +15,16 @@ class BuildingEmployee extends Component {
             address:"",
             phone:"",
             position:"",
-            level:""
+            level:"",
+            salary:""
         }
     }
 
     isChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        // console.log(name);
-        // console.log(value);
+        console.log(name);
+        console.log(value);
         this.setState({
             [name]:value
         })
@@ -42,16 +43,17 @@ class BuildingEmployee extends Component {
 
     changeButton = (id) => {
         if(id===0){
-            return <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick = {(code, name, dateOfBirth, address, phone, position, level) => this.addNewBuildingEmployee(
+            return <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick = {(code, name, dateOfBirth, address, phone, position, level, salary) => this.addNewBuildingEmployee(
                 code = this.state.code,
                 name = this.state.name, 
                 dateOfBirth = this.state.dateOfBirth, 
                 address = this.state.address, 
                 phone = this.state.phone, 
                 position = this.state.position,
-                level = this.state.level)}>Add New</button>
+                level = this.state.level,
+                salary = this.state.salary)}>Add New</button>
         }else{
-            return <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick = {(id, code, name, dateOfBirth, address, phone, position, level) => this.editBuildingEmployee(
+            return <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onClick = {(id, code, name, dateOfBirth, address, phone, position, level, salary) => this.editBuildingEmployee(
                 id = this.state.id,
                 code = this.state.code,
                 name = this.state.name, 
@@ -59,11 +61,12 @@ class BuildingEmployee extends Component {
                 address = this.state.address, 
                 phone = this.state.phone, 
                 position = this.state.position,
-                level = this.state.level)}>Update</button>
+                level = this.state.level,
+                salary = this.state.salary)}>Update</button>
         }
     }
 
-    addNewBuildingEmployee = (code, name, dateOfBirth, address, phone, position, level) => {
+    addNewBuildingEmployee = (code, name, dateOfBirth, address, phone, position, level, salary) => {
         var buildingEmployee ={};
         buildingEmployee.code = code;
         buildingEmployee.name = name;
@@ -72,7 +75,7 @@ class BuildingEmployee extends Component {
         buildingEmployee.phone = phone;
         buildingEmployee.position = position;
         buildingEmployee.level = level;
-        this.state.buildingEmployees.push(buildingEmployee);
+        buildingEmployee.salary = parseFloat(salary);
         BuildingEmployeeService.createBuildingEmployee(buildingEmployee).then(()=>{
             this.componentDidMount();
         });
@@ -85,7 +88,7 @@ class BuildingEmployee extends Component {
             phone:"",
             position:"",
             level:"",
-            value:""
+            salary:""
         });
     }
 
@@ -97,14 +100,16 @@ class BuildingEmployee extends Component {
             dateOfBirth : buildingEmployee.dateOfBirth,
             address : buildingEmployee.address,
             phone : buildingEmployee.phone,
-            position : buildingEmployee.position,
-            level : buildingEmployee.level
+            position : buildingEmployee.salaryResponse.position,
+            level : buildingEmployee.salaryResponse.level,
+            salary : buildingEmployee.salaryResponse.salary
         });
         
     }
-    editBuildingEmployee = (id, code, name, dateOfBirth, address, phone, position, level) => {
+    editBuildingEmployee = (id, code, name, dateOfBirth, address, phone, position, level, salary) => {
         var buildingEmployee ={};
         var idUpdate = parseInt(id);
+        var salaryUpdate = parseFloat(salary);
         buildingEmployee.id = idUpdate;
         buildingEmployee.code = code;
         buildingEmployee.name = name;
@@ -113,7 +118,7 @@ class BuildingEmployee extends Component {
         buildingEmployee.phone = phone;
         buildingEmployee.position = position;
         buildingEmployee.level = level;
-        console.log(buildingEmployee);
+        buildingEmployee.salary = salaryUpdate;
         BuildingEmployeeService.updateBuildingEmployee(idUpdate, buildingEmployee).then(()=>{
             this.componentDidMount();
         });
@@ -124,8 +129,9 @@ class BuildingEmployee extends Component {
             dateOfBirth:"",
             address:"",
             phone:"",
+            level:"",
             position:"",
-            level:""
+            salary:""
         });
     }
 
@@ -147,6 +153,7 @@ class BuildingEmployee extends Component {
     componentDidMount() {
         BuildingEmployeeService.getAllBuildingEmployee().then((response) => {
             this.setState({ buildingEmployees: response.data.data});
+            console.log(response.data);
         });
     }
 
@@ -202,7 +209,10 @@ class BuildingEmployee extends Component {
                                                 <label for="level" class="form-label">Level</label>
                                                 <input value={this.state.level} type="text" onChange={(event) => this.isChange(event)} name = "level" class="form-control" id="level" />
                                             </div>
-
+                                            <div class="mb-3">
+                                                <label for="level" class="form-label">Salary</label>
+                                                <input value={this.state.salary} type="text" onChange={(event) => this.isChange(event)} name = "salary" class="form-control" id="salary" />
+                                            </div>
                                         </form>
                                     </div>
                                     <div class="modal-footer">
@@ -250,6 +260,7 @@ class BuildingEmployee extends Component {
                                                         <th>PhoneNumber</th>
                                                         <th>Level</th>
                                                         <th>Position</th>
+                                                        <th>Salary</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -262,8 +273,9 @@ class BuildingEmployee extends Component {
                                                                 <td> {buildingEmployee.dateOfBirth}</td>
                                                                 <td> {buildingEmployee.address}</td>
                                                                 <td> {buildingEmployee.phone}</td>
-                                                                <td> {buildingEmployee.level}</td>
-                                                                <td> {buildingEmployee.position}</td>
+                                                                <td> {buildingEmployee.salaryResponse.level}</td>
+                                                                <td> {buildingEmployee.salaryResponse.position}</td>
+                                                                <td> {buildingEmployee.salaryResponse.salary}</td>
                                                                 <td>
                                                                     <button type="button" className="btn btn-warning badge-pill" onClick={()=> this.deleteBuildingEmployee(buildingEmployee.id)}>Delete</button>
                                                                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getBuildingEmployee(buildingEmployee)}>Edit</button>
