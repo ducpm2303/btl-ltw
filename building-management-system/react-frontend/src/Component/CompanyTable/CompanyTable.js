@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import Header from '../header/Header';
 import Menu from '../menu/Menu';
+import CompanyService from './CompanyService';
 
 class CompanyTable extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            company: []
+        }
+    }
+
+    componentDidMount(){
+        CompanyService.getAllCompany().then((response) => {
+            console.log(response);
+            this.setState({company: response.data.data})
+        })
+    }
+
     render() {
         return (
             <div className="container-fluid">
@@ -42,7 +57,7 @@ class CompanyTable extends Component {
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tfoot>
+                                            {/* <tfoot>
                                                 <tr>
                                                     <th>Name</th>
                                                     <th>Code</th>
@@ -54,50 +69,26 @@ class CompanyTable extends Component {
                                                     <th>Area</th>
                                                     <th>Action</th>
                                                 </tr>
-                                            </tfoot>
+                                            </tfoot> */}
                                             <tbody>
-                                                <tr>
-                                                    <td>Mincy</td>
-                                                    <td>12345</td>
-                                                    <td>20$</td>
-                                                    <td>Font end</td>
-                                                    <td>2</td>
-                                                    <td>Ha Dong</td>
-                                                    <td>0988405038</td>
-                                                    <td>1000</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-outline-success">Delete</button>
-                                                        <button type="button" class="btn btn-outline-success">Edit</button>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Mincy</td>
-                                                    <td>12345</td>
-                                                    <td>20$</td>
-                                                    <td>Font end</td>
-                                                    <td>2</td>
-                                                    <td>Ha Dong</td>
-                                                    <td>0988405038</td>
-                                                    <td>1000</td>
-                                                </tr><tr>
-                                                    <td>Mincy</td>
-                                                    <td>12345</td>
-                                                    <td>20$</td>
-                                                    <td>Font end</td>
-                                                    <td>2</td>
-                                                    <td>Ha Dong</td>
-                                                    <td>0988405038</td>
-                                                    <td>1000</td>
-                                                </tr><tr>
-                                                    <td>Mincy</td>
-                                                    <td>12345</td>
-                                                    <td>20$</td>
-                                                    <td>Font end</td>
-                                                    <td>2</td>
-                                                    <td>Ha Dong</td>
-                                                    <td>0988405038</td>
-                                                    <td>1000</td>
-                                                </tr>
+                                                {
+                                                    this.state.company.map((company) =>(
+                                                        <tr key={company.id}>
+                                                            <td> {company.name} </td>
+                                                            <td> {company.taxCode} </td>
+                                                            <td> {company.authorizedCapital} </td>
+                                                            <td> {company.fieldOfActivity} </td>
+                                                            <td> {company.numberOfEmployee} </td>
+                                                            <td> {company.floor} </td>
+                                                            <td> {company.hotline} </td>
+                                                            <td> {company.area} </td>
+                                                            <td> 
+                                                                <button type="button" className="btn btn-danger">Delete</button>
+                                                                <button type="button" className="btn btn-primary">Edit</button>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                }
                                             </tbody>
                                         </table>
                                     </div>
