@@ -166,6 +166,7 @@ class BuildingEmployee extends Component {
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Building Employee Infomation</h5>
+                                <br/>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -215,7 +216,7 @@ class BuildingEmployee extends Component {
                 <div class="col-lg-12 ml-auto" id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-4">Building Employee Table</h1>
+                            <h1 class="mt-1">Building Employee Table</h1>
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div className="row">
