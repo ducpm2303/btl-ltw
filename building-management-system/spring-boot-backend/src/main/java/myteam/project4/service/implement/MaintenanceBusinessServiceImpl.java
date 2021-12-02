@@ -35,7 +35,7 @@ public class MaintenanceBusinessServiceImpl implements MaintenanceBusinessServic
     @Override
     public MaintenanceResponse createNewMaintenanceService(MaintenanceRequest request) {
         if(serviceRepository.findCleanedServiceByActiveIs(true).isPresent()) {
-            serviceRepository.deactivateAllCleanedService();
+            serviceRepository.deactivateAllMaintenanceService();
         }
         MaintenanceService maintenanceService = serviceRepository.save(maintenanceMapper.to(request));
         return maintenanceMapper.to(maintenanceService);
