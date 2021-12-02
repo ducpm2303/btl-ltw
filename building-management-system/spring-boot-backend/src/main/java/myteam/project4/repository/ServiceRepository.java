@@ -17,15 +17,30 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
 
     Optional<ProtectedService> findProtectedServiceByActiveIs(boolean active);
 
+    Optional<MaintenanceService> findMaintenanceServiceByActiveIs(boolean active);
+
     @Transactional
     @Modifying
     @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT c.id FROM CleanedService c)")
     void deactivateAllCleanedService();
 
-    Optional<MaintenanceService> findMaintenanceServiceByActiveIs(boolean active);
-
     @Transactional
     @Modifying
     @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT m.id FROM MaintenanceService m)")
     void deactivateAllMaintenanceService();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT f.id FROM FoodService f)")
+    void deactivateAllFoodService();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT p.id FROM ProtectedService p)")
+    void deactivateAllProtectedService();
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT m.id FROM ParkingService m)")
+    void deactivateAllParkingService();
 }

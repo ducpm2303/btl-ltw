@@ -36,7 +36,7 @@ public class FoodServiceBusinessServiceImpl implements FoodServiceBusinessServic
     @Override
     public FoodServiceResponse createNewFoodService(FoodServiceRequest request) {
         if(serviceRepository.findFoodServiceByActiveIs(true).isPresent()) {
-            serviceRepository.deactivateAll();
+            serviceRepository.deactivateAllFoodService();
         }
         FoodService foodService = serviceRepository.save(foodServiceMapper.to(request));
         return foodServiceMapper.to(foodService);

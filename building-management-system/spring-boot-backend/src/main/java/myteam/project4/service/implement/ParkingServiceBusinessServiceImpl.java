@@ -36,7 +36,7 @@ public class ParkingServiceBusinessServiceImpl implements ParkingServiceBusiness
     @Override
     public ParkingServiceResponse createNewParkingService(ParkingServiceRequest request) {
         if(serviceRepository.findParkingServiceByActiveIs(true).isPresent()) {
-            serviceRepository.deactivateAll();
+            serviceRepository.deactivateAllParkingService();
         }
         ParkingService parkingService = serviceRepository.save(parkingServiceMapper.to(request));
         return parkingServiceMapper.to(parkingService);

@@ -35,7 +35,7 @@ public class ProtectedServiceBusinessServiceImpl implements ProtectedServiceBusi
     @Override
     public ProtectedServiceResponse createNewProtectedService(ProtectedServiceRequest request) {
         if(serviceRepository.findProtectedServiceByActiveIs(true).isPresent()) {
-            serviceRepository.deactivateAll();
+            serviceRepository.deactivateAllProtectedService();
         }
         ProtectedService protectedService = serviceRepository.save(protectedServiceMapper.to(request));
         return protectedServiceMapper.to(protectedService);
