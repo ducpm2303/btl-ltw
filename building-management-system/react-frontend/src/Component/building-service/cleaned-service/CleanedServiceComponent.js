@@ -21,6 +21,7 @@ class CleanedServiceComponent extends Component {
     componentDidMount() {
         CleanedServiceService.getCurrentCleanedService().then((response) => {
             this.setState({ currentCleanedService: response.data.data});
+            this.setState({ newCleanedService : response.data.data})
         });
     }
 
@@ -63,15 +64,18 @@ class CleanedServiceComponent extends Component {
                                 <form>
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Tên</label>
-                                        <input type="text" onChange={event => this.handleChanged(event)} className="form-control" name="name" id="name"/>
+                                        <input type="text" onChange={event => this.handleChanged(event)} className="form-control" name="name" id="name"
+                                               value={this.state.newCleanedService.name}/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="price" className="form-label">Giá</label>
-                                        <input type="number" onChange={event => this.handleChanged(event)} className="form-control"  name="price" id="price"/>
+                                        <input type="number" onChange={event => this.handleChanged(event)} className="form-control"  name="price" id="price"
+                                         value={this.state.newCleanedService.price}/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="times" className="form-label">Tần suất</label>
-                                        <input type="number"  onChange={event => this.handleChanged(event)} className="form-control"  name="timesPerWeek" id="times"/>
+                                        <input type="number"  onChange={event => this.handleChanged(event)} className="form-control"  name="timesPerWeek" id="times"
+                                               value={this.state.newCleanedService.timesPerWeek}/>
                                     </div>
                                 </form>
                             </div>
