@@ -1,4 +1,5 @@
 package myteam.project4.entity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -6,26 +7,19 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.List;
 
 @Entity
-@Table(name = "salary")
+@Table(name = "month_salary")
 @Data
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @EntityListeners(value = BaseModelListener.class)
-public class Salary extends BaseModel{
 
-    @Column(name = "position", length = 100)
-    private String position;
+public class MonthSalary extends BaseModel {
 
-    @Column(name = "level", length = 100)
-    private String level;
-
-    @Column(name = "salary")
-    private Float salary;
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "salary_id")
+    private Salary salary;
 }

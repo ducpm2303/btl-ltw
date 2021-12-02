@@ -23,26 +23,18 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
     private final BuildingEmployeeMapper mapper;
     private final BuildingEmployeeRepository repository;
 
+
     @Override
-    public BuildingEmployeeResponse save(BuildingEmployeeRequest request) {
-        BuildingEmployee buildingEmployee = mapper.to(request);
+    public BuildingEmployeeResponse save(BuildingEmployeeRequest buildingEmployeeRequest) {
+        BuildingEmployee buildingEmployee = mapper.to(buildingEmployeeRequest);
         return mapper.to(repository.saveAndFlush(buildingEmployee));
     }
 
     @Override
-    public BuildingEmployeeResponse updateById(Long id, BuildingEmployeeRequest request) {
-        BuildingEmployee buildingEmployee = mapper.to(request);
-        repository.updateById(
-                id,
-                buildingEmployee.getCode(),
-                buildingEmployee.getDateOfBirth(),
-                buildingEmployee.getAddress(),
-                buildingEmployee.getLevel(),
-                buildingEmployee.getPosition(),
-                buildingEmployee.getName(),
-                buildingEmployee.getPhone()
-        );
+    public BuildingEmployeeResponse save(Long id, BuildingEmployeeRequest buildingEmployeeRequest) {
+        BuildingEmployee buildingEmployee = mapper.to(buildingEmployeeRequest);
         buildingEmployee.setId(id);
+        repository.save(buildingEmployee);
         return mapper.to(buildingEmployee);
     }
 

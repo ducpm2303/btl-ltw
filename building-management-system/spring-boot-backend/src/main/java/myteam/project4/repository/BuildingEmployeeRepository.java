@@ -12,17 +12,5 @@ import java.util.List;
 @Transactional
 public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmployee, Long> {
 
-    @Modifying
-    @Query(value = "update BuildingEmployee set " +
-            "code = :code, " +
-            "address = :address, " +
-            "dateOfBirth = :dateOfBirth, " +
-            "level = :level, " +
-            "position = :position, " +
-            "name = :name, " +
-            "phone = :phone " +
-            "where id = :id")
-    void updateById(Long id, String code, Timestamp dateOfBirth, String address, String level, String position, String name, String phone);
-
     List<BuildingEmployee> findByNameLike(String name);
 }
