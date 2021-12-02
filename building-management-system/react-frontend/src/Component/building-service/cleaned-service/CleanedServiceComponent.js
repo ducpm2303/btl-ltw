@@ -44,7 +44,7 @@ class CleanedServiceComponent extends Component {
 
     addNewCleanedService() {
         CleanedServiceService.createCleanedService(this.state.newCleanedService)
-            .then(() => this.componentDidMount);
+            .then(() => this.componentDidMount());
     }
 
     render() {
