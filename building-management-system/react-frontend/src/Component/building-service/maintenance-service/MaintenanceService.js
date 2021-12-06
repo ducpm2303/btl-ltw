@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import './CleanedService.css';
-import CleanedServiceService from "./CleanedServiceService";
-
-class CleanedServiceComponent extends Component {
+import MaintenanceServiceService from "./MaintenanceServiceService";
+class MaintenanceService extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentCleanedService: {
+            currentMaintenanceService: {
                 name: "",
                 price: 0,
-                timesPerWeek: 0,
+                period: 0,
             },
-            newCleanedService : {
+            newMaintenanceService : {
                 name: "",
                 price: 0,
-                timesPerWeek: 0,
+                period: 0,
             },
         }
     }
     componentDidMount() {
-        CleanedServiceService.getCurrentCleanedService().then((response) => {
-            this.setState({ currentCleanedService: response.data.data});
-            this.setState({ newCleanedService : response.data.data})
+        MaintenanceServiceService.getCurrentMaintenanceService().then((response) => {
+            if(response.code != 404) {
+                this.setState({currentMaintenanceService: response.data.data});
+                this.setState({newMaintenanceService: response.data.data})
+            }
         });
     }
 
-    handleChanged = (event) =>{
-        let cleanedService = this.state.newCleanedService;
+    handleChanged = (event) => {
+        let cleanedService = this.state.newMaintenanceService;
         const name = event.target.name;
         const value = event.target.value;
         if(name == "name") {
@@ -34,17 +34,17 @@ class CleanedServiceComponent extends Component {
         } else if(name == "price"){
             cleanedService.price = value;
         }
-        else if(name == "timesPerWeek"){
-            cleanedService.timesPerWeek = value;
+        else if(name == "period"){
+            cleanedService.period = value;
         }
         this.setState( {
-            newCleanedService: cleanedService
+            newMaintenanceService: cleanedService
         })
     }
 
 
-    addNewCleanedService() {
-        CleanedServiceService.createCleanedService(this.state.newCleanedService)
+    addNewMaintenanceService() {
+        MaintenanceServiceService.createMaintenanceService(this.state.newMaintenanceService)
             .then(() => this.componentDidMount());
     }
 
@@ -56,7 +56,7 @@ class CleanedServiceComponent extends Component {
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="exampleModalLabel">Cleaned Service Information</h5>
+                                <h5 className="modal-title" id="exampleModalLabel">Maintenance Service Information</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                             </div>
@@ -65,17 +65,17 @@ class CleanedServiceComponent extends Component {
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Tên</label>
                                         <input type="text" onChange={event => this.handleChanged(event)} className="form-control" name="name" id="name"
-                                               value={this.state.newCleanedService.name}/>
+                                               value={this.state.newMaintenanceService.name}/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="price" className="form-label">Giá</label>
                                         <input type="number" onChange={event => this.handleChanged(event)} className="form-control"  name="price" id="price"
-                                         value={this.state.newCleanedService.price}/>
+                                         value={this.state.newMaintenanceService.price}/>
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="times" className="form-label">Tần suất</label>
-                                        <input type="number"  onChange={event => this.handleChanged(event)} className="form-control"  name="timesPerWeek" id="times"
-                                               value={this.state.newCleanedService.timesPerWeek}/>
+                                        <input type="number"  onChange={event => this.handleChanged(event)} className="form-control"  name="period" id="times"
+                                               value={this.state.newMaintenanceService.period}/>
                                     </div>
                                 </form>
                             </div>
@@ -83,7 +83,7 @@ class CleanedServiceComponent extends Component {
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
                                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
-                                        onClick={(event) => this.addNewCleanedService(event)}>Update
+                                        onClick={(event) => this.addNewMaintenanceService(event)}>Update
                                 </button>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ class CleanedServiceComponent extends Component {
                 </div>
                 <main>
                     <div className="container-fluid px-4">
-                        <h1 className="mt-4">Cleaned Service</h1>
+                        <h1 className="mt-4">Maintenance Service</h1>
                         <div className="card mb-4">
                             <div className="card-body">
                                 <button type="button" className="btn btn btn-success" data-bs-toggle="modal"
@@ -108,15 +108,15 @@ class CleanedServiceComponent extends Component {
                                     <tbody>
                                         <tr>
                                             <td> <b>Tên:</b></td>
-                                            <td>{this.state.currentCleanedService.name}</td>
+                                            <td>{this.state.currentMaintenanceService.name}</td>
                                         </tr>
                                         <tr>
                                             <td><b>Giá:</b></td>
-                                            <td>{this.state.currentCleanedService.price} vnđ</td>
+                                            <td>{this.state.currentMaintenanceService.price} vnđ</td>
                                         </tr>
                                         <tr>
                                             <td><b>Tần suất:</b></td>
-                                            <td>{this.state.currentCleanedService.timesPerWeek} lần/tuần</td>
+                                            <td>{this.state.currentMaintenanceService.period} lần/tuần</td>
                                         </tr>
                                         <tr>
                                             <td><b>Bắt buộc:</b></td>
@@ -134,4 +134,4 @@ class CleanedServiceComponent extends Component {
 
 }
 
-export default CleanedServiceComponent;
+export default MaintenanceService;

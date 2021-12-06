@@ -23,7 +23,7 @@ public final class HandleExceptionController {
         HttpStatus httpStatus = businessException.getErrorResponse().getStatus();
         log.error("Exception Detail: {} and rootCause: {}",
                 businessException.getErrorResponse().getMessage(),
-                StringUtil.stackTraceToString(businessException.getCause())
+                StringUtil.stackTraceToString(businessException)
         );
         return new ResponseEntity<>(BaseResponse.ofFailed(businessException.getErrorResponse()), httpStatus);
     }
@@ -34,7 +34,7 @@ public final class HandleExceptionController {
         if (!StringUtils.isBlank(exception.getMessage())) {
             log.error("Exception Detail: {} and rootCause: {}",
                     exception.getMessage(),
-                    StringUtil.stackTraceToString(exception.getCause()));
+                    StringUtil.stackTraceToString(exception));
         }
         HttpStatus httpStatus = businessException.getErrorResponse().getStatus();
 
