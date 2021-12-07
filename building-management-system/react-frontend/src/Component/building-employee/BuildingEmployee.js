@@ -147,12 +147,10 @@ class BuildingEmployee extends Component {
             this.setState({ buildingEmployees: response.data.data })
         });
     }
-
-
     componentDidMount() {
         BuildingEmployeeService.getAllBuildingEmployee().then((response) => {
             this.setState({ buildingEmployees: response.data.data });
-            console.log(response.data);
+            // console.log(response.data);
         });
     }
 
@@ -270,6 +268,7 @@ class BuildingEmployee extends Component {
                                                         <td>
                                                             <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteBuildingEmployee(buildingEmployee.id)}>Delete</button>
                                                             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getBuildingEmployee(buildingEmployee)}>Edit</button>
+                                                            
                                                         </td>
                                                     </tr>
                                                 ))

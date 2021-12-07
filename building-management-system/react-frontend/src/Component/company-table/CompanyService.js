@@ -18,6 +18,7 @@ class CompanyService{
     deleteCompany(id){
         return axios.delete(COMPANY_API_URL + '/delete/' + id)
     }
+
 }
 
 export default new CompanyService();

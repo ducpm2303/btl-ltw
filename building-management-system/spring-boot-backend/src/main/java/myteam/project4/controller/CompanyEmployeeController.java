@@ -31,7 +31,7 @@ public class CompanyEmployeeController {
         return BaseResponse.ofSuccess(companyEmployeeService.findById(id));
     }
 
-    @GetMapping("{company_id}")
+    @GetMapping("/company/{company_id}")
     public BaseResponse<List<CompanyEmployeeResponse>> getCompanyEmployeeByCompanyId(@PathVariable Long company_id){
         return BaseResponse.ofSuccess(companyEmployeeService.findByCompanyId(company_id));
     }
