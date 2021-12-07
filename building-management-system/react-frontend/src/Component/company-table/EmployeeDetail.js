@@ -25,7 +25,7 @@ class EmployeeDetail extends Component{
                 <div class="col-lg-12 ml-auto">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-1">Salary Detail</h1>
+                            <h1 class="mt-1">Company Employee Detail</h1>
                             <br/>
                             <div class="card mb-4">
                                 <div class="card-header">

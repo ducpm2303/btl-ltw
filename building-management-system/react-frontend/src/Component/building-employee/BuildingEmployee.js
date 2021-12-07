@@ -158,7 +158,6 @@ class BuildingEmployee extends Component {
     render() {
         return (
             <div>
-
                 {/* form add new Employee */}
                 <div class="modal fade" id="formEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">

@@ -13,4 +13,5 @@ import java.util.List;
 public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmployee, Long> {
 
     List<BuildingEmployee> findByNameLike(String name);
+    List<BuildingEmployee> findAllByIsDeleted(boolean isDeleted);
 }

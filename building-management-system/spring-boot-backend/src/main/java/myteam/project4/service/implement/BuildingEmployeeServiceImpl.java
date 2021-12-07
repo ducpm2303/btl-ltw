@@ -51,13 +51,15 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
         BuildingEmployee buildingEmployee = repository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_BUILDING_EMPLOYEE)
         );
-        repository.delete(buildingEmployee);
+        buildingEmployee.setIsDeleted(true);
+        repository.save(buildingEmployee);
+//        repository.delete(buildingEmployee);
         return "Deleted";
     }
 
     @Override
     public List<BuildingEmployeeResponse> getAllBuildingEmployee() {
-        List<BuildingEmployee> list = repository.findAll();
+        List<BuildingEmployee> list = repository.findAllByIsDeleted(false);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 
