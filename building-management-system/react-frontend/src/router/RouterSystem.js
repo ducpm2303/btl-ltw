@@ -12,6 +12,9 @@ import CleanedServiceComponent from "../Component/building-service/cleaned-servi
 import BuildingEmployee from "../Component/building-employee/BuildingEmployee";
 import MaintenanceService from "../Component/building-service/maintenance-service/MaintenanceService";
 import EmployeeDetail from "../Component/company-table/EmployeeDetail";
+import FoodServiceComponent from "../Component/building-service/food-service/FoodServiceComponent";
+import ParkingServiceComponent from "../Component/building-service/parking-service/ParkingServiceComponent";
+import ProtectedServiceComponent from "../Component/building-service/protected-service/ProtectedServiceComponent";
 
 class RouterSystem extends Component {
     render() {
@@ -26,6 +29,9 @@ class RouterSystem extends Component {
                     <Route path={"/building-service"}> <Service/></Route>
                     <Route path={"/cleaned-service"}><CleanedServiceComponent/></Route>
                     <Route path={"/maintenance-service"}><MaintenanceService/></Route>
+                    <Route path={"/food-service"}><FoodServiceComponent/></Route>
+                    <Route path={"/parking-service"}><ParkingServiceComponent/></Route>
+                    <Route path={"/protected-service"}><ProtectedServiceComponent/></Route>
                     <Route path="/employee-detail/:companyId" component = {EmployeeDetail}></Route>
                 </Switch>
             </div>
