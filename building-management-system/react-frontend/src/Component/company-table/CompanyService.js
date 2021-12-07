@@ -6,6 +6,18 @@ class CompanyService{
     getAllCompany(){
         return axios.get(COMPANY_API_URL + '/list');
     }
+
+    createCompany(company){
+        return axios.post(COMPANY_API_URL + '/create', company)
+    }
+
+    updateCompany(id, company){
+        return axios.put(COMPANY_API_URL + '/update/' + id, company)
+    }
+
+    deleteCompany(id){
+        return axios.delete(COMPANY_API_URL + '/delete/' + id)
+    }
 }
 
 export default new CompanyService();

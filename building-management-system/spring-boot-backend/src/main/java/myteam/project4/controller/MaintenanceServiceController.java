@@ -18,12 +18,12 @@ public class MaintenanceServiceController {
     private final MaintenanceBusinessService maintenanceBusinessService;
 
     @GetMapping()
-    public BaseResponse<MaintenanceResponse> getCurrentCleanedService(){
+    public BaseResponse<MaintenanceResponse> getCurrentMaintenanceService(){
         return BaseResponse.ofSuccess(maintenanceBusinessService.getActiveMaintenanceService());
     }
 
     @PostMapping()
-    public BaseResponse<MaintenanceResponse> createNewCleanedService(@RequestBody MaintenanceRequest maintenanceRequest){
+    public BaseResponse<MaintenanceResponse> createNewMaintenanceService(@RequestBody MaintenanceRequest maintenanceRequest){
         return BaseResponse.ofSuccess(maintenanceBusinessService.createNewMaintenanceService(maintenanceRequest));
     }
 }

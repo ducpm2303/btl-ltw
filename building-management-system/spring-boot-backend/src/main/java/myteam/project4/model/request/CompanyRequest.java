@@ -6,7 +6,7 @@ import lombok.Data;
 public class CompanyRequest {
     private String name;
     private String taxCode;
-    private String authorizedCapital;
+    private Float authorizedCapital;
     private String fieldOfActivity;
     private String floor;
     private String hotline;
