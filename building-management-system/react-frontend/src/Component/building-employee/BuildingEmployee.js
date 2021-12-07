@@ -148,6 +148,7 @@ class BuildingEmployee extends Component {
         });
     }
 
+
     componentDidMount() {
         BuildingEmployeeService.getAllBuildingEmployee().then((response) => {
             this.setState({ buildingEmployees: response.data.data });
@@ -257,7 +258,7 @@ class BuildingEmployee extends Component {
                                         <tbody>
                                             {
                                                 this.state.buildingEmployees.map((buildingEmployee) => (
-                                                    <tr key={buildingEmployee.id}>
+                                                    <tr key={buildingEmployee.id} >
                                                         <td> {buildingEmployee.code}</td>
                                                         <td> {buildingEmployee.name}</td>
                                                         <td> {buildingEmployee.dateOfBirth}</td>

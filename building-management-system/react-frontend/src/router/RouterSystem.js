@@ -10,6 +10,7 @@ import StatTable from '../Component/stat-table/StatTable';
 import Service from "../Component/building-service/Service";
 import CleanedServiceComponent from "../Component/building-service/cleaned-service/CleanedServiceComponent";
 import BuildingEmployee from "../Component/building-employee/BuildingEmployee";
+import SalaryDetail from "../Component/building-employee/SalaryDetail";
 
 class RouterSystem extends Component {
     render() {
@@ -24,6 +25,7 @@ class RouterSystem extends Component {
                     <Route path={"/building-service"}> <Service/></Route>
                     <Route path={"/cleaned-service"}><CleanedServiceComponent/></Route>
                     <Route path={"/maintenance-service"}></Route>
+                    <Route path="/salarydetail"><SalaryDetail/></Route>
                 </Switch>
             </div>
         );
