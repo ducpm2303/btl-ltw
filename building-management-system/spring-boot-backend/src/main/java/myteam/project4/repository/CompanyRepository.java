@@ -8,18 +8,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 
-@Transactional
+
 public interface CompanyRepository extends JpaRepository<Company,Long> {
+
+    @Transactional
     @Modifying
-    @Query(value = "update Company set " +
-            "name = :name, " +
-            "area = :area, " +
-            "authorizedCapital = :authorizedCapital, " +
-            "fieldOfActivity = :fieldOfActivity, " +
-            "floor = :floor, " +
-            "hotline = :hotline, " +
-            "taxCode = :taxCode " +
-            "where  id = :id"
+    @Query(value = "update Company company set " +
+            "company.name = :name, " +
+            "company.area = :area, " +
+            "company.authorizedCapital = :authorizedCapital, " +
+            "company.fieldOfActivity = :fieldOfActivity, " +
+            "company.floor = :floor, " +
+            "company.hotline = :hotline, " +
+            "company.taxCode = :taxCode " +
+            "where  company.id = :id"
     )
     void updateById(Long id, String taxCode, Float authorizedCapital, String fieldOfActivity, String floor, String hotline, String name, Float area);
 }

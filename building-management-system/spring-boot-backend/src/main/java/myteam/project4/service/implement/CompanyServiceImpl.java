@@ -33,18 +33,18 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyResponse updateById(Long id, CompanyRequest request) {
         Company company = companyMapper.to(request);
-        companyRepository.updateById(
-                company.getId(),
-                company.getTaxCode(),
-                company.getAuthorizedCapital(),
-                company.getFieldOfActivity(),
-                company.getFloor(),
-                company.getHotline(),
-                company.getName(),
-                company.getArea()
-        );
+//        companyRepository.updateById(
+//                company.getId(),
+//                company.getTaxCode(),
+//                company.getAuthorizedCapital(),
+//                company.getFieldOfActivity(),
+//                company.getFloor(),
+//                company.getHotline(),
+//                company.getName(),
+//                company.getArea()
+//        );
         company.setId(id);
-        return companyMapper.to(company);
+        return companyMapper.to(companyRepository.saveAndFlush(company));
     }
 
     @Override
