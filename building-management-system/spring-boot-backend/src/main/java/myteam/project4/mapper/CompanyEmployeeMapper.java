@@ -33,6 +33,10 @@ public class CompanyEmployeeMapper implements Mapper<CompanyEmployee>{
         return companyEmployee;
     }
 
+    public CompanyEmployee to(CompanyEmployee companyEmployee, CompanyEmployeeRequest request){
+        BeanUtils.copyProperties(request,companyEmployee);
+        return companyEmployee;
+    }
     public CompanyEmployeeResponse to(CompanyEmployee companyEmployee){
         CompanyEmployeeResponse response = new CompanyEmployeeResponse();
         BeanUtils.copyProperties(companyEmployee, response);
