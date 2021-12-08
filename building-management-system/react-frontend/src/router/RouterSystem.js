@@ -6,6 +6,7 @@ import {
     Route,
   } from "react-router-dom";
 import CompanyTable from '../Component/company-table/CompanyTable';
+import Salary from '../Component/building-employee/Salary';
 import StatTable from '../Component/stat-table/StatTable';
 import Service from "../Component/building-service/Service";
 import CleanedServiceComponent from "../Component/building-service/cleaned-service/CleanedServiceComponent";
@@ -25,6 +26,7 @@ class RouterSystem extends Component {
                     <Route path="/company-employee"><EmployeeTable/></Route>
                     <Route path="/companies"><CompanyTable/></Route>
                     <Route path="/building-employee"><BuildingEmployee/></Route>
+                    <Route path="/salary"><Salary/></Route>
                     <Route path="/statTable"><StatTable/></Route>
                     <Route path={"/building-service"}> <Service/></Route>
                     <Route path={"/cleaned-service"}><CleanedServiceComponent/></Route>

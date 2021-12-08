@@ -119,6 +119,7 @@ class BuildingEmployee extends Component {
         buildingEmployee.salary = salaryUpdate;
         BuildingEmployeeService.updateBuildingEmployee(idUpdate, buildingEmployee).then(() => {
             this.componentDidMount();
+            // console.log(idUpdate);
         });
         this.setState({
             id: 0,

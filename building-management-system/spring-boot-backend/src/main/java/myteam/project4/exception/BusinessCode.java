@@ -6,7 +6,6 @@ public class BusinessCode {
 
     private BusinessCode() {
     }
-
     public static final ErrorResponse SUCCESS =
             new ErrorResponse("SUCCESS-01", "SUCCESS", HttpStatus.OK);
 
@@ -24,4 +23,6 @@ public class BusinessCode {
     // Service Error Response
     public static final ErrorResponse NOT_FOUND_CURRENT_SERVICE =
             new ErrorResponse("NOT_FOUND_CURRENT_SERVICE", "Not found current service", HttpStatus.NOT_FOUND);
+    public static final ErrorResponse NOT_FOUND_SALARY =
+            new ErrorResponse("NOT FOUND SALARY", "Not found salary", HttpStatus.NOT_FOUND);
 }
