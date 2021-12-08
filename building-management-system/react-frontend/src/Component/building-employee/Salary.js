@@ -24,12 +24,12 @@ class BuildingEmployee extends Component {
 
     }
     getPosition = (positionLike) => {
-        const name = positionLike.target.name;
+        const position = positionLike.target.name;
         const value = positionLike.target.value;
-        // console.log(name);
-        // console.log(value);
+        console.log(position);
+        console.log(value);
         this.setState({
-            name: value
+            position: value
         })
 
     }
@@ -101,9 +101,7 @@ class BuildingEmployee extends Component {
         });
     }
 
-    searchByPosition = (value) => {
-        console.log(value);
-        console.log(this.state)
+    searchByPosition = () => {
         SalaryService.searchByPosition(this.state.position).then((response) => {
             this.setState({ salaries: response.data.data })
         });
@@ -166,8 +164,8 @@ class BuildingEmployee extends Component {
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                             <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" >
                                                 <div class="input-group">
-                                                    <input onChange={(event) => this.getName(event)} class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                                                    <button onClick={() => this.searchByPosition(this.state.value)} class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                                                    <input onChange={(event) => this.getPosition(event)} class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                                                    <button onClick={() => this.searchByPosition(this.state.position)} class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
                                                 </div>
                                             </form>
                                         </div>

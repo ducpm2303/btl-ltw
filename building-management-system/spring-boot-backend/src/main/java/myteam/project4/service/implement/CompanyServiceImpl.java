@@ -32,19 +32,10 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public CompanyResponse updateById(Long id, CompanyRequest request) {
-        Company company = companyMapper.to(request);
-//        companyRepository.updateById(
-//                company.getId(),
-//                company.getTaxCode(),
-//                company.getAuthorizedCapital(),
-//                company.getFieldOfActivity(),
-//                company.getFloor(),
-//                company.getHotline(),
-//                company.getName(),
-//                company.getArea()
-//        );
-        company.setId(id);
-        return companyMapper.to(companyRepository.saveAndFlush(company));
+        Company company = companyRepository.findById(id).orElseThrow(
+                () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
+        );
+        return companyMapper.to(companyRepository.saveAndFlush(companyMapper.to(company,request)));
     }
 
     @Override
@@ -60,7 +51,8 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
         );
-        companyRepository.delete(company);
+        company.setIsDeleted(true);
+        companyRepository.saveAndFlush(company);
         return "Deleted";
     }
 

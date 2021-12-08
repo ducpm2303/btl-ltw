@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SalaryRepository extends JpaRepository<Salary, Long> {
-    List<Salary> findByPositionLike(String position);
+    List<Salary> findByIsDeletedAndPositionLike(Boolean isDeleted, String position);
     List<Salary> findAllByIsDeleted(boolean isDeleted);
     Optional<Salary> findByPositionAndLevel(String position, String level);
 }

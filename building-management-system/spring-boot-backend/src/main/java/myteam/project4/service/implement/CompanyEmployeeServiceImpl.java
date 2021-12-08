@@ -31,17 +31,10 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
 
     @Override
     public CompanyEmployeeResponse updateById(Long id, CompanyEmployeeRequest request) {
-        CompanyEmployee companyEmployee = mapper.to(request);
-        repository.updateById(id,
-                companyEmployee.getCode(),
-                companyEmployee.getDateOfBirth(),
-                companyEmployee.getIdentification(),
-                companyEmployee.getName(),
-                companyEmployee.getPhone(),
-                companyEmployee.getCompany().getId()
+        CompanyEmployee companyEmployee = repository.findById(id).orElseThrow(
+                () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY_EMPLOYEE)
         );
-        companyEmployee.setId(id);
-        return mapper.to(companyEmployee);
+        return mapper.to(repository.saveAndFlush(mapper.to(companyEmployee,request)));
     }
 
     @Override
