@@ -31,6 +31,7 @@ class Menu extends Component {
                                     <div class="collapse" id="collapseBuilding" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="/building-employee">Building Employee</a>
+                                            <a class="nav-link" href="/salary">Salary</a>
                                             <a class="nav-link" href="/building-service">Building Service</a>
                                         </nav>
                                     </div>
