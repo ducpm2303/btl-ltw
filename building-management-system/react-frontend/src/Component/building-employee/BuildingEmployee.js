@@ -142,8 +142,8 @@ class BuildingEmployee extends Component {
     }
 
     searchName = (value) => {
-        console.log(value);
-        console.log(this.state)
+        // console.log(value);
+        // console.log(this.state)
         BuildingEmployeeService.searchByName(this.state.name).then((response) => {
             this.setState({ buildingEmployees: response.data.data })
         });

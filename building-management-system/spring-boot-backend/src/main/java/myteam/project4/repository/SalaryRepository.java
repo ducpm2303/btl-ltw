@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SalaryRepository extends JpaRepository<Salary, Long> {
-    List<Salary> findByPositionLike(String position);
+    List<Salary> findByIsDeletedAndPositionLike(Boolean isDeleted, String position);
     List<Salary> findAllByIsDeleted(boolean isDeleted);
 }

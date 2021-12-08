@@ -11,6 +11,7 @@ import myteam.project4.repository.SalaryRepository;
 import myteam.project4.service.SalaryService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -71,8 +72,9 @@ public class SalaryServiceImpl implements SalaryService {
 
     @Override
     public List<SalaryResponse> findSalaryByPositionLike(String position) {
-        String searchPosition = "%"+position + "%";
-        List<Salary> salaryList = repositiory.findByPositionLike(searchPosition);
+        String searchPosition = "%"+position+ "%";
+        List<Salary> result = new ArrayList<>();
+        List<Salary> salaryList = repositiory.findByIsDeletedAndPositionLike(false, searchPosition);
         return salaryList.stream().map(mapper::to).collect(Collectors.toList());
     }
 }
