@@ -32,17 +32,9 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         return dateOfBirth.toString().split(" ")[0];
     }
 
-    public BuildingEmployee to(BuildingEmployeeRequest request) {
-        BuildingEmployee buildingEmployee = new BuildingEmployee();
+    public BuildingEmployee to( BuildingEmployee buildingEmployee ,BuildingEmployeeRequest request) {
         BeanUtils.copyProperties(request, buildingEmployee);
         buildingEmployee.setDateOfBirth(convertStringToTimestamp(request.getDateOfBirth()));
-        Salary salary = new Salary();
-        BeanUtils.copyProperties(request, salary);
-        MonthSalary monthSalary = new MonthSalary();
-        monthSalary.setSalary(salary);
-        List<MonthSalary> monthSalaryList = new ArrayList<>();
-        monthSalaryList.add(monthSalary);
-        buildingEmployee.setMonthSalaryList(monthSalaryList);
         return buildingEmployee;
     }
 
@@ -51,8 +43,12 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         BeanUtils.copyProperties(buildingEmployee, response);
         response.setDateOfBirth(convertTimestampToString(buildingEmployee.getDateOfBirth()));
         List<MonthSalary> monthSalaryList = buildingEmployee.getMonthSalaryList();
-        MonthSalary monthSalary = monthSalaryList.get(0);
-        Salary salary = monthSalary.getSalary();
+        Salary salary = new Salary();
+        for (MonthSalary m: monthSalaryList) {
+            if (!m.getIsDeleted()) {
+                salary = m.getSalary();
+            }
+        }
         response.setSalaryResponse(salaryMapper.to(salary));
         return response;
     }

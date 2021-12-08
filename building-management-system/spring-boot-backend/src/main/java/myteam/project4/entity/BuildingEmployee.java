@@ -35,7 +35,7 @@ public class BuildingEmployee extends BaseModel {
     @Column(name = "phone", length = 250)
     private String phone;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "building_employee_id" )
     private List<MonthSalary> monthSalaryList;
 }
