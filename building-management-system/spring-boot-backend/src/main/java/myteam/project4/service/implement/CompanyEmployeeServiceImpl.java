@@ -50,13 +50,15 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
         CompanyEmployee companyEmployee = repository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY_EMPLOYEE)
         );
-        repository.delete(companyEmployee);
+        companyEmployee.setIsDeleted(true);
+        repository.saveAndFlush(companyEmployee);
+
         return "Deleted";
     }
 
     @Override
     public List<CompanyEmployeeResponse> getAllCompanyEmployee() {
-        List<CompanyEmployee> list = repository.findAll();
+        List<CompanyEmployee> list = repository.findAllByIsDeleted(false);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 

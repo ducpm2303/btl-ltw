@@ -3,12 +3,15 @@ package myteam.project4.service.implement;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import myteam.project4.entity.Company;
+import myteam.project4.entity.CompanyEmployee;
 import myteam.project4.exception.BusinessCode;
 import myteam.project4.exception.BusinessException;
+import myteam.project4.mapper.CompanyEmployeeMapper;
 import myteam.project4.mapper.CompanyMapper;
 import myteam.project4.model.request.CompanyRequest;
 import myteam.project4.model.response.CompanyDetailResponse;
 import myteam.project4.model.response.CompanyResponse;
+import myteam.project4.repository.CompanyEmployeeRepository;
 import myteam.project4.repository.CompanyRepository;
 import myteam.project4.service.CompanyService;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,10 @@ import java.util.stream.Collectors;
 public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository companyRepository;
+    private final CompanyEmployeeRepository companyEmployeeRepository;
+
     private final CompanyMapper companyMapper;
+    private final CompanyEmployeeMapper companyEmployeeMapper;
 
     @Override
     public CompanyResponse save(CompanyRequest request) {
@@ -53,12 +59,17 @@ public class CompanyServiceImpl implements CompanyService {
         );
         company.setIsDeleted(true);
         companyRepository.saveAndFlush(company);
+        List<CompanyEmployee> companyEmployeeList = companyEmployeeRepository.findByCompanyId(company.getId());
+        for(CompanyEmployee companyEmployee: companyEmployeeList){
+            companyEmployee.setIsDeleted(true);
+            companyEmployeeRepository.saveAndFlush(companyEmployee);
+        }
         return "Deleted";
     }
 
     @Override
     public List<CompanyResponse> getAllCompany() {
-        List<Company> companyList = companyRepository.findAll();
+        List<Company> companyList = companyRepository.findAllByIsDeleted(false);
         return companyList.stream().map(companyMapper::to).collect(Collectors.toList());
     }
 }
