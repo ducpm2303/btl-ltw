@@ -17,7 +17,7 @@ public interface CompanyEmployeeService {
 
     List<CompanyEmployeeResponse> getAllCompanyEmployee();
 
-    List<CompanyEmployeeResponse> findByIsDeletedAndCompanyId(boolean isDeleted, Long company_id);
+    List<CompanyEmployeeResponse> findByCompanyId(Long company_id);
 
-    List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name, Long company_id);
+    List<CompanyEmployeeResponse> findCompanyEmployeeByCompanyAndNameLike(Long company_id, String name);
 }

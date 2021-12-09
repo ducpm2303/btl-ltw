@@ -10,7 +10,6 @@ import myteam.project4.mapper.CompanyEmployeeMapper;
 import myteam.project4.model.request.CompanyEmployeeRequest;
 import myteam.project4.model.response.CompanyEmployeeResponse;
 import myteam.project4.repository.CompanyEmployeeRepository;
-import myteam.project4.repository.CompanyRepository;
 import myteam.project4.service.CompanyEmployeeService;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
 
     private final CompanyEmployeeRepository repository;
-    private final CompanyRepository companyRepository;
     private final CompanyEmployeeMapper mapper;
 
     @Override
@@ -55,6 +53,7 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
         );
         companyEmployee.setIsDeleted(true);
         repository.saveAndFlush(companyEmployee);
+
         return "Deleted";
     }
 
@@ -65,21 +64,15 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
     }
 
     @Override
-    public List<CompanyEmployeeResponse> findByIsDeletedAndCompanyId(boolean isDeleted, Long company_id) {
-        Company company = companyRepository.findById(company_id).orElseThrow(
-                () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
-        );
-        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndCompany(false, company);
+    public List<CompanyEmployeeResponse> findByCompanyId(Long company_id) {
+        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndCompanyId(false,company_id);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 
     @Override
-    public List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name, Long company_id) {
-        Company company = companyRepository.findById(company_id).orElseThrow(
-                () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
-        );
+    public List<CompanyEmployeeResponse> findCompanyEmployeeByCompanyAndNameLike(Long companyId, String name) {
         String searchName = "%"+name+"%";
-        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndNameLikeAndCompany(false, searchName, company);
+        List<CompanyEmployee> list = repository.findCompanyEmployeeByCompanyIdAndIsDeletedAndNameLike(companyId, false, searchName);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 }
