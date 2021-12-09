@@ -16,4 +16,6 @@ public interface CompanyService {
     String deleteById(Long id);
 
     List<CompanyResponse> getAllCompany();
+
+    List<CompanyResponse> findCompanyByNameLike(String name);
 }

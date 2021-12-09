@@ -2,21 +2,133 @@ import React, { Component, useEffect, useState } from 'react';
 import CompanyEmployeeService from './CompanyEmployeeService';
 // import {} from 'react-router-dom';
 
-class EmployeeDetail extends Component{
+class EmployeeDetail extends Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             companyEmployees: [],
-            companyId: props.match.params.companyId
+            companyId: props.match.params.companyId,
+            id: 0,
+            code: "",
+            identification: "",
+            name: "",
+            dateOfBirth: "",
+            phone: ""
         }
     }
-    
 
-    componentDidMount(){
+    isChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        console.log(name);
+        console.log(value);
+        this.setState({
+            [name]: value
+        })
+    }
+    changeButton = (id) => {
+        if (id === 0) {
+            return <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(code, identification, name, dateOfBirth, phone) => this.addNewCompany(
+                code = this.state.code,
+                identification = this.state.identification,
+                name = this.state.name,
+                dateOfBirth = this.state.dateOfBirth,
+                phone = this.state.phone)
+            }>Add New</button>
+        } else {
+            return <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(id, code, identification, name, dateOfBirth, phone) => this.editCompany(
+                id = this.state.id,
+                code = this.state.code,
+                identification = this.state.identification,
+                name = this.state.name,
+                dateOfBirth = this.state.dateOfBirth,
+                phone = this.state.phone)}>Update</button>
+        }
+    }
+
+    getName = (nameLike) => {
+        const name = nameLike.target.name;
+        const value = nameLike.target.value;
+        // console.log(name);
+        // console.log(value);
+        this.setState({
+            name: value
+        })
+
+    }
+
+    searchName = () => {
+        // console.log(value);
+        // console.log(this.state)
+        CompanyEmployeeService.searchByName(this.state.name).then((response) => {
+            this.setState({ companies: response.data.data })
+        });
+    }
+
+    addNewCompany = (code, identification, name, dateOfBirth, phone) => {
+        var companyEmployee = {};
+        companyEmployee.code = code;
+        companyEmployee.identification = identification;
+        companyEmployee.name = name;
+        companyEmployee.dateOfBirth = dateOfBirth;
+        companyEmployee.phone = phone;
+        companyEmployee.company_id = this.state.companyId;
+        CompanyEmployeeService.createCompanyEmployee(companyEmployee).then(() => {
+            this.componentDidMount();
+        });
+        this.setState({
+            id: 0,
+            code: "",
+            identification: "",
+            name: "",
+            dateOfBirth: "",
+            phone: ""
+        });
+    }
+
+    editCompany = (id, code, identification, name, dateOfBirth, phone) => {
+        var companyEmployee = {};
+        companyEmployee.code = code;
+        companyEmployee.identification = identification;
+        companyEmployee.name = name;
+        companyEmployee.dateOfBirth = dateOfBirth;
+        companyEmployee.phone = phone;
+        companyEmployee.companyId = this.state.companyId;
+        CompanyEmployeeService.updateCompanyEmployee(id, companyEmployee).then(() => {
+            this.componentDidMount();
+        });
+        this.setState({
+            id: 0,
+            code: "",
+            identification: "",
+            name: "",
+            dateOfBirth: "",
+            phone: ""
+        });
+    }
+
+    getCompanyEmployee = (companyEmployee) => {
+        this.setState({
+            id: companyEmployee.id,
+            code: companyEmployee.code,
+            identification: companyEmployee.identification,
+            name: companyEmployee.name,
+            dateOfBirth: companyEmployee.dateOfBirth,
+            phone: companyEmployee.phone
+        });
+    }
+
+    deleteCompany = (id) => {
+        CompanyEmployeeService.deleteCompanyEmployee(parseInt(id)).then(() => {
+            this.componentDidMount();
+        })
+    }
+
+    componentDidMount() {
         CompanyEmployeeService.getEmployeeByCompanyId(this.state.companyId).then((response) => {
             console.log(response);
-            this.setState({companyEmployees: response.data.data})
+            this.setState({ companyEmployees: response.data.data })
         })
     };
     render() {
@@ -24,10 +136,67 @@ class EmployeeDetail extends Component{
             <div>
                 <div class="col-lg-12 ml-auto">
                     <main>
-                        <div class="container-fluid px-4">
-                            <h1 class="mt-1">Company Employee Detail</h1>
+
+                        {/* form add new Company Employee */}
+                        <div className="modal fade" id="formEmployee" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal-dialog">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h5 className="modal-title" id="exampleModalLabel">Company Infomation</h5>
+                                        <br />
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        <form>
+                                            <div className="mb-3">
+                                                <label for="code" className="form-label">Code</label>
+                                                <input value={this.state.code} type="text" onChange={(event) => this.isChange(event)} name="code" className="form-control" id="code" />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label for="name" className="form-label">Identification</label>
+                                                <input value={this.state.identification} type="text" onChange={(event) => this.isChange(event)} name="identification" className="form-control" id="identification" />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label for="code" className="form-label">Name</label>
+                                                <input value={this.state.name} type="text" onChange={(event) => this.isChange(event)} name="name" className="form-control" id="name" />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label for="dateOfBirth" className="form-label">Date Of Birth</label>
+                                                <input value={this.state.dateOfBirth} type="date" onChange={(event) => this.isChange(event)} name="dateOfBirth" className="form-control" id="dateOfBirth" />
+                                            </div>
+                                            <div className="mb-3">
+                                                <label for="address" className="form-label">Phone</label>
+                                                <input value={this.state.phone} type="text" onChange={(event) => this.isChange(event)} name="phone" className="form-control" id="phone" />
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        {this.changeButton(this.state.id)}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="container-fluid px-4">
+                            <h1 className="mt-1">Employee Table</h1>
                             <br/>
-                            <div class="card mb-4">
+                            <div className="card mb-4">
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            <button type="button" className="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formEmployee">Add new Employee</button>
+                                        </div>
+                                        <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                            <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" >
+                                                <div className="input-group">
+                                                    <input onChange={(event) => this.getName(event)} className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                                                    <button onClick={() => this.searchName(this.state.name)} className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
                                     DataTable Company Employee
@@ -45,33 +214,34 @@ class EmployeeDetail extends Component{
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {
-                                            this.state.companyEmployees.map((companyEmployee) => (
-                                                <tr key={companyEmployee.id} >
-                                                    <td> {companyEmployee.code}</td>
-                                                    <td> {companyEmployee.name}</td>
-                                                    <td> {companyEmployee.dateOfBirth}</td>
-                                                    <td> {companyEmployee.identification}</td>
-                                                    <td> {companyEmployee.phone}</td>
+                                            {
+                                                this.state.companyEmployees.map((companyEmployee) => (
+                                                    <tr key={companyEmployee.id} >
+                                                        <td> {companyEmployee.code}</td>
+                                                        <td> {companyEmployee.name}</td>
+                                                        <td> {companyEmployee.dateOfBirth}</td>
+                                                        <td> {companyEmployee.identification}</td>
+                                                        <td> {companyEmployee.phone}</td>
 
-                                                    <td>
-                                                        <button type="button" className="btn btn-warning badge-pill">Delete</button>
-                                                        <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee">Edit</button>
-                                                        
-                                                    </td>
-                                                </tr>
-                                            ))
+                                                        <td>
+                                                            <button type="button" className="btn btn-warning badge-pill">Delete</button>
+                                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getCompanyEmployee(companyEmployee)}>Edit</button>
 
-                                        }
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
                                         </tbody>
                                     </table>
                                 </div>
+
                             </div>
                         </div>
+
                     </main>
                 </div>
             </div>
-            
+
         );
     }
 }

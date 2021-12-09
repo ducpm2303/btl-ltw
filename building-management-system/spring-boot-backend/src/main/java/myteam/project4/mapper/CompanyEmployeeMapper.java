@@ -43,7 +43,7 @@ public class CompanyEmployeeMapper implements Mapper<CompanyEmployee>{
         CompanyEmployeeResponse response = new CompanyEmployeeResponse();
         BeanUtils.copyProperties(companyEmployee, response);
         response.setDateOfBirth(convertTimestampToString(companyEmployee.getDateOfBirth()));
-        response.setCompany_id(companyEmployee.getCompany().getId());
+//        response.setCompany_id(companyEmployee.getCompany().getId());
         return response;
     }
 }

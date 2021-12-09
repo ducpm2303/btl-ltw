@@ -67,4 +67,11 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
         List<CompanyEmployee> list = repository.findByCompanyId(company_id);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
+
+    @Override
+    public List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name) {
+        String searchName = "%"+name+"%";
+        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndNameLike(false, searchName);
+        return list.stream().map(mapper::to).collect(Collectors.toList());
+    }
 }

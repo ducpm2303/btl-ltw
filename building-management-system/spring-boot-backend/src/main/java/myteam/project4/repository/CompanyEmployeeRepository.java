@@ -31,4 +31,6 @@ public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee
     List<CompanyEmployee> findByCompanyId(Long company_id);
 
     List<CompanyEmployee> findAllByIsDeleted(boolean isDeleted);
+
+    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndNameLike(boolean isDeleted, String name);
 }

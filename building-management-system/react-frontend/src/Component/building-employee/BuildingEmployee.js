@@ -180,7 +180,7 @@ class BuildingEmployee extends Component {
                                     </div>
                                     <div class="mb-3">
                                         <label for="dateOfBirth" class="form-label">Date Of Birth</label>
-                                        <input value={this.state.dateOfBirth} type="text" onChange={(event) => this.isChange(event)} name="dateOfBirth" class="form-control" id="dateOfBirth" />
+                                        <input value={this.state.dateOfBirth} type="date" onChange={(event) => this.isChange(event)} name="dateOfBirth" class="form-control" id="dateOfBirth" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="address" class="form-label">Address</label>
@@ -219,7 +219,7 @@ class BuildingEmployee extends Component {
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div className="row">
-                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <button type="button" class="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formEmployee">Add new Employee</button>
                                         </div>
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">

@@ -158,7 +158,7 @@ class BuildingEmployee extends Component {
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <div className="row">
-                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                             <button type="button" class="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formEmployee">Add new Salary</button>
                                         </div>
                                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">

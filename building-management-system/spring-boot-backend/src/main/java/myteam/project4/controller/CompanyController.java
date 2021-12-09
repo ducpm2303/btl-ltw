@@ -5,6 +5,7 @@ import myteam.project4.model.request.CompanyRequest;
 import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.CompanyDetailResponse;
 import myteam.project4.model.response.CompanyResponse;
+import myteam.project4.model.response.SalaryResponse;
 import myteam.project4.service.CompanyService;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,5 +44,9 @@ public class CompanyController {
         return BaseResponse.ofSuccess(companyService.deleteById(id));
     }
 
+    @GetMapping("/search")
+    BaseResponse<List<CompanyResponse>> findCompanyByNameLike(@RequestParam String name){
+        return BaseResponse.ofSuccess(companyService.findCompanyByNameLike(name));
+    }
 
 }

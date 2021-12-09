@@ -22,4 +22,5 @@ public class MonthSalary extends BaseModel {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "salary_id")
     private Salary salary;
+
 }

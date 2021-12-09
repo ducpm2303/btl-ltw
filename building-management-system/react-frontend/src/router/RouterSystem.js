@@ -23,7 +23,6 @@ class RouterSystem extends Component {
             <div>
                 <Switch>
                     <Route exact path="/"><Home/></Route>
-                    <Route path="/company-employee"><EmployeeTable/></Route>
                     <Route path="/companies"><CompanyTable/></Route>
                     <Route path="/building-employee"><BuildingEmployee/></Route>
                     <Route path="/salary"><Salary/></Route>

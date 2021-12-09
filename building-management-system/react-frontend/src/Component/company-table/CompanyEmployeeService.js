@@ -11,17 +11,22 @@ class CompanyEmployeeService{
         return axios.post(COMPANYEMPLOYEE_API_URL + '/create', companyEmployee)
     }
 
-    updateCompany(id, companyEmployee){
+    updateCompanyEmployee(id, companyEmployee){
         return axios.put(COMPANYEMPLOYEE_API_URL + '/update/' + id, companyEmployee)
     }
 
-    deleteCompany(id){
+    deleteCompanyEmployee(id){
         return axios.delete(COMPANYEMPLOYEE_API_URL + '/delete/' + id)
     }
 
     getEmployeeByCompanyId(companyId){
         return axios.get(COMPANYEMPLOYEE_API_URL + '/company/' + companyId);
     }
+
+    searchByName(name, companyId){
+        return axios.get(COMPANYEMPLOYEE_API_URL + '/search?name=?'+ name + 'company_id=?'+ companyId);
+    }
+
 
 }
 

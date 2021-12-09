@@ -5,7 +5,7 @@ class CompanyTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            company: [],
+            companies: [],
             id: 0,
             name: "",
             taxCode: "",
@@ -51,6 +51,27 @@ class CompanyTable extends Component {
                 area = this.state.area,
                 numberOfEmployee = this.state.numberOfEmployee)}>Update</button>
         }
+    }
+
+    
+    getName = (nameLike) => {
+        const name = nameLike.target.name;
+        const value = nameLike.target.value;
+        // console.log(name);
+        // console.log(value);
+        this.setState({
+            name: value
+        })
+
+    }
+
+    
+    searchName = () => {
+        // console.log(value);
+        // console.log(this.state)
+        CompanyService.searchByName(this.state.name).then((response) => {
+            this.setState({ companies: response.data.data })
+        });
     }
 
     addNewCompany = (name, taxCode, authorizedCapital, fieldOfActivity, floor, hotline, area, numberOfEmployee) => {
@@ -130,7 +151,7 @@ class CompanyTable extends Component {
 
     componentDidMount(){
         CompanyService.getAllCompany().then((response) => {
-            this.setState({company: response.data.data})
+            this.setState({companies: response.data.data})
         })
     }
 
@@ -187,18 +208,19 @@ class CompanyTable extends Component {
                         </div>
                     </div>
                     <div className="container-fluid px-4">
-                        <h1 className="mt-4">Companies Table</h1>
+                        <h1 className="mt-1">Companies Table</h1>
+                        <br/>
                         <div className="card mb-4">
                             <div className="card-body">
                                 <div className="row">
-                                    <div className="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                    <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                                         <button type="button" className="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formCompany">Add new Employee</button>
                                     </div>
                                     <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" >
                                             <div className="input-group">
                                                 <input onChange={(event) => this.getName(event)} className="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                                                <button onClick={() => this.searchName(this.state.value)} className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
+                                                <button onClick={() => this.searchName(this.state.name)} className="btn btn-primary" id="btnNavbarSearch" type="button"><i className="fas fa-search"></i></button>
                                             </div>
                                         </form>
                                     </div>
@@ -225,22 +247,9 @@ class CompanyTable extends Component {
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    {/* <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Code</th>
-                                            <th>Authorized capital</th>
-                                            <th>Activity</th>
-                                            <th>Quantity</th>
-                                            <th>Address</th>
-                                            <th>Phone Number</th>
-                                            <th>Area</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot> */}
                                     <tbody>
                                         {
-                                            this.state.company.map((company) =>(
+                                            this.state.companies.map((company) =>(
                                                 <tr key={company.id}>
                                                     <td> {company.name} </td>
                                                     <td> {company.taxCode} </td>
@@ -253,7 +262,7 @@ class CompanyTable extends Component {
                                                     <td>
                                                         <button type="button" className="btn btn-danger" onClick={() => this.deleteCompany(company.id)}>Delete</button>
                                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCompany" onClick={() => this.getCompany(company)}>Edit</button>
-                                                        <button type="button" className="btn btn-success">
+                                                        <button type="button" className="btn btn-warning">
                                                                 <a href={`/employee-detail/${company.id}`}>view Detail</a>
                                                         </button>
                                                     </td>

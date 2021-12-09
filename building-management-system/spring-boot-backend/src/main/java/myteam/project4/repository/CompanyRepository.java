@@ -28,4 +28,6 @@ public interface CompanyRepository extends JpaRepository<Company,Long> {
     void updateById(Long id, String taxCode, Float authorizedCapital, String fieldOfActivity, String floor, String hotline, String name, Float area);
 
     List<Company> findAllByIsDeleted(boolean isDeleted);
+
+    List<Company> findCompanyByIsDeletedAndNameLike(boolean isDeleted, String name);
 }

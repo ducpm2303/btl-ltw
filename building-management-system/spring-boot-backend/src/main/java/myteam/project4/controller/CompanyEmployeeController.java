@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import myteam.project4.model.request.CompanyEmployeeRequest;
 import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.CompanyEmployeeResponse;
+import myteam.project4.model.response.CompanyResponse;
 import myteam.project4.service.CompanyEmployeeService;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,11 @@ public class CompanyEmployeeController {
     @DeleteMapping("delete/{id}")
     public BaseResponse<String> deleteCompanyEmployeeById(@PathVariable Long id){
         return BaseResponse.ofSuccess((companyEmployeeService.deleteById(id)));
+    }
+
+    @GetMapping("/search")
+    BaseResponse<List<CompanyEmployeeResponse>> findCompanyEmployeeByNameLike(@RequestParam String name){
+        return BaseResponse.ofSuccess(companyEmployeeService.findCompanyEmployeeByNameLike(name));
     }
 
 }

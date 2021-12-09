@@ -72,4 +72,11 @@ public class CompanyServiceImpl implements CompanyService {
         List<Company> companyList = companyRepository.findAllByIsDeleted(false);
         return companyList.stream().map(companyMapper::to).collect(Collectors.toList());
     }
+
+    @Override
+    public List<CompanyResponse> findCompanyByNameLike(String name) {
+        String searchName= "%"+name+"%";
+        List<Company> companyList = companyRepository.findCompanyByIsDeletedAndNameLike(false, searchName);
+        return companyList.stream().map(companyMapper::to).collect(Collectors.toList());
+    }
 }

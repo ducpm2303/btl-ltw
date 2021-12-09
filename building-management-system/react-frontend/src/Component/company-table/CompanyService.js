@@ -19,6 +19,10 @@ class CompanyService{
         return axios.delete(COMPANY_API_URL + '/delete/' + id)
     }
 
+    searchByName(name){
+        return axios.get(COMPANY_API_URL + '/search?name='+ name);
+    }
+
 }
 
 export default new CompanyService();

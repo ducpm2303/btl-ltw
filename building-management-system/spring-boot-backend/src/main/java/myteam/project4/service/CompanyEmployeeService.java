@@ -18,4 +18,6 @@ public interface CompanyEmployeeService {
     List<CompanyEmployeeResponse> getAllCompanyEmployee();
 
     List<CompanyEmployeeResponse> findByCompanyId(Long company_id);
+
+    List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name);
 }
