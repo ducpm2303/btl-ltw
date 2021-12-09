@@ -69,14 +69,14 @@ class EmployeeDetail extends Component {
     }
 
     addNewCompany = (code, identification, name, dateOfBirth, phone) => {
-        var companyEmployee = {};
+        let companyEmployee = {};
         companyEmployee.code = code;
         companyEmployee.identification = identification;
         companyEmployee.name = name;
         companyEmployee.dateOfBirth = dateOfBirth;
         companyEmployee.phone = phone;
         companyEmployee.company_id = this.state.companyId;
-        CompanyEmployeeService.createCompanyEmployee(companyEmployee).then(() => {
+        CompanyEmployeeService.createCompanyEmployee(companyEmployee.company_id, companyEmployee).then(() => {
             this.componentDidMount();
         });
         toast.success('Added Employee successfully!!!');
@@ -91,14 +91,14 @@ class EmployeeDetail extends Component {
     }
 
     editCompany = (id, code, identification, name, dateOfBirth, phone) => {
-        var companyEmployee = {};
+        let companyEmployee = {};
         companyEmployee.code = code;
         companyEmployee.identification = identification;
         companyEmployee.name = name;
         companyEmployee.dateOfBirth = dateOfBirth;
         companyEmployee.phone = phone;
         companyEmployee.companyId = this.state.companyId;
-        CompanyEmployeeService.updateCompanyEmployee(id, companyEmployee).then(() => {
+        CompanyEmployeeService.updateCompanyEmployee(companyEmployee.companyId, id, companyEmployee).then(() => {
             this.componentDidMount();
         });
         toast.info('Updated Employee successfully!!!');
@@ -124,7 +124,7 @@ class EmployeeDetail extends Component {
     }
 
     deleteCompanyEmployee = (id) => {
-        CompanyEmployeeService.deleteCompanyEmployee(parseInt(id)).then(() => {
+        CompanyEmployeeService.deleteCompanyEmployee(this.state.companyId, parseInt(id)).then(() => {
             this.componentDidMount();
         });
         toast.error('Deleted Employee successfully!!!');

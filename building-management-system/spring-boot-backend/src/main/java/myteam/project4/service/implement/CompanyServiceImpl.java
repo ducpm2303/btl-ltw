@@ -92,6 +92,9 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public List<CompanyResponse> getAllCompany() {
         List<Company> companyList = companyRepository.findAllByIsDeleted(false);
+        companyList.stream().forEach(company ->
+                company.setCompanyEmployeeList(companyEmployeeRepository
+                        .findCompanyEmployeeByIsDeletedAndCompanyId(false, company.getId())));
         return companyList.stream().map(companyMapper::to).collect(Collectors.toList());
     }
 

@@ -1,30 +1,26 @@
 import axios from "axios";
-const COMPANYEMPLOYEE_API_URL = "http://localhost:8080/public-api/v1.0.0/company_employee"
+const COMPANYEMPLOYEE_API_URL = "http://localhost:8080/public-api/v1.0.0/company/"
 
 class CompanyEmployeeService{
 
-    getAllCompanyEmployee(){
-        return axios.get(COMPANYEMPLOYEE_API_URL + '/list');
+    createCompanyEmployee(companyId, companyEmployee){
+        return axios.post(COMPANYEMPLOYEE_API_URL + companyId + '/employee/create', companyEmployee)
     }
 
-    createCompanyEmployee(companyEmployee){
-        return axios.post(COMPANYEMPLOYEE_API_URL + '/create', companyEmployee)
+    updateCompanyEmployee(companyId, id, companyEmployee){
+        return axios.put(COMPANYEMPLOYEE_API_URL + companyId + '/employee/update/' + id, companyEmployee)
     }
 
-    updateCompanyEmployee(id, companyEmployee){
-        return axios.put(COMPANYEMPLOYEE_API_URL + '/update/' + id, companyEmployee)
-    }
-
-    deleteCompanyEmployee(id){
-        return axios.delete(COMPANYEMPLOYEE_API_URL + '/delete/' + id)
+    deleteCompanyEmployee(companyId, id){
+        return axios.delete(COMPANYEMPLOYEE_API_URL + companyId + '/employee/delete/' + id)
     }
 
     getEmployeeByCompanyId(companyId){
-        return axios.get(COMPANYEMPLOYEE_API_URL + '/company/' + companyId);
+        return axios.get(COMPANYEMPLOYEE_API_URL  + companyId + '/employee');
     }
 
     searchByName(name, companyId){
-        return axios.get(COMPANYEMPLOYEE_API_URL + '/search?name='+ name + '&company_id='+ companyId);
+        return axios.get(COMPANYEMPLOYEE_API_URL + companyId + '/employee/search?name='+ name);
     }
 
 
