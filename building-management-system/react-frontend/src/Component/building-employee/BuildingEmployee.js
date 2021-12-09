@@ -38,6 +38,9 @@ class BuildingEmployee extends Component {
             buildingEmployee.phone = value;
         }else if(name === "position") {
             buildingEmployee.position = value;
+            SalaryService.getAllLevelByPosition(value).then((response) => {
+                this.setState({listLevel: response.data.data})
+            });
         }else if(name === "level") {
             buildingEmployee.level = value;
         }
@@ -146,7 +149,7 @@ class BuildingEmployee extends Component {
             SalaryService.getAllLevelByPosition(this.state.listPosition[0]).then((response) => {
                 this.setState({listLevel: response.data.data})
             });
-        });
+        })
     }
 
 

@@ -11,7 +11,7 @@ import java.util.Optional;
 @Transactional
 public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmployee, Long> {
 
-    List<BuildingEmployee> findByNameLike(String name);
+    List<BuildingEmployee> findByIsDeletedAndNameLike(boolean isDeleted, String name);
     List<BuildingEmployee> findAllByIsDeleted(boolean isDeleted);
 
     @Query(value = "SELECT Max(b.id) FROM BuildingEmployee b")

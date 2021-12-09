@@ -98,7 +98,7 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
     @Override
     public List<BuildingEmployeeResponse> getBuildingEmployeeByName(String name) {
         name = "%"+name+"%";
-        List<BuildingEmployee> listBuildingEmployee = repository.findByNameLike(name);
+        List<BuildingEmployee> listBuildingEmployee = repository.findByIsDeletedAndNameLike(false, name);
         return listBuildingEmployee.stream().map(mapper::to).collect(Collectors.toList());
     }
 }
