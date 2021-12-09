@@ -37,11 +37,11 @@ class Menu extends Component {
                                 </nav>
                             
                             <div class="sb-sidenav-menu-heading">Statitics</div>
-                            <a class="nav-link" href="charts.html">
+                            <a class="nav-link" href="/company-stat">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                                 Company Stat
                             </a>
-                            <a class="nav-link" href="/statTable">
+                            <a class="nav-link" href="/employee-stat">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Employee Stat
                             </a>

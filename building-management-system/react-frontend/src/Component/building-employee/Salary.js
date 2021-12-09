@@ -187,8 +187,8 @@ class BuildingEmployee extends Component {
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Level</th>
                                                 <th>Position</th>
+                                                <th>Level</th>
                                                 <th>Salary</th>
                                                 <th>Action</th>
                                             </tr>
@@ -197,8 +197,8 @@ class BuildingEmployee extends Component {
                                             {
                                                 this.state.salaries.map((Salary) => (
                                                     <tr key={Salary.id} >
-                                                        <td> {Salary.level}</td>
                                                         <td> {Salary.position}</td>
+                                                        <td> {Salary.level}</td>
                                                         <td> {Salary.salary}</td>
                                                         <td>
                                                             <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteSalary(Salary.id)}>Delete</button>

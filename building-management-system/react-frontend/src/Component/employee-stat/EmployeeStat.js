@@ -1,21 +1,14 @@
 import React, { Component } from 'react';
 
-class StatTable extends Component {
+class EmployeeStat extends Component {
     render() {
         return (
             <div>
                 <div class="col-lg-12 ml-auto" id="layoutSidenav_content">
                     <main>
                         <div class="container-fluid px-4">
-                            <h1 class="mt-1">Statitic Table</h1>
+                            <h1 class="mt-1">Employee Statitic Table</h1>
                             <br/>
-                            <div class="card mb-4">
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-lg btn-success">Week Statitic</button>
-                                    <button type="button" class="btn btn-lg btn-warning">Month Statitic</button>
-                                    <button type="button" class="btn btn-lg btn-danger">Year Statitic</button>
-                                </div>
-                            </div>
                             <div class="card mb-4">
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
@@ -25,13 +18,11 @@ class StatTable extends Component {
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Date</th>
+                                                <th>Code</th>
                                                 <th>Name</th>
-                                                <th>Area</th>
-                                                <th>Rented Price</th>
-                                                <th>Service Price</th>
-                                                <th>Total Price</th>
-                                                <th>Action</th>
+                                                <th>level</th>
+                                                <th>position</th>
+                                                <th>salary</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -62,4 +53,4 @@ class StatTable extends Component {
     }
 }
 
-export default StatTable;
+export default EmployeeStat;
