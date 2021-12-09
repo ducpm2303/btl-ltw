@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState } from 'react';
 import CompanyEmployeeService from './CompanyEmployeeService';
-// import {} from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class EmployeeDetail extends Component {
 
@@ -16,6 +17,7 @@ class EmployeeDetail extends Component {
             dateOfBirth: "",
             phone: ""
         }
+        toast.configure();
     }
 
     isChange = (event) => {
@@ -61,8 +63,9 @@ class EmployeeDetail extends Component {
     searchName = () => {
         // console.log(value);
         // console.log(this.state)
-        CompanyEmployeeService.searchByName(this.state.name).then((response) => {
-            this.setState({ companies: response.data.data })
+        CompanyEmployeeService.searchByName(this.state.name, this.state.companyId).then((response) => {
+            this.setState({ companyEmployees: response.data.data })
+            // console.log(this.state.companies);
         });
     }
 
@@ -77,6 +80,7 @@ class EmployeeDetail extends Component {
         CompanyEmployeeService.createCompanyEmployee(companyEmployee).then(() => {
             this.componentDidMount();
         });
+        toast.success('Added Employee successfully!!!');
         this.setState({
             id: 0,
             code: "",
@@ -98,6 +102,7 @@ class EmployeeDetail extends Component {
         CompanyEmployeeService.updateCompanyEmployee(id, companyEmployee).then(() => {
             this.componentDidMount();
         });
+        toast.info('Updated Employee successfully!!!');
         this.setState({
             id: 0,
             code: "",
@@ -119,15 +124,16 @@ class EmployeeDetail extends Component {
         });
     }
 
-    deleteCompany = (id) => {
+    deleteCompanyEmployee = (id) => {
         CompanyEmployeeService.deleteCompanyEmployee(parseInt(id)).then(() => {
             this.componentDidMount();
-        })
+        });
+        toast.error('Deleted Employee successfully!!!');
     }
 
     componentDidMount() {
         CompanyEmployeeService.getEmployeeByCompanyId(this.state.companyId).then((response) => {
-            console.log(response);
+            // console.log(response);
             this.setState({ companyEmployees: response.data.data })
         })
     };
@@ -224,7 +230,7 @@ class EmployeeDetail extends Component {
                                                         <td> {companyEmployee.phone}</td>
 
                                                         <td>
-                                                            <button type="button" className="btn btn-warning badge-pill">Delete</button>
+                                                            <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteCompanyEmployee(companyEmployee.id)}>Delete</button>
                                                             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getCompanyEmployee(companyEmployee)}>Edit</button>
 
                                                         </td>

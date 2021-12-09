@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SalaryService from './SalaryService';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class BuildingEmployee extends Component {
     constructor(props) {
@@ -11,6 +13,7 @@ class BuildingEmployee extends Component {
             level: "",
             salary: ""
         }
+        toast.configure();
     }
 
     isChange = (event) => {
@@ -57,6 +60,7 @@ class BuildingEmployee extends Component {
         SalaryService.createSalary(Salary).then(() => {
             this.componentDidMount();
         });
+        toast.success('Added Salary successfully!!!');
         this.setState({
             id: 0,
             position: "",
@@ -86,6 +90,7 @@ class BuildingEmployee extends Component {
             this.componentDidMount();
             // console.log(idUpdate);
         });
+        toast.info('Updated Salary successfully!!!');
         this.setState({
             id: 0,
             level: "",
@@ -99,6 +104,7 @@ class BuildingEmployee extends Component {
         SalaryService.deleteSalary(idDelete).then(() => {
             this.componentDidMount();
         });
+        toast.error('Deleted Salary successfully!!!');
     }
 
     searchByPosition = () => {

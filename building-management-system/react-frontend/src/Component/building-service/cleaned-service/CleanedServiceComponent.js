@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './CleanedService.css';
 import CleanedServiceService from "./CleanedServiceService";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CleanedServiceComponent extends Component {
     constructor(props) {
@@ -17,11 +19,14 @@ class CleanedServiceComponent extends Component {
                 timesPerWeek: 0,
             },
         }
+        toast.configure();
     }
     componentDidMount() {
         CleanedServiceService.getCurrentCleanedService().then((response) => {
-            this.setState({ currentCleanedService: response.data.data});
-            this.setState({ newCleanedService : response.data.data})
+            if(response.data.code !== 404) {
+                this.setState({ currentCleanedService: response.data.data});
+                this.setState({ newCleanedService : response.data.data});
+            }
         });
     }
 
@@ -42,10 +47,10 @@ class CleanedServiceComponent extends Component {
         })
     }
 
-
     addNewCleanedService() {
         CleanedServiceService.createCleanedService(this.state.newCleanedService)
             .then(() => this.componentDidMount());
+        toast.success('Updated Cleaned Service successfully!!!');
     }
 
     render() {

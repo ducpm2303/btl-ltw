@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ProtectedServiceService from "./ProtectedServiceService";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class ProtectedService extends Component {
     constructor(props) {
         super(props);
@@ -15,10 +18,11 @@ class ProtectedService extends Component {
                 any: "bao ve",
             },
         }
+        toast.configure();
     }
     componentDidMount() {
         ProtectedServiceService.getCurrentProtectedService().then((response) => {
-            if(response.code != 404) {
+            if(response.data.code !== 404) {
                 this.setState({currentProtectedService: response.data.data});
                 this.setState({newProtectedService: response.data.data})
             }
@@ -46,6 +50,7 @@ class ProtectedService extends Component {
     addNewProtectedService() {
         ProtectedServiceService.createProtectedService(this.state.newProtectedService)
             .then(() => this.componentDidMount());
+        toast.success('Updated Protected Service successfully!!!');
     }
 
     render() {

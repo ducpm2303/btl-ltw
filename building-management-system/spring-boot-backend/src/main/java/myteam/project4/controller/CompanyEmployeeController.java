@@ -34,7 +34,7 @@ public class CompanyEmployeeController {
 
     @GetMapping("/company/{company_id}")
     public BaseResponse<List<CompanyEmployeeResponse>> getCompanyEmployeeByCompanyId(@PathVariable Long company_id){
-        return BaseResponse.ofSuccess(companyEmployeeService.findByCompanyId(company_id));
+        return BaseResponse.ofSuccess(companyEmployeeService.findByIsDeletedAndCompanyId(false, company_id));
     }
 
     @GetMapping("/list")
@@ -48,8 +48,8 @@ public class CompanyEmployeeController {
     }
 
     @GetMapping("/search")
-    BaseResponse<List<CompanyEmployeeResponse>> findCompanyEmployeeByNameLike(@RequestParam String name){
-        return BaseResponse.ofSuccess(companyEmployeeService.findCompanyEmployeeByNameLike(name));
+    BaseResponse<List<CompanyEmployeeResponse>> findCompanyEmployeeByNameLike(@RequestParam String name, @RequestParam Long company_id){
+        return BaseResponse.ofSuccess(companyEmployeeService.findCompanyEmployeeByNameLike(name, company_id));
     }
 
 }

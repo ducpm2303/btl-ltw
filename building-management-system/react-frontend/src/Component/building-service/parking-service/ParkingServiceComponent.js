@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ParkingServiceService from "./ParkingServiceService";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class ParkingService extends Component {
     constructor(props) {
         super(props);
@@ -15,10 +18,11 @@ class ParkingService extends Component {
                 slot: 0,
             },
         }
+        toast.configure();
     }
     componentDidMount() {
         ParkingServiceService.getCurrentParkingService().then((response) => {
-            if(response.code != 404) {
+            if(response.data.code !== 404) {
                 this.setState({currentParkingService: response.data.data});
                 this.setState({newParkingService: response.data.data})
             }
@@ -46,6 +50,7 @@ class ParkingService extends Component {
     addNewParkingService() {
         ParkingServiceService.createParkingService(this.state.newParkingService)
             .then(() => this.componentDidMount());
+        toast.success('Updated Parking Service successfully!!!');
     }
 
     render() {

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import MaintenanceServiceService from "./MaintenanceServiceService";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class MaintenanceService extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +21,7 @@ class MaintenanceService extends Component {
     }
     componentDidMount() {
         MaintenanceServiceService.getCurrentMaintenanceService().then((response) => {
-            if(response.code != 404) {
+            if(response.data.code !== 404) {
                 this.setState({currentMaintenanceService: response.data.data});
                 this.setState({newMaintenanceService: response.data.data})
             }
@@ -46,6 +49,7 @@ class MaintenanceService extends Component {
     addNewMaintenanceService() {
         MaintenanceServiceService.createMaintenanceService(this.state.newMaintenanceService)
             .then(() => this.componentDidMount());
+        toast.success('Updated Maintenance Service successfully!!!');
     }
 
     render() {

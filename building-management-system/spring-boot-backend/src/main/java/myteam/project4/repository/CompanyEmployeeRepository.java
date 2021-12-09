@@ -1,5 +1,6 @@
 package myteam.project4.repository;
 
+import myteam.project4.entity.Company;
 import myteam.project4.entity.CompanyEmployee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -32,5 +33,7 @@ public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee
 
     List<CompanyEmployee> findAllByIsDeleted(boolean isDeleted);
 
-    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndNameLike(boolean isDeleted, String name);
+    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndNameLikeAndCompany(boolean isDeleted, String name, Company company);
+
+    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndCompany(boolean isDeleted, Company company);
 }
