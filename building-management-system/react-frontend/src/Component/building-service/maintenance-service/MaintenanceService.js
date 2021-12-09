@@ -32,12 +32,12 @@ class MaintenanceService extends Component {
         let cleanedService = this.state.newMaintenanceService;
         const name = event.target.name;
         const value = event.target.value;
-        if(name == "name") {
+        if(name === "name") {
             cleanedService.name = value;
-        } else if(name == "price"){
+        } else if(name === "price"){
             cleanedService.price = value;
         }
-        else if(name == "period"){
+        else if(name === "period"){
             cleanedService.period = value;
         }
         this.setState( {
@@ -61,8 +61,7 @@ class MaintenanceService extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Maintenance Service Information</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
                             </div>
                             <div className="modal-body">
                                 <form>

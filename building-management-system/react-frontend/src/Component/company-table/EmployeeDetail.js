@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import CompanyEmployeeService from './CompanyEmployeeService';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,7 +50,6 @@ class EmployeeDetail extends Component {
     }
 
     getName = (nameLike) => {
-        const name = nameLike.target.name;
         const value = nameLike.target.value;
         // console.log(name);
         // console.log(value);
@@ -133,8 +132,10 @@ class EmployeeDetail extends Component {
 
     componentDidMount() {
         CompanyEmployeeService.getEmployeeByCompanyId(this.state.companyId).then((response) => {
+            console.log(this.state.companyId)
             // console.log(response);
             this.setState({ companyEmployees: response.data.data })
+            console.log(this.state)
         })
     };
     render() {

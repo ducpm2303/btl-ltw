@@ -33,12 +33,12 @@ class ParkingService extends Component {
         let parkingService = this.state.newParkingService;
         const name = event.target.name;
         const value = event.target.value;
-        if(name == "name") {
+        if(name === "name") {
             parkingService.name = value;
-        } else if(name == "price"){
+        } else if(name === "price"){
             parkingService.price = value;
         }
-        else if(name == "slot"){
+        else if(name === "slot"){
             parkingService.slot = value;
         }
         this.setState( {
@@ -63,7 +63,7 @@ class ParkingService extends Component {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Parking Service Information</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                        aria-label="Close"/>
                             </div>
                             <div className="modal-body">
                                 <form>

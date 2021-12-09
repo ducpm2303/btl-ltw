@@ -59,7 +59,6 @@ class CompanyTable extends Component {
 
     
     getName = (nameLike) => {
-        const name = nameLike.target.name;
         const value = nameLike.target.value;
         // console.log(name);
         // console.log(value);

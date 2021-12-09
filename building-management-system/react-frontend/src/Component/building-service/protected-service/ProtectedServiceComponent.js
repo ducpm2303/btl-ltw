@@ -33,12 +33,12 @@ class ProtectedService extends Component {
         let protectedService = this.state.newProtectedService;
         const name = event.target.name;
         const value = event.target.value;
-        if(name == "name") {
+        if(name === "name") {
             protectedService.name = value;
-        } else if(name == "price"){
+        } else if(name === "price"){
             protectedService.price = value;
         }
-        else if(name == "any"){
+        else if(name === "any"){
             protectedService.any = value;
         }
         this.setState( {
@@ -63,7 +63,7 @@ class ProtectedService extends Component {
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Protected Service Information</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                        aria-label="Close"/>
                             </div>
                             <div className="modal-body">
                                 <form>

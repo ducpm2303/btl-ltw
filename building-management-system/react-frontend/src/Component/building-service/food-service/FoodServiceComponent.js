@@ -33,12 +33,12 @@ class FoodService extends Component {
         let foodService = this.state.newFoodService;
         const name = event.target.name;
         const value = event.target.value;
-        if(name == "name") {
+        if(name === "name") {
             foodService.name = value;
-        } else if(name == "price"){
+        } else if(name === "price"){
             foodService.price = value;
         }
-        else if(name == "time"){
+        else if(name === "time"){
             foodService.time = value;
         }
         this.setState( {
@@ -62,8 +62,7 @@ class FoodService extends Component {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Food Service Information</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
                             </div>
                             <div className="modal-body">
                                 <form>
