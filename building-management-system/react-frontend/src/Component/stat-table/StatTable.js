@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Header from '../home/header/Header';
-import Menu from '../home/menu/Menu';
 
 class StatTable extends Component {
     render() {

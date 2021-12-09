@@ -24,5 +24,14 @@ class SalaryService{
         return axios.get(SALARY_API_URL + '/search?position='+ position);
     }
 
+    getAllPosition() {
+        return axios.get(SALARY_API_URL + '/position')
+    }
+
+    getAllLevelByPosition(position) {
+        return axios.get(SALARY_API_URL + '/level?position=' + position )
+    }
+
+
 }
 export default new SalaryService();

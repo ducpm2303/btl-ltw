@@ -1,149 +1,137 @@
 import React, { Component } from 'react';
 import BuildingEmployeeService from './BuildingEmployeeService';
+import SalaryService from "./SalaryService";
 
 class BuildingEmployee extends Component {
     constructor(props) {
         super(props);
         this.state = {
             buildingEmployees: [],
-            id: 0,
-            code: "",
-            name: "",
-            dateOfBirth: "",
-            address: "",
-            phone: "",
-            position: "",
-            level: "",
-            salary: ""
+            newBuildingEmployee: {
+                id: 0,
+                code: "",
+                name: "",
+                dateOfBirth: "",
+                address: "",
+                phone: "",
+                position: "",
+                level: "",
+            },
+            listLevel : [],
+            listPosition: [],
         }
     }
 
     isChange = (event) => {
+        let buildingEmployee = this.state.newBuildingEmployee;
         const name = event.target.name;
         const value = event.target.value;
         console.log(name);
         console.log(value);
+        if(name === "name") {
+            buildingEmployee.name = value
+        } else if(name === "dateOfBirth") {
+            buildingEmployee.dateOfBirth = value;
+        }else if(name === "address") {
+            buildingEmployee.address = value;
+        }else if(name === "phone") {
+            buildingEmployee.phone = value;
+        }else if(name === "position") {
+            buildingEmployee.position = value;
+        }else if(name === "level") {
+            buildingEmployee.level = value;
+        }
         this.setState({
-            [name]: value
+            newBuildingEmployee: buildingEmployee
         })
 
     }
     getName = (nameLike) => {
-        const name = nameLike.target.name;
         const value = nameLike.target.value;
-        // console.log(name);
-        // console.log(value);
         this.setState({
             name: value
         })
 
     }
 
-    changeButton = (id) => {
-        if (id === 0) {
-            return <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={(code, name, dateOfBirth, address, phone, position, level, salary) => this.addNewBuildingEmployee(
-                code = this.state.code,
-                name = this.state.name,
-                dateOfBirth = this.state.dateOfBirth,
-                address = this.state.address,
-                phone = this.state.phone,
-                position = this.state.position,
-                level = this.state.level,
-                salary = this.state.salary)}>Add New</button>
+    changeButton = () => {
+        if (this.state.newBuildingEmployee.id === 0) {
+            return <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={() => this.addNewBuildingEmployee()}>Add New</button>
         } else {
-            return <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onClick={(id, code, name, dateOfBirth, address, phone, position, level, salary) => this.editBuildingEmployee(
-                id = this.state.id,
-                code = this.state.code,
-                name = this.state.name,
-                dateOfBirth = this.state.dateOfBirth,
-                address = this.state.address,
-                phone = this.state.phone,
-                position = this.state.position,
-                level = this.state.level,
-                salary = this.state.salary)}>Update</button>
+            return <button type="button" class="btn btn-warning" data-bs-dismiss="modal" onClick={() => this.editBuildingEmployee()}>Update</button>
         }
     }
 
-    addNewBuildingEmployee = (code, name, dateOfBirth, address, phone, position, level, salary) => {
-        var buildingEmployee = {};
-        buildingEmployee.code = code;
-        buildingEmployee.name = name;
-        buildingEmployee.dateOfBirth = dateOfBirth;
-        buildingEmployee.address = address;
-        buildingEmployee.phone = phone;
-        buildingEmployee.position = position;
-        buildingEmployee.level = level;
-        buildingEmployee.salary = parseFloat(salary);
-        BuildingEmployeeService.createBuildingEmployee(buildingEmployee).then(() => {
+    addNewBuildingEmployee = () => {
+        console.log(this.state)
+        BuildingEmployeeService.createBuildingEmployee(this.state.newBuildingEmployee).then(() => {
             this.componentDidMount();
         });
         this.setState({
-            id: 0,
-            code: "",
-            name: "",
-            dateOfBirth: "",
-            address: "",
-            phone: "",
-            position: "",
-            level: "",
-            salary: ""
+            newBuildingEmployee: {
+                id: 0,
+                code: "",
+                name: "",
+                dateOfBirth: "",
+                address: "",
+                phone: "",
+                position: "",
+                level: "",
+            }
         });
     }
 
     getBuildingEmployee = (buildingEmployee) => {
-        this.setState({
-            id: buildingEmployee.id,
-            code: buildingEmployee.code,
-            name: buildingEmployee.name,
-            dateOfBirth: buildingEmployee.dateOfBirth,
-            address: buildingEmployee.address,
-            phone: buildingEmployee.phone,
-            position: buildingEmployee.salaryResponse.position,
-            level: buildingEmployee.salaryResponse.level,
-            salary: buildingEmployee.salaryResponse.salary
-        });
-
-    }
-    editBuildingEmployee = (id, code, name, dateOfBirth, address, phone, position, level, salary) => {
-        var buildingEmployee = {};
-        var idUpdate = parseInt(id);
-        var salaryUpdate = parseFloat(salary);
-        buildingEmployee.id = idUpdate;
-        buildingEmployee.code = code;
-        buildingEmployee.name = name;
-        buildingEmployee.dateOfBirth = dateOfBirth;
-        buildingEmployee.address = address;
-        buildingEmployee.phone = phone;
-        buildingEmployee.position = position;
-        buildingEmployee.level = level;
-        buildingEmployee.salary = salaryUpdate;
-        BuildingEmployeeService.updateBuildingEmployee(idUpdate, buildingEmployee).then(() => {
-            this.componentDidMount();
-            // console.log(idUpdate);
-        });
-        this.setState({
+        let editBuildingEmployee = {
             id: 0,
             code: "",
             name: "",
             dateOfBirth: "",
             address: "",
             phone: "",
-            level: "",
             position: "",
-            salary: ""
+            level: "",
+        };
+        editBuildingEmployee.id = buildingEmployee.id;
+        editBuildingEmployee.code = buildingEmployee.code;
+        editBuildingEmployee.name = buildingEmployee.name;
+        editBuildingEmployee.dateOfBirth = buildingEmployee.dateOfBirth;
+        editBuildingEmployee.address = buildingEmployee.address;
+        editBuildingEmployee.phone = buildingEmployee.phone;
+        editBuildingEmployee.position = buildingEmployee.salaryResponse.position;
+        editBuildingEmployee.level = buildingEmployee.salaryResponse.level;
+        this.setState({
+            newBuildingEmployee: editBuildingEmployee
+        });
+
+    }
+    editBuildingEmployee = () => {
+        console.log(this.state)
+        BuildingEmployeeService.updateBuildingEmployee(this.state.newBuildingEmployee.id, this.state.newBuildingEmployee).then(() => {
+            this.componentDidMount();
+        });
+        this.setState({
+            newBuildingEmployee: {
+                id: 0,
+                code: "",
+                name: "",
+                dateOfBirth: "",
+                address: "",
+                phone: "",
+                position: "",
+                level: "",
+            }
         });
     }
 
     deleteBuildingEmployee = (id) => {
-        var idDelete = parseInt(id);
+        let idDelete = parseInt(id);
         BuildingEmployeeService.deleteBuildingEmployee(idDelete).then(() => {
             this.componentDidMount();
         });
     }
 
     searchName = (value) => {
-        // console.log(value);
-        // console.log(this.state)
         BuildingEmployeeService.searchByName(this.state.name).then((response) => {
             this.setState({ buildingEmployees: response.data.data })
         });
@@ -151,7 +139,13 @@ class BuildingEmployee extends Component {
     componentDidMount() {
         BuildingEmployeeService.getAllBuildingEmployee().then((response) => {
             this.setState({ buildingEmployees: response.data.data });
-            // console.log(response.data);
+        });
+        SalaryService.getAllPosition().then((response) => {
+           this.setState({listPosition: response.data.data})
+        }).then( () => {
+            SalaryService.getAllLevelByPosition(this.state.listPosition[0]).then((response) => {
+                this.setState({listLevel: response.data.data})
+            });
         });
     }
 
@@ -171,42 +165,48 @@ class BuildingEmployee extends Component {
                             <div class="modal-body">
                                 <form>
                                     <div class="mb-3">
-                                        <label for="code" class="form-label">Code</label>
-                                        <input value={this.state.code} type="text" onChange={(event) => this.isChange(event)} name="code" class="form-control" id="code" />
-                                    </div>
-                                    <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input value={this.state.name} type="text" onChange={(event) => this.isChange(event)} name="name" class="form-control" id="name" />
+                                        <input value={this.state.newBuildingEmployee.name} type="text" onChange={(event) => this.isChange(event)} name="name" class="form-control" id="name" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="dateOfBirth" class="form-label">Date Of Birth</label>
-                                        <input value={this.state.dateOfBirth} type="date" onChange={(event) => this.isChange(event)} name="dateOfBirth" class="form-control" id="dateOfBirth" />
+                                        <input value={this.state.newBuildingEmployee.dateOfBirth} type="date" onChange={(event) => this.isChange(event)} name="dateOfBirth" class="form-control" id="dateOfBirth" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="address" class="form-label">Address</label>
-                                        <input value={this.state.address} type="text" onChange={(event) => this.isChange(event)} name="address" class="form-control" id="address" />
+                                        <input value={this.state.newBuildingEmployee.address} type="text" onChange={(event) => this.isChange(event)} name="address" class="form-control" id="address" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="phone" class="form-label">Phone</label>
-                                        <input value={this.state.phone} type="text" onChange={(event) => this.isChange(event)} name="phone" class="form-control" id="phone" />
+                                        <input value={this.state.newBuildingEmployee.phone} type="text" onChange={(event) => this.isChange(event)} name="phone" class="form-control" id="phone" />
                                     </div>
                                     <div class="mb-3">
                                         <label for="position" class="form-label">Position</label>
-                                        <input value={this.state.position} type="text" onChange={(event) => this.isChange(event)} name="position" class="form-control" id="position" />
+                                        <select className="form-select" value={this.state.newBuildingEmployee.position} name="position"
+                                                onChange={(event) => this.isChange(event)}>
+                                            {
+                                                this.state.listPosition.map((position) => (
+                                                    <option selected={position === this.state.newBuildingEmployee.position} value={position}>{position}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="level" class="form-label">Level</label>
-                                        <input value={this.state.level} type="text" onChange={(event) => this.isChange(event)} name="level" class="form-control" id="level" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="level" class="form-label">Salary</label>
-                                        <input value={this.state.salary} type="text" onChange={(event) => this.isChange(event)} name="salary" class="form-control" id="salary" />
+                                        <select className="form-select" value={this.state.newBuildingEmployee.level} name="level"
+                                                onChange={(event) => this.isChange(event)}>
+                                            {
+                                                this.state.listLevel.map((level) => (
+                                                    <option selected={level === this.state.newBuildingEmployee.level} value={level}>{level}</option>
+                                                ))
+                                            }
+                                        </select>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                {this.changeButton(this.state.id)}
+                                {this.changeButton(this.state.newBuildingEmployee.id)}
                             </div>
                         </div>
                     </div>

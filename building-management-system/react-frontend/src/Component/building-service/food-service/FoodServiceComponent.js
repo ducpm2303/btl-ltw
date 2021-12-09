@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import FoodServiceService from "./FoodServiceService";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 class FoodService extends Component {
     constructor(props) {
         super(props);
@@ -15,10 +18,11 @@ class FoodService extends Component {
                 time: 0,
             },
         }
+        toast.configure();
     }
     componentDidMount() {
         FoodServiceService.getCurrentFoodService().then((response) => {
-            if(response.code != 404) {
+            if(response.data.code !== 404) {
                 this.setState({currentFoodService: response.data.data});
                 this.setState({newFoodService: response.data.data})
             }
@@ -46,6 +50,7 @@ class FoodService extends Component {
     addNewFoodService() {
         FoodServiceService.createFoodService(this.state.newFoodService)
             .then(() => this.componentDidMount());
+        toast.success('Updated FoodService successfully!!!');
     }
 
     render() {

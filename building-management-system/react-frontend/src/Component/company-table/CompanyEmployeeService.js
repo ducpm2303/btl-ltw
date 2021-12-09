@@ -24,7 +24,7 @@ class CompanyEmployeeService{
     }
 
     searchByName(name, companyId){
-        return axios.get(COMPANYEMPLOYEE_API_URL + '/search?name=?'+ name + 'company_id=?'+ companyId);
+        return axios.get(COMPANYEMPLOYEE_API_URL + '/search?name='+ name + '&company_id='+ companyId);
     }
 
 

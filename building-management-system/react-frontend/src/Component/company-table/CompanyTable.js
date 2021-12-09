@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import CompanyService from './CompanyService';
+import './CompanyTable.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class CompanyTable extends Component {
     constructor(props) {
@@ -16,6 +19,7 @@ class CompanyTable extends Component {
             area: 0.0,
             numberOfEmployee: 0
         }
+        toast.configure();
     }
 
     isChange = (event) => {
@@ -87,7 +91,7 @@ class CompanyTable extends Component {
         CompanyService.createCompany(company).then(() => {
             this.componentDidMount();
         })
-
+        toast.success('Added Company successfully!!!');
         this.setState({
             id: 0,
             name: "",
@@ -115,7 +119,7 @@ class CompanyTable extends Component {
         CompanyService.updateCompany(company.id, company).then(() => {
             this.componentDidMount();
         })
-
+        toast.info('Updated Company successfully!!!');
         this.setState({
             id: 0,
             name: "",
@@ -146,7 +150,8 @@ class CompanyTable extends Component {
     deleteCompany = (id) =>{
         CompanyService.deleteCompany(parseInt(id)).then( () =>{
             this.componentDidMount();
-        })
+        });
+        toast.error('Deleted Company successfully!!!');
     }
 
     componentDidMount(){
@@ -263,7 +268,7 @@ class CompanyTable extends Component {
                                                         <button type="button" className="btn btn-danger" onClick={() => this.deleteCompany(company.id)}>Delete</button>
                                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCompany" onClick={() => this.getCompany(company)}>Edit</button>
                                                         <button type="button" className="btn btn-warning">
-                                                                <a href={`/employee-detail/${company.id}`}>view Detail</a>
+                                                                <a id="viewDetail" href={`/employee-detail/${company.id}`}>view Detail</a>
                                                         </button>
                                                     </td>
                                                 </tr>

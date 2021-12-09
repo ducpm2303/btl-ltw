@@ -77,4 +77,14 @@ public class SalaryServiceImpl implements SalaryService {
         List<Salary> salaryList = repositiory.findByIsDeletedAndPositionLike(false, searchPosition);
         return salaryList.stream().map(mapper::to).collect(Collectors.toList());
     }
+
+    @Override
+    public List<String> findAllPosition() {
+        return repositiory.findAllPosition();
+    }
+
+    @Override
+    public List<String> findLevelByPosition(String position) {
+        return repositiory.findAllLevelByPosition(position);
+    }
 }
