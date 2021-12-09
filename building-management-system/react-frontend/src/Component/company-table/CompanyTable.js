@@ -219,7 +219,7 @@ class CompanyTable extends Component {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                                        <button type="button" className="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formCompany">Add new Employee</button>
+                                        <button type="button" className="btn btn btn-success" data-bs-toggle="modal" data-bs-target="#formCompany">Add new Company</button>
                                     </div>
                                     <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                                         <form className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" >
