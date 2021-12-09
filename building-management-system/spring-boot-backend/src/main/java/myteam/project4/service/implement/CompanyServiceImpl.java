@@ -66,7 +66,6 @@ public class CompanyServiceImpl implements CompanyService {
         company.setCompanyEmployeeList(companyEmployeeList);
         company.setUsedServiceList(usedServiceList);
 
-
         return companyMapper.toDetail(company);
     }
 

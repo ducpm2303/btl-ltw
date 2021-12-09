@@ -24,13 +24,9 @@ public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee
     )
     void updateById(Long id, String code, Timestamp dateOfBirth, String identification, String name, String phone, Long company_id);
 
-    @Transactional
-    @Query(value = "select c from CompanyEmployee c " +
-            "where 1 = 1 " +
-            "and c.company.id = :company_id")
-    List<CompanyEmployee> findByCompanyId(Long company_id);
+    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndCompanyId(boolean isDeleted, Long company_id);
 
     List<CompanyEmployee> findAllByIsDeleted(boolean isDeleted);
 
-    List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndNameLike(boolean isDeleted, String name);
+    List<CompanyEmployee> findCompanyEmployeeByCompanyIdAndIsDeletedAndNameLike(Long company_id, boolean isDeleted, String name);
 }

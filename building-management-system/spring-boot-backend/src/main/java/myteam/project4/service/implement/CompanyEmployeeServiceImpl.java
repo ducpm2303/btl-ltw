@@ -2,6 +2,7 @@ package myteam.project4.service.implement;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import myteam.project4.entity.Company;
 import myteam.project4.entity.CompanyEmployee;
 import myteam.project4.exception.BusinessCode;
 import myteam.project4.exception.BusinessException;
@@ -64,14 +65,14 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
 
     @Override
     public List<CompanyEmployeeResponse> findByCompanyId(Long company_id) {
-        List<CompanyEmployee> list = repository.findByCompanyId(company_id);
+        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndCompanyId(false,company_id);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 
     @Override
-    public List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name) {
+    public List<CompanyEmployeeResponse> findCompanyEmployeeByCompanyAndNameLike(Long companyId, String name) {
         String searchName = "%"+name+"%";
-        List<CompanyEmployee> list = repository.findCompanyEmployeeByIsDeletedAndNameLike(false, searchName);
+        List<CompanyEmployee> list = repository.findCompanyEmployeeByCompanyIdAndIsDeletedAndNameLike(companyId, false, searchName);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 }

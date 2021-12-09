@@ -19,5 +19,5 @@ public interface CompanyEmployeeService {
 
     List<CompanyEmployeeResponse> findByCompanyId(Long company_id);
 
-    List<CompanyEmployeeResponse> findCompanyEmployeeByNameLike(String name);
+    List<CompanyEmployeeResponse> findCompanyEmployeeByCompanyAndNameLike(Long company_id, String name);
 }
