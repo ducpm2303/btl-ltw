@@ -47,4 +47,15 @@ public class SalaryController {
     BaseResponse<List<SalaryResponse>> getSalaryByPositionLike(@RequestParam String position){
         return BaseResponse.ofSuccess(salaryService.findSalaryByPositionLike(position));
     }
+
+    @GetMapping("/position")
+    BaseResponse<List<String>> getAllPosition() {
+        return BaseResponse.ofSuccess(salaryService.findAllPosition());
+    }
+
+    @GetMapping("/level")
+    BaseResponse<List<String>> getAllLevelByPosition(@RequestParam String position) {
+        return BaseResponse.ofSuccess(salaryService.findLevelByPosition(position));
+    }
+
 }
