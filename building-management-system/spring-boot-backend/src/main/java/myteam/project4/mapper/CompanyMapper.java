@@ -2,11 +2,11 @@ package myteam.project4.mapper;
 
 import lombok.AllArgsConstructor;
 import myteam.project4.entity.Company;
-import myteam.project4.entity.CompanyEmployee;
 import myteam.project4.model.request.CompanyRequest;
 import myteam.project4.model.response.CompanyDetailResponse;
 import myteam.project4.model.response.CompanyEmployeeResponse;
 import myteam.project4.model.response.CompanyResponse;
+import myteam.project4.model.response.UsedServiceResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CompanyMapper implements Mapper<Company> {
     private final CompanyEmployeeMapper companyEmployeeMapper;
+    private final UsedServiceMapper usedServiceMapper;
 
     public Company to(CompanyRequest request){
         Company company = new Company();
@@ -45,7 +46,10 @@ public class CompanyMapper implements Mapper<Company> {
             List<CompanyEmployeeResponse> companyEmployeeResponseList = companyEmployeeMapper.toList(company.getCompanyEmployeeList(),companyEmployeeMapper::to);
             companyDetailResponse.setCompanyEmployeeList(companyEmployeeResponseList);
         }
-//        if(company.getUsedServiceList() != null)
+        if(company.getUsedServiceList() != null){
+            List<UsedServiceResponse> usedServiceResponseList = usedServiceMapper.toList(company.getUsedServiceList(),usedServiceMapper::to);
+            companyDetailResponse.setUsedServiceList(usedServiceResponseList);
+        }
         return companyDetailResponse;
     }
 }
