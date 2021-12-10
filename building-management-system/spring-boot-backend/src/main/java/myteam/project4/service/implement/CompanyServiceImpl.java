@@ -61,7 +61,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
         );
-        List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByCompanyIdAndDate(id, new Timestamp(System.currentTimeMillis()));
+        List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByIsDeletedAndCompanyIdAndDate(false,id, new Timestamp(System.currentTimeMillis()));
         List<UsedService> usedServiceList = monthUsedServiceList.stream().map(monthUsedService -> {
             UsedService usedService = monthUsedService.getUsedService();
             usedService.setStartDate(monthUsedService.getFromDate());

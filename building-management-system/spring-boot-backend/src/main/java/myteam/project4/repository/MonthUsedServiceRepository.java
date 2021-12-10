@@ -13,4 +13,10 @@ public interface MonthUsedServiceRepository extends JpaRepository<MonthUsedServi
     @Query(value = "SELECT m.* FROM month_used_service m INNER JOIN used_service us ON m.used_service_id = us.id" +
             " WHERE us.company_id = :companyId and :date >= from_date AND :date <  to_date", nativeQuery = true)
     List<MonthUsedService> findByCompanyIdAndDate(Long companyId, Timestamp date);
+
+    @Query(value = "SELECT m.* FROM month_used_service m INNER JOIN used_service us ON m.used_service_id = us.id" +
+            " WHERE us.company_id = :companyId " +
+            "and us.is_deleted = :isDeleted " +
+            "and :date >= from_date AND :date <  to_date ", nativeQuery = true)
+    List<MonthUsedService> findByIsDeletedAndCompanyIdAndDate(Boolean isDeleted, Long companyId, Timestamp date);
 }

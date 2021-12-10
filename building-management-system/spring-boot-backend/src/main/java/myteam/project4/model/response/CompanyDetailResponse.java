@@ -18,5 +18,5 @@ public class CompanyDetailResponse {
     private Float area;
     private Float totalPrice;
     List<CompanyEmployeeResponse> companyEmployeeList;
-    List<ServiceResponse> ServiceList;
+    List<ServiceResponse> serviceList;
 }
