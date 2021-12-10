@@ -16,6 +16,7 @@ public class CompanyDetailResponse {
     private String floor;
     private String hotline;
     private Float area;
+    private Float totalPrice;
     List<CompanyEmployeeResponse> companyEmployeeList;
     List<ServiceResponse> ServiceList;
 }
