@@ -16,7 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @EntityListeners(value = BaseModelListener.class)
-public class ProtectedService extends  Service {
+public class ProtectedService extends Service {
 
     @Column(name = "any")
     private String any;
