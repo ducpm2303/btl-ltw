@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ServiceBusinessService {
     List<ServiceResponse> findAllService();
+    List<ServiceResponse> findServiceNotUsedByCompanyId(Long companyId);
 }

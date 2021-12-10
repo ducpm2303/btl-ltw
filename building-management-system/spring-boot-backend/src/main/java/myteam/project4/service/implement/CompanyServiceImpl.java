@@ -19,6 +19,7 @@ import myteam.project4.repository.ServiceRepository;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.CompanyService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -38,10 +39,9 @@ public class CompanyServiceImpl implements CompanyService {
     private final ServiceRepository serviceRepository;
 
     private final CompanyMapper companyMapper;
-    private final UsedServiceMapper usedServiceMapper;
-    private final CompanyEmployeeMapper companyEmployeeMapper;
 
     @Override
+    @Transactional
     public CompanyResponse save(CompanyRequest request) {
         Company company = companyRepository.saveAndFlush(companyMapper.to(request));
         serviceRequired(company);
@@ -49,6 +49,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public CompanyResponse updateById(Long id, CompanyRequest request) {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
@@ -70,6 +71,7 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public String deleteById(Long id) {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)

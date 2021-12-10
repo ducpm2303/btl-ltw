@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface ServiceRepository extends JpaRepository<Service, Long> {
@@ -43,4 +44,7 @@ public interface ServiceRepository extends JpaRepository<Service, Long> {
     @Modifying
     @Query("UPDATE Service service SET service.active = false WHERE service.id IN (SELECT m.id FROM ParkingService m)")
     void deactivateAllParkingService();
+
+    List<Service> findAllByActive(boolean active);
+
 }
