@@ -2,21 +2,20 @@ package myteam.project4.mapper;
 
 import lombok.AllArgsConstructor;
 import myteam.project4.entity.Company;
+import myteam.project4.entity.Service;
+import myteam.project4.entity.UsedService;
 import myteam.project4.model.request.CompanyRequest;
-import myteam.project4.model.response.CompanyDetailResponse;
-import myteam.project4.model.response.CompanyEmployeeResponse;
-import myteam.project4.model.response.CompanyResponse;
-import myteam.project4.model.response.UsedServiceResponse;
+import myteam.project4.model.response.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 @AllArgsConstructor
 public class CompanyMapper implements Mapper<Company> {
     private final CompanyEmployeeMapper companyEmployeeMapper;
-    private final UsedServiceMapper usedServiceMapper;
 
     public Company to(CompanyRequest request){
         Company company = new Company();
@@ -47,8 +46,15 @@ public class CompanyMapper implements Mapper<Company> {
             companyDetailResponse.setCompanyEmployeeList(companyEmployeeResponseList);
         }
         if(company.getUsedServiceList() != null){
-            List<UsedServiceResponse> usedServiceResponseList = usedServiceMapper.toList(company.getUsedServiceList(),usedServiceMapper::to);
-            companyDetailResponse.setUsedServiceList(usedServiceResponseList);
+            List<ServiceResponse> serviceList = new ArrayList<>();
+            for(UsedService usedService: company.getUsedServiceList()){
+                ServiceResponse serviceResponse = new ServiceResponse();
+                serviceResponse.setId(usedService.getService().getId());
+                serviceResponse.setName(usedService.getService().getName());
+                serviceResponse.setPrice(usedService.getService().getPrice());
+                serviceList.add(serviceResponse);
+            }
+            companyDetailResponse.setServiceList(serviceList);
         }
         return companyDetailResponse;
     }

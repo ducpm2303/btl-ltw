@@ -52,11 +52,12 @@ public class CompanyController {
         return BaseResponse.ofSuccess(companyService.findCompanyByNameLike(name));
     }
 
-    @PostMapping("/{company_id}/used-service/service/{service_id}")
+    @PostMapping("/{company_id}/add-service/{service_id}")
     BaseResponse<UsedServiceResponse> createUsedService(@PathVariable Long company_id, @PathVariable Long service_id){
         UsedServiceRequest request = new UsedServiceRequest(company_id,service_id);
         return BaseResponse.ofSuccess(usedService.save(request));
     }
+
 
     @GetMapping("/{company_id}/used-service/month/{month}")
     BaseResponse<List<UsedServiceResponse>> listUsedServiceMonth(@PathVariable Long company_id, @PathVariable Long month){
