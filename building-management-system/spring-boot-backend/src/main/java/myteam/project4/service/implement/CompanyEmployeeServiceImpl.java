@@ -12,6 +12,7 @@ import myteam.project4.model.response.CompanyEmployeeResponse;
 import myteam.project4.repository.CompanyEmployeeRepository;
 import myteam.project4.service.CompanyEmployeeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,12 +26,14 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
     private final CompanyEmployeeMapper mapper;
 
     @Override
+    @Transactional
     public CompanyEmployeeResponse save(CompanyEmployeeRequest request) {
         CompanyEmployee companyEmployee = mapper.to(request);
         return mapper.to(repository.saveAndFlush(companyEmployee));
     }
 
     @Override
+    @Transactional
     public CompanyEmployeeResponse updateById(Long id, CompanyEmployeeRequest request) {
         CompanyEmployee companyEmployee = repository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY_EMPLOYEE)
@@ -47,6 +50,7 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
     }
 
     @Override
+    @Transactional
     public String deleteById(Long id) {
         CompanyEmployee companyEmployee = repository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY_EMPLOYEE)

@@ -1,9 +1,6 @@
 package myteam.project4.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
@@ -11,7 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "company")
-@Data
+@Getter
+@Setter
 @SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,7 +41,7 @@ public class Company extends BaseModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
     private List<CompanyEmployee> companyEmployeeList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "company")
     private List<UsedService> usedServiceList;
 
 }

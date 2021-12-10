@@ -9,6 +9,7 @@ import myteam.project4.model.response.UsedServiceResponse;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.UsedServiceBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,6 +23,7 @@ public class UsedServiceBusinessServiceImpl implements UsedServiceBusinessServic
     private final UsedServiceMapper mapper;
 
     @Override
+    @Transactional
     public UsedServiceResponse save(UsedServiceRequest request) {
         UsedService usedService = mapper.to(request);
         return mapper.to(repository.saveAndFlush(usedService));

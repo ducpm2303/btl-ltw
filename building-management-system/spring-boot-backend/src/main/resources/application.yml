@@ -20,7 +20,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: org.hibernate.dialect.MySQL55Dialect
   messages:
     basename: messages
     use-code-as-default-message: true

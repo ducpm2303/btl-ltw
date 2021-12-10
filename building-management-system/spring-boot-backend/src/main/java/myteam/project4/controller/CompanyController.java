@@ -84,7 +84,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{company_id}/employee/{employee_id}")
-    public  BaseResponse<CompanyEmployeeResponse> getCompanyEmployeeById(@PathVariable Long employee_id){
+    public  BaseResponse<CompanyEmployeeResponse> getCompanyEmployeeById(@PathVariable Long employee_id, @PathVariable String company_id){
         return BaseResponse.ofSuccess(companyEmployeeService.findById(employee_id));
     }
 
@@ -93,13 +93,13 @@ public class CompanyController {
         return BaseResponse.ofSuccess(companyEmployeeService.findByCompanyId(company_id));
     }
 
-//    @GetMapping("/{company_id}/employee/list")
-//    public BaseResponse<List<CompanyEmployeeResponse>> getAllCompanyEmployee(){
-//        return BaseResponse.ofSuccess(companyEmployeeService.getAllCompanyEmployee());
-//    }
+    @GetMapping("/{company_id}/employee/list")
+    public BaseResponse<List<CompanyEmployeeResponse>> getAllCompanyEmployee(){
+        return BaseResponse.ofSuccess(companyEmployeeService.getAllCompanyEmployee());
+    }
 
     @DeleteMapping("/{company_id}/employee/delete/{id}")
-    public BaseResponse<String> deleteCompanyEmployeeById(@PathVariable Long id){
+    public BaseResponse<String> deleteCompanyEmployeeById(@PathVariable Long id, @PathVariable String company_id){
         return BaseResponse.ofSuccess((companyEmployeeService.deleteById(id)));
     }
 
