@@ -5,10 +5,7 @@ import myteam.project4.model.request.CompanyEmployeeRequest;
 import myteam.project4.model.request.CompanyRequest;
 import myteam.project4.model.request.UsedServiceRequest;
 import myteam.project4.model.response.*;
-import myteam.project4.service.CompanyEmployeeService;
-import myteam.project4.service.CompanyService;
-import myteam.project4.service.ServiceBusinessService;
-import myteam.project4.service.UsedServiceBusinessService;
+import myteam.project4.service.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,6 +20,7 @@ public class CompanyController {
     private final UsedServiceBusinessService usedService;
     private final ServiceBusinessService service;
     private final CompanyEmployeeService companyEmployeeService;
+    private final MonthStatCompany monthStatCompany;
 
     @GetMapping("{id}")
     BaseResponse<CompanyDetailResponse> getCompanyById(@PathVariable Long id){
@@ -110,5 +108,10 @@ public class CompanyController {
     @GetMapping("/{company_id}/employee/search")
     BaseResponse<List<CompanyEmployeeResponse>> findCompanyEmployeeByNameLike(@PathVariable Long company_id, @RequestParam String name){
         return BaseResponse.ofSuccess(companyEmployeeService.findCompanyEmployeeByCompanyAndNameLike(company_id,name));
+    }
+
+    @GetMapping("/view-statistic/{month}/{year}")
+    BaseResponse<List<MonthStatCompanyResponse>> viewStatistic(@PathVariable int month, @PathVariable int year) {
+        return BaseResponse.ofSuccess(monthStatCompany.viewStatistic(month, year));
     }
 }

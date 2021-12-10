@@ -6,5 +6,5 @@ import myteam.project4.model.response.MonthStatCompanyResponse;
 import java.util.List;
 
 public interface MonthStatCompany {
-    List<MonthStatCompanyResponse> viewStatistic(MonthRequest request);
+    List<MonthStatCompanyResponse> viewStatistic(int month, int year);
 }
