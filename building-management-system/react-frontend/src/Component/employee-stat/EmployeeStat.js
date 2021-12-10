@@ -9,7 +9,8 @@ class EmployeeStat extends Component {
         this.state = {
             listStatitics: [],
             month: 12,
-            year: 2021
+            year: 2021,
+            check : 1
         }
         toast.configure();
     }
@@ -32,8 +33,9 @@ class EmployeeStat extends Component {
     
     componentDidMount() {
         EmployeeStatService.getAll(this.state.month, this.state.year).then((response) => {
-            if(response.data.code === 404) {
-                toast.error('No statitic in this time !!')
+            if(response.data.data.code === null ) {
+                toast.error('No statitic in this time !!');
+                this.setState({ check: 0 });
             }else{
                 this.setState({ listStatitics: response.data.data });
                 console.log(response);

@@ -69,7 +69,7 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         Timestamp current = new Timestamp(System.currentTimeMillis());
         Timestamp compare = convertStringToTimestamp(time);
         if ( compare.after(current) ) {
-            return null;
+            return new BuildingEmployeeResponse();
         }
         for (MonthSalary m: monthSalaryList) {
             if (m.getCreatedAt().before(compare)) {
