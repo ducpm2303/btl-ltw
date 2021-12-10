@@ -2,7 +2,7 @@ package myteam.project4.config.tracing;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
-import myteam.project4.constant.DemoConstant;
+import myteam.project4.constant.SystemConstant;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -56,7 +56,7 @@ public class CustomResponseBodyAdviceAdapter implements ResponseBodyAdvice<Objec
             data.append("[response:").append("--").append("]");
         }
         finally {
-            Long requestTime = (Long)httpServletRequest.getAttribute(DemoConstant.Tracing.TIME_REQUEST);
+            Long requestTime = (Long)httpServletRequest.getAttribute(SystemConstant.Tracing.TIME_REQUEST);
             if (!Objects.isNull(requestTime)) {
                 data.append(", processing time: ")
                         .append(System.currentTimeMillis() - requestTime)

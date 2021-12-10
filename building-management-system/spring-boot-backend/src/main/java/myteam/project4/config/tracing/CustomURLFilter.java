@@ -1,7 +1,7 @@
 package myteam.project4.config.tracing;
 
 import lombok.extern.slf4j.Slf4j;
-import myteam.project4.constant.DemoConstant;
+import myteam.project4.constant.SystemConstant;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ public class CustomURLFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
 //		ThreadContext.put(ServletUtils.DEMO_UID, ObjectUtils.defaultIfNull(ServletUtils.getCurrentUserId(), -1L).toString());
-        servletRequest.setAttribute(DemoConstant.Tracing.TIME_REQUEST, System.currentTimeMillis());
+        servletRequest.setAttribute(SystemConstant.Tracing.TIME_REQUEST, System.currentTimeMillis());
         logRequest((HttpServletRequest) servletRequest);
         filterChain.doFilter(servletRequest, servletResponse);
     }
