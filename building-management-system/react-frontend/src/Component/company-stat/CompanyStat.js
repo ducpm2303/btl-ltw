@@ -11,7 +11,7 @@ class CompanyStat extends Component {
                             <br/>
                             <div class="card mb-4">
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-lg btn-warning">Month Statitic</button>
+                                    <button type="button" class="btn btn-lg btn-success me-1">Month Statitic</button>
                                     <button type="button" class="btn btn-lg btn-danger">Year Statitic</button>
                                 </div>
                             </div>
@@ -29,8 +29,7 @@ class CompanyStat extends Component {
                                                 <th>Area</th>
                                                 <th>Rented Price</th>
                                                 <th>Service Price</th>
-                                                <th>Total Price</th>
-                                                <th>Action</th>
+                                                <th>Total Price</th>    
                                             </tr>
                                         </thead>
                                         <tbody>

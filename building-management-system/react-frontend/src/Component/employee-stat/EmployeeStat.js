@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import EmployeeStatService from './EmployeeStatService';
 
 class EmployeeStat extends Component {
@@ -9,6 +11,7 @@ class EmployeeStat extends Component {
             month: 12,
             year: 2021
         }
+        toast.configure();
     }
 
     getMonth = (event) => {
@@ -29,8 +32,12 @@ class EmployeeStat extends Component {
     
     componentDidMount() {
         EmployeeStatService.getAll(this.state.month, this.state.year).then((response) => {
-            this.setState({ listStatitics: response.data.data });
-            console.log(response);
+            if(response.data.code !== 404) {
+                toast.error('No statitic in this time !!')
+            }else{
+                this.setState({ listStatitics: response.data.data });
+                console.log(response);
+            }
         });
 
     }
