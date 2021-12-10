@@ -32,7 +32,7 @@ class EmployeeStat extends Component {
     
     componentDidMount() {
         EmployeeStatService.getAll(this.state.month, this.state.year).then((response) => {
-            if(response.data.code !== 404) {
+            if(response.data.code === 404) {
                 toast.error('No statitic in this time !!')
             }else{
                 this.setState({ listStatitics: response.data.data });

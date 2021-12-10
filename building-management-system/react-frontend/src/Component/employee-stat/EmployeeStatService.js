@@ -1,7 +1,7 @@
 import axios from "axios";
 const EMPLOYEESTAT_API_URL = "http://localhost:8080/public-api/v1.0.0/month-salary"
 
-class CompanyEmployeeService{
+class EmployeeStatService{
 
     getAll(month, year){
         return axios.get(EMPLOYEESTAT_API_URL +'/'  + month + '/' + year);
@@ -9,4 +9,4 @@ class CompanyEmployeeService{
 
 }
 
-export default new CompanyEmployeeService();
+export default new EmployeeStatService();
