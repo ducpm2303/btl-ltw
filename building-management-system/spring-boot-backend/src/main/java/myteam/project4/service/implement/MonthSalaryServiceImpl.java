@@ -29,7 +29,7 @@ public class MonthSalaryServiceImpl implements MonthSalaryService {
 
     @Override
     public List<BuildingEmployeeResponse> getAllMonthSalaryPrecent(boolean isDeleted) {
-        List<BuildingEmployee> list = repository.findActive(false);
+        List<BuildingEmployee> list = repository.findAllByIsDeleted(false);
         return list.stream().map(mapper::to).collect(Collectors.toList());
     }
 

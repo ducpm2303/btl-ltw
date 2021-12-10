@@ -18,5 +18,4 @@ public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmploy
     @Query(value = "SELECT Max(b.id) FROM BuildingEmployee b")
     Optional<Integer> findLastId();
 
-    List<BuildingEmployee> findActive(boolean isDeleted);
 }
