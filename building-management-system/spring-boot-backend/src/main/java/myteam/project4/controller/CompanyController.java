@@ -60,6 +60,10 @@ public class CompanyController {
         return BaseResponse.ofSuccess(usedService.save(request));
     }
 
+    @DeleteMapping("/{company_id}/used-service/delete/{id}")
+    BaseResponse<String> deleteUsedService(@PathVariable Long company_id, @PathVariable Long id){
+        return BaseResponse.ofSuccess(usedService.delete(id));
+    }
 
     @GetMapping("/{company_id}/used-service/month/{month}")
     BaseResponse<List<UsedServiceResponse>> listUsedServiceMonth(@PathVariable Long company_id, @PathVariable Long month){

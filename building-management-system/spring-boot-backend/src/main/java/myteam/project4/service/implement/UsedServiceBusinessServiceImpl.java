@@ -3,6 +3,8 @@ package myteam.project4.service.implement;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import myteam.project4.entity.UsedService;
+import myteam.project4.exception.BusinessCode;
+import myteam.project4.exception.BusinessException;
 import myteam.project4.mapper.UsedServiceMapper;
 import myteam.project4.model.request.UsedServiceRequest;
 import myteam.project4.model.response.UsedServiceResponse;
@@ -23,10 +25,19 @@ public class UsedServiceBusinessServiceImpl implements UsedServiceBusinessServic
     private final UsedServiceMapper mapper;
 
     @Override
-    @Transactional
     public UsedServiceResponse save(UsedServiceRequest request) {
         UsedService usedService = mapper.to(request);
         return mapper.to(repository.saveAndFlush(usedService));
+    }
+
+    @Override
+    @Transactional
+    public String delete(Long usedServiceId) {
+        UsedService usedService = repository.findById(usedServiceId).orElseThrow(
+                () -> new BusinessException(BusinessCode.NOT_FOUND_CURRENT_SERVICE));
+        usedService.setIsDeleted(true);
+        repository.saveAndFlush(usedService);
+        return "Deleted";
     }
 
     @Override
