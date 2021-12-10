@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import myteam.project4.entity.Company;
 import myteam.project4.entity.CompanyEmployee;
+import myteam.project4.entity.MonthUsedService;
 import myteam.project4.entity.UsedService;
 import myteam.project4.exception.BusinessCode;
 import myteam.project4.exception.BusinessException;
@@ -13,10 +14,7 @@ import myteam.project4.mapper.UsedServiceMapper;
 import myteam.project4.model.request.CompanyRequest;
 import myteam.project4.model.response.CompanyDetailResponse;
 import myteam.project4.model.response.CompanyResponse;
-import myteam.project4.repository.CompanyEmployeeRepository;
-import myteam.project4.repository.CompanyRepository;
-import myteam.project4.repository.ServiceRepository;
-import myteam.project4.repository.UsedServiceRepository;
+import myteam.project4.repository.*;
 import myteam.project4.service.CompanyService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,6 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyEmployeeRepository companyEmployeeRepository;
     private final UsedServiceRepository usedServiceRepository;
     private final ServiceRepository serviceRepository;
+    private final MonthUsedServiceRepository monthUsedServiceRepository;
 
     private final CompanyMapper companyMapper;
 
@@ -62,7 +61,12 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
         );
-        List<UsedService> usedServiceList = usedServiceRepository.findByIsDeletedAndCompanyId(false,id);
+        List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByCompanyIdAndDate(id, new Timestamp(System.currentTimeMillis()));
+        List<UsedService> usedServiceList = monthUsedServiceList.stream().map(monthUsedService -> {
+            UsedService usedService = monthUsedService.getUsedService();
+            usedService.setStartDate(monthUsedService.getFromDate());
+            return  usedService;
+        }).collect(Collectors.toList());
         List<CompanyEmployee> companyEmployeeList = companyEmployeeRepository.findCompanyEmployeeByIsDeletedAndCompanyId(false,id);
         company.setCompanyEmployeeList(companyEmployeeList);
         company.setUsedServiceList(usedServiceList);
