@@ -9,7 +9,7 @@ public interface UsedServiceBusinessService {
 
     UsedServiceResponse save(UsedServiceRequest request);
 
-    public String delete(Long usedServiceId);
+    String deleteByCompanyIdAndServiceId(Long companyId, Long serviceId);
 
     List<UsedServiceResponse> findUsedServiceMonthByCompany(Long companyId, Long month);
 

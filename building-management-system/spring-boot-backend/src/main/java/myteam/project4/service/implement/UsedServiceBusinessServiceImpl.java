@@ -32,9 +32,8 @@ public class UsedServiceBusinessServiceImpl implements UsedServiceBusinessServic
 
     @Override
     @Transactional
-    public String delete(Long usedServiceId) {
-        UsedService usedService = repository.findById(usedServiceId).orElseThrow(
-                () -> new BusinessException(BusinessCode.NOT_FOUND_CURRENT_SERVICE));
+    public String deleteByCompanyIdAndServiceId(Long companyId, Long serviceId) {
+        UsedService usedService = repository.findByCompanyIdAndServiceId(companyId, serviceId);
         usedService.setIsDeleted(true);
         repository.saveAndFlush(usedService);
         return "Deleted";
