@@ -7,7 +7,7 @@ class EmployeeStat extends Component {
         this.state = {
             listStatitics: [],
             month: 12,
-            year: 2021,
+            year: 2021
         }
     }
 
@@ -16,7 +16,8 @@ class EmployeeStat extends Component {
         this.setState({
             month: value
         })
-        console.log(value)
+        console.log(value);
+        console.log(typeof(this.state.month));
     } 
 
     getYear = (event) => {
@@ -48,15 +49,15 @@ class EmployeeStat extends Component {
                                         <div class="col-lg-2">
                                             <select className="form-select" aria-label="Default select example"
                                                 onChange={(event) => this.getMonth(event)}>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                                <option value="9">9</option>
+                                                <option value="01">1</option>
+                                                <option value="02">2</option>
+                                                <option value="03">3</option>
+                                                <option value="04">4</option>
+                                                <option value="05">5</option>
+                                                <option value="06">6</option>
+                                                <option value="07">7</option>
+                                                <option value="08">8</option>
+                                                <option value="09">9</option>
                                                 <option value="10">10</option>
                                                 <option value="11">11</option>
                                                 <option value="12" selected>12</option>
@@ -104,9 +105,9 @@ class EmployeeStat extends Component {
                                                     <tr key={statitic.id} >
                                                         <td> {statitic.code}</td>
                                                         <td> {statitic.name}</td>
-                                                        <td> {statitic.level}</td>
-                                                        <td> {statitic.position}</td>
-                                                        <td> {statitic.salary}</td>
+                                                        <td> {statitic.salaryResponse.level}</td>
+                                                        <td> {statitic.salaryResponse.position}</td>
+                                                        <td> {statitic.salaryResponse.salary}</td>
                                                     </tr>
                                                 ))
 
