@@ -9,8 +9,11 @@ import myteam.project4.model.response.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.sql.Timestamp;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @AllArgsConstructor
@@ -55,7 +58,9 @@ public class CompanyMapper implements Mapper<Company> {
                 serviceResponse.setId(usedService.getService().getId());
                 serviceResponse.setName(usedService.getService().getName());
                 serviceResponse.setPrice(usedService.getService().getPrice());
-                servicePrice += usedService.getService().getPrice();
+                Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+                long timeUsed = TimeUnit.DAYS.convert(Math.abs(currentDate.getTime() - usedService.getStartDate().getTime()),TimeUnit.MILLISECONDS);
+                servicePrice += (1.0*timeUsed/26) * usedService.getService().getPrice();
                 serviceList.add(serviceResponse);
             }
             companyDetailResponse.setServiceList(serviceList);
