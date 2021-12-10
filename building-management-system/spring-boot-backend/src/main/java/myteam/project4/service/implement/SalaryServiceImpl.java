@@ -10,6 +10,7 @@ import myteam.project4.model.response.SalaryResponse;
 import myteam.project4.repository.SalaryRepository;
 import myteam.project4.service.SalaryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,7 @@ public class SalaryServiceImpl implements SalaryService {
     private final SalaryRepository repositiory;
 
     @Override
+    @Transactional
     public SalaryResponse save(SalaryRequest salaryRequest) {
         Salary salary = mapper.to(salaryRequest);
         repositiory.saveAndFlush(salary);
@@ -30,6 +32,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional
     public SalaryResponse save(Long id, SalaryRequest salaryRequest) {
         Salary salaryCheck = repositiory.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_SALARY)
@@ -55,6 +58,7 @@ public class SalaryServiceImpl implements SalaryService {
     }
 
     @Override
+    @Transactional
     public String deleteById(Long id) {
         Salary salary = repositiory.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_SALARY)

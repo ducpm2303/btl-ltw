@@ -80,6 +80,7 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
     }
 
     @Override
+    @Transactional
     public String deleteById(Long id) {
         BuildingEmployee buildingEmployee = repository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_BUILDING_EMPLOYEE)

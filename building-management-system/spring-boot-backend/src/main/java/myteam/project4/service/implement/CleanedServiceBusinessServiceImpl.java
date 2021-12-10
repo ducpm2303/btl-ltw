@@ -13,6 +13,7 @@ import myteam.project4.repository.ServiceRepository;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.CleanedServiceBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class CleanedServiceBusinessServiceImpl implements CleanedServiceBusiness
     }
 
     @Override
+    @Transactional
     public CleanedResponse createNewCleanedService(CleanedRequest cleanedRequest) {
         if(serviceRepository.findCleanedServiceByActiveIs(true).isPresent()) {
             CleanedService cleanedService = serviceRepository.findCleanedServiceByActiveIs(true).get();

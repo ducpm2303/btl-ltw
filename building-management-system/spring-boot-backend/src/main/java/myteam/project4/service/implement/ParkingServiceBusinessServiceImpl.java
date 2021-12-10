@@ -12,6 +12,7 @@ import myteam.project4.repository.ServiceRepository;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.ParkingServiceBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class ParkingServiceBusinessServiceImpl implements ParkingServiceBusiness
     }
 
     @Override
+    @Transactional
     public ParkingServiceResponse createNewParkingService(ParkingServiceRequest request) {
         if(serviceRepository.findParkingServiceByActiveIs(true).isPresent()) {
             ParkingService oldService = serviceRepository.findParkingServiceByActiveIs(true).get();

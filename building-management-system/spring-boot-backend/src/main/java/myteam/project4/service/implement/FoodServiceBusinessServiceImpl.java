@@ -12,6 +12,7 @@ import myteam.project4.repository.ServiceRepository;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.FoodServiceBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class FoodServiceBusinessServiceImpl implements FoodServiceBusinessServic
     }
 
     @Override
+    @Transactional
     public FoodServiceResponse createNewFoodService(FoodServiceRequest request) {
         if(serviceRepository.findFoodServiceByActiveIs(true).isPresent()) {
             FoodService oldService = serviceRepository.findFoodServiceByActiveIs(true).get();

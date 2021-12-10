@@ -18,6 +18,7 @@ import myteam.project4.repository.ServiceRepository;
 import myteam.project4.repository.UsedServiceRepository;
 import myteam.project4.service.MaintenanceBusinessService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -43,6 +44,7 @@ public class MaintenanceBusinessServiceImpl implements MaintenanceBusinessServic
     }
 
     @Override
+    @Transactional
     public MaintenanceResponse createNewMaintenanceService(MaintenanceRequest request) {
         if(serviceRepository.findMaintenanceServiceByActiveIs(true).isPresent()) {
             MaintenanceService oldService = serviceRepository.findMaintenanceServiceByActiveIs(true).get();
