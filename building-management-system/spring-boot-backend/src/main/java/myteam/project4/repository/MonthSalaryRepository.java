@@ -18,5 +18,4 @@ public interface MonthSalaryRepository extends JpaRepository<MonthSalary, Long> 
             "AND building_employee_id = :building_employee_id", nativeQuery = true)
     void deactivateAllByBuildingEmployeeId(Long building_employee_id);
 
-    List<MonthSalary> getAllMonthSalaryPrecent(boolean isDeleted);
 }

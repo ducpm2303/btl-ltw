@@ -8,10 +8,12 @@ import myteam.project4.model.response.BuildingEmployeeResponse;
 import myteam.project4.repository.BuildingEmployeeRepository;
 import myteam.project4.repository.MonthSalaryRepository;
 import myteam.project4.service.MonthSalaryService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class MonthSalaryServiceImpl implements MonthSalaryService {
 
     private final MonthSalaryRepository monthSalaryRepository;
