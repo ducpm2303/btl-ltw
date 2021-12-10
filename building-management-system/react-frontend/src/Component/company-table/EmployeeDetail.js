@@ -9,6 +9,19 @@ class EmployeeDetail extends Component {
         super(props);
         this.state = {
             companyEmployees: [],
+            serviceNotUsed: [],
+            company: {
+                id: 0,
+                name: "",
+                taxCode: "",
+                authorizedCapital: 0,
+                fieldOfActivity: "",
+                floor: "",
+                hotline: "",
+                area: 0,
+                companyEmployeeList: [],
+                serviceList: [],
+            },
             companyId: props.match.params.companyId,
             id: 0,
             code: "",
@@ -19,6 +32,7 @@ class EmployeeDetail extends Component {
         }
         toast.configure();
     }
+
 
     isChange = (event) => {
         const name = event.target.name;
@@ -130,14 +144,32 @@ class EmployeeDetail extends Component {
         toast.error('Deleted Employee successfully!!!');
     }
 
-    componentDidMount() {
-        CompanyEmployeeService.getEmployeeByCompanyId(this.state.companyId).then((response) => {
-            console.log(this.state.companyId)
-            // console.log(response);
-            this.setState({ companyEmployees: response.data.data })
-            console.log(this.state)
+    createNewService = (serviceId) => {
+        console.log(serviceId);
+        CompanyEmployeeService.createNewService(this.state.companyId, serviceId).then((response)=>{
+            this.componentDidMount();
         })
+    }
+    
+    addNewService = () => {
+        this.state.serviceNotUsed.map((service) => {
+            console.log(service.name);
+            return <button type="button" class="btn btn-success" onClick = {() => this.createNewService(service.id)}>{service.name}</button>
+        })
+        
+    }
+
+    componentDidMount() {
+        CompanyEmployeeService.getServiceNotUsed(this.state.companyId).then((response) => {
+            this.setState({serviceNotUsed: response.data.data});
+        });
+        CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
+            // console.log(this.state.companyId)
+            this.setState({ company: response.data.data })
+        });
     };
+
+
     render() {
         return (
             <div>
@@ -149,7 +181,7 @@ class EmployeeDetail extends Component {
                             <div className="modal-dialog">
                                 <div className="modal-content">
                                     <div className="modal-header">
-                                        <h5 className="modal-title" id="exampleModalLabel">Company Infomation</h5>
+                                        <h5 className="modal-title" id="exampleModalLabel">Employee Infomation</h5>
                                         <br />
                                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
@@ -185,8 +217,58 @@ class EmployeeDetail extends Component {
                             </div>
                         </div>
                         <div className="container-fluid px-4">
-                            <h1 className="mt-1">Employee Table</h1>
-                            <br/>
+                            <h1 className="mt-1">Detail Company Table</h1>
+                            <br />
+                            <div className="card mb-4">
+
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                                            {
+                                                this.state.serviceNotUsed.map((service) => (
+                                                    <button type="button" class="btn btn-success me-1" onClick = {() => this.createNewService(service.id)}>{service.name}</button>
+                                                ))
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-header">
+                                    <i class="fas fa-table me-1"></i>
+                                    DataTable Company Service
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Price</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {
+                                                this.state.company.serviceList.map((service) => (
+                                                    <tr key={service.id}>
+                                                        <td> {service.name}</td>
+                                                        <td> {service.price}</td>
+
+                                                        <td>
+                                                            {/* <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteCompanyEmployee(companyEmployee.id)}>Delete</button>
+                                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getCompanyEmployee(companyEmployee)}>Edit</button> */}
+
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <br />
                             <div className="card mb-4">
                                 <div className="card-body">
                                     <div className="row">
@@ -203,7 +285,6 @@ class EmployeeDetail extends Component {
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="card-header">
                                     <i class="fas fa-table me-1"></i>
                                     DataTable Company Employee
@@ -222,7 +303,7 @@ class EmployeeDetail extends Component {
                                         </thead>
                                         <tbody>
                                             {
-                                                this.state.companyEmployees.map((companyEmployee) => (
+                                                this.state.company.companyEmployeeList.map((companyEmployee) => (
                                                     <tr key={companyEmployee.id} >
                                                         <td> {companyEmployee.code}</td>
                                                         <td> {companyEmployee.name}</td>

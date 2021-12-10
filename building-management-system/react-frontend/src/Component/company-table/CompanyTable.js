@@ -87,6 +87,7 @@ class CompanyTable extends Component {
         company.hotline = hotline;
         company.area = parseFloat(area);
         company.numberOfEmployee = parseInt(numberOfEmployee);
+        console.log(company)
         CompanyService.createCompany(company).then(() => {
             this.componentDidMount();
         })

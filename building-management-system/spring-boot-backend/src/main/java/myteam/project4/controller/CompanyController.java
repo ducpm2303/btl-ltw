@@ -7,6 +7,7 @@ import myteam.project4.model.request.UsedServiceRequest;
 import myteam.project4.model.response.*;
 import myteam.project4.service.CompanyEmployeeService;
 import myteam.project4.service.CompanyService;
+import myteam.project4.service.ServiceBusinessService;
 import myteam.project4.service.UsedServiceBusinessService;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ public class CompanyController {
 
     private final CompanyService companyService;
     private final UsedServiceBusinessService usedService;
+    private final ServiceBusinessService service;
     private final CompanyEmployeeService companyEmployeeService;
 
     @GetMapping("{id}")
@@ -62,6 +64,11 @@ public class CompanyController {
     @GetMapping("/{company_id}/used-service/month/{month}")
     BaseResponse<List<UsedServiceResponse>> listUsedServiceMonth(@PathVariable Long company_id, @PathVariable Long month){
         return BaseResponse.ofSuccess(usedService.findUsedServiceMonthByCompany(company_id,month));
+    }
+
+    @GetMapping("/{company_id}/used-service")
+    BaseResponse<List<ServiceResponse>> listServiceNotUsed(@PathVariable Long company_id){
+        return BaseResponse.ofSuccess(service.findServiceNotUsedByCompanyId(company_id));
     }
 
     @PostMapping("/{company_id}/employee/create")

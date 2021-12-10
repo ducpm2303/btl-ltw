@@ -10,4 +10,5 @@ public interface UsedServiceBusinessService {
     UsedServiceResponse save(UsedServiceRequest request);
 
     List<UsedServiceResponse> findUsedServiceMonthByCompany(Long companyId, Long month);
+
 }

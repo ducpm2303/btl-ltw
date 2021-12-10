@@ -22,7 +22,18 @@ class CompanyEmployeeService{
     searchByName(name, companyId){
         return axios.get(COMPANYEMPLOYEE_API_URL + companyId + '/employee/search?name='+ name);
     }
+    
+    getCompanyById(companyId){
+        return axios.get(COMPANYEMPLOYEE_API_URL  + companyId);
+    }
 
+    getServiceNotUsed(companyId){
+        return axios.get(COMPANYEMPLOYEE_API_URL + companyId + '/used-service');
+    }
+
+    createNewService(companyId, serviceId){
+        return axios.post(COMPANYEMPLOYEE_API_URL + companyId + '/add-service/' + serviceId);
+    }
 
 }
 
