@@ -17,7 +17,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Service
 @AllArgsConstructor
@@ -58,6 +60,8 @@ public class MonthStatCompanyImpl implements MonthStatCompany {
                 monthStatCompanyResponses.add(response);
             }
         }
+        monthStatCompanyResponses = monthStatCompanyResponses.stream().sorted(Comparator.comparing(MonthStatCompanyResponse::getTotalPrice).reversed())
+                .collect(Collectors.toList());
         return monthStatCompanyResponses;
     }
 
