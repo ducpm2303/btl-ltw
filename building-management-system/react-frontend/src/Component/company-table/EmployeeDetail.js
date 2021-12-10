@@ -19,6 +19,7 @@ class EmployeeDetail extends Component {
                 floor: "",
                 hotline: "",
                 area: 0,
+                totalPrice: 0,
                 companyEmployeeList: [],
                 serviceList: [],
             },
@@ -159,14 +160,25 @@ class EmployeeDetail extends Component {
         
     }
 
+    deleteService = (serviceId, serviceN) => {
+        if(serviceN==="Dịch vụ bảo vệ" || serviceN === "Dịch vụ vệ sinh"){
+            toast.error('Không thể xoá dịch vụ này !!!');
+        }else{
+            CompanyEmployeeService.deleteService(this.state.companyId, serviceId).then((response) => {
+                this.componentDidMount();
+            })
+        }
+    }
+
     componentDidMount() {
         CompanyEmployeeService.getServiceNotUsed(this.state.companyId).then((response) => {
             this.setState({serviceNotUsed: response.data.data});
-        });
-        CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
-            // console.log(this.state.companyId)
-            this.setState({ company: response.data.data })
-        });
+        }).then(
+            CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
+                this.setState({ company: response.data.data });
+                console.log(this.state.company)
+            })
+        );
     };
 
 
@@ -252,11 +264,8 @@ class EmployeeDetail extends Component {
                                                     <tr key={service.id}>
                                                         <td> {service.name}</td>
                                                         <td> {service.price}</td>
-
                                                         <td>
-                                                            {/* <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteCompanyEmployee(companyEmployee.id)}>Delete</button>
-                                                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getCompanyEmployee(companyEmployee)}>Edit</button> */}
-
+                                                            <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteService(service.id, service.name)}>Delete</button>
                                                         </td>
                                                     </tr>
                                                 ))
@@ -266,7 +275,13 @@ class EmployeeDetail extends Component {
                                 </div>
                             </div>
 
-                            <br />
+                            <div className="row">
+                                <div className="col-lg-8">
+                                </div>
+                                <div class="col-lg-4">
+                                    <b>Total Service Price: {this.state.company.totalPrice}</b>
+                                </div>
+                            </div>
                             <br />
                             <br />
                             <div className="card mb-4">

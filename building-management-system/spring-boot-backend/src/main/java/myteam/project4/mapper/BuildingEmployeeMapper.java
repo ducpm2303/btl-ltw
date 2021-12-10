@@ -60,8 +60,17 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         response.setDateOfBirth(convertTimestampToString(buildingEmployee.getDateOfBirth()));
         List<MonthSalary> monthSalaryList = buildingEmployee.getMonthSalaryList();
         Salary salary = new Salary();
-        String time = request.getYear()+ "-" +request.getMonth() + "-1";
+        String time = "";
+        if ( request.getMonth() < 10 ) {
+            time = request.getYear()+ "-0" +request.getMonth() + "-01";
+        } else {
+            time = request.getYear()+ "-" +request.getMonth() + "-01";
+        }
+        Timestamp current = new Timestamp(System.currentTimeMillis());
         Timestamp compare = convertStringToTimestamp(time);
+        if ( compare.after(current) ) {
+            return null;
+        }
         for (MonthSalary m: monthSalaryList) {
             if (m.getCreatedAt().before(compare)) {
                 salary = m.getSalary();

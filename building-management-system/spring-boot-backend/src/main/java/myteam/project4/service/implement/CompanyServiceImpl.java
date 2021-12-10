@@ -62,8 +62,7 @@ public class CompanyServiceImpl implements CompanyService {
         Company company = companyRepository.findById(id).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_COMPANY)
         );
-        Long currentMonth = Long.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1);
-        List<UsedService> usedServiceList = usedServiceRepository.findUsedServiceMonthByCompanyId(id,currentMonth);
+        List<UsedService> usedServiceList = usedServiceRepository.findByIsDeletedAndCompanyId(false,id);
         List<CompanyEmployee> companyEmployeeList = companyEmployeeRepository.findCompanyEmployeeByIsDeletedAndCompanyId(false,id);
         company.setCompanyEmployeeList(companyEmployeeList);
         company.setUsedServiceList(usedServiceList);

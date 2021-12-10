@@ -35,6 +35,10 @@ class CompanyEmployeeService{
         return axios.post(COMPANYEMPLOYEE_API_URL + companyId + '/add-service/' + serviceId);
     }
 
+    deleteService(companyId, serviceId){
+        return axios.delete(COMPANYEMPLOYEE_API_URL + companyId + '/used-service/delete/' + serviceId);
+    }
+
 }
 
 export default new CompanyEmployeeService();
