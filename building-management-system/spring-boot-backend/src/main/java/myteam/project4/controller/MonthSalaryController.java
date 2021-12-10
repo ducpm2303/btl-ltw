@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import myteam.project4.model.request.MonthRequest;
 import myteam.project4.model.response.BaseResponse;
 import myteam.project4.model.response.BuildingEmployeeResponse;
-import myteam.project4.model.response.MonthSalaryResponse;
 import myteam.project4.service.MonthSalaryService;
-import myteam.project4.service.implement.MonthSalaryServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +28,7 @@ public class MonthSalaryController {
     BaseResponse<List<BuildingEmployeeResponse>> getMonthSalaryByMonth(@PathVariable int month, @PathVariable int year) {
         MonthRequest request = new MonthRequest();
         request.setMonth(month);
-        request.setMonth(year);
+        request.setYear(year);
         return BaseResponse.ofSuccess(monthSalaryService.getMonthSalaryByMonth(request));
     }
 }

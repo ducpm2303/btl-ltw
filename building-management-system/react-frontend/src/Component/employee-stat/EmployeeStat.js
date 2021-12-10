@@ -29,7 +29,9 @@ class EmployeeStat extends Component {
     componentDidMount() {
         EmployeeStatService.getAll(this.state.month, this.state.year).then((response) => {
             this.setState({ listStatitics: response.data.data });
+            console.log(response);
         });
+
     }
 
     render() {
