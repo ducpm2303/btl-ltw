@@ -66,7 +66,11 @@ class BuildingEmployee extends Component {
     }
 
     addNewBuildingEmployee = () => {
-        console.log(this.state)
+        if(this.state.newBuildingEmployee.position === "" || this.state.newBuildingEmployee.level === "") {
+            this.state.newBuildingEmployee.position = this.state.listPosition[0];
+            this.state.newBuildingEmployee.level = this.state.listLevel[0];
+        }
+        console.log(this.state.newBuildingEmployee)
         BuildingEmployeeService.createBuildingEmployee(this.state.newBuildingEmployee).then(() => {
             this.componentDidMount();
         });
@@ -109,6 +113,10 @@ class BuildingEmployee extends Component {
 
     }
     editBuildingEmployee = () => {
+        if(this.state.newBuildingEmployee.position === "" || this.state.newBuildingEmployee.level === "") {
+            this.state.newBuildingEmployee.position = this.state.listPosition[0];
+            this.state.newBuildingEmployee.level = this.state.listLevel[0];
+        }
         console.log(this.state)
         BuildingEmployeeService.updateBuildingEmployee(this.state.newBuildingEmployee.id, this.state.newBuildingEmployee).then(() => {
             this.componentDidMount();
@@ -147,7 +155,7 @@ class BuildingEmployee extends Component {
            this.setState({listPosition: response.data.data})
         }).then( () => {
             SalaryService.getAllLevelByPosition(this.state.listPosition[0]).then((response) => {
-                this.setState({listLevel: response.data.data})
+                this.setState({listLevel: response.data.data});
             });
         })
     }
