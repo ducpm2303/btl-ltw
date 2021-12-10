@@ -38,8 +38,6 @@ public class CompanyServiceImpl implements CompanyService {
     private final ServiceRepository serviceRepository;
 
     private final CompanyMapper companyMapper;
-    private final UsedServiceMapper usedServiceMapper;
-    private final CompanyEmployeeMapper companyEmployeeMapper;
 
     @Override
     public CompanyResponse save(CompanyRequest request) {
