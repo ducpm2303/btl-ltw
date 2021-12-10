@@ -5,6 +5,7 @@ import myteam.project4.entity.BuildingEmployee;
 import myteam.project4.entity.MonthSalary;
 import myteam.project4.entity.Salary;
 import myteam.project4.model.request.BuildingEmployeeRequest;
+import myteam.project4.model.request.MonthRequest;
 import myteam.project4.model.response.BuildingEmployeeResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,23 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         Salary salary = new Salary();
         for (MonthSalary m: monthSalaryList) {
             if (!m.getIsDeleted()) {
+                salary = m.getSalary();
+            }
+        }
+        response.setSalaryResponse(salaryMapper.to(salary));
+        return response;
+    }
+
+    public BuildingEmployeeResponse toByMonth(BuildingEmployee buildingEmployee, MonthRequest request) {
+        BuildingEmployeeResponse response = new BuildingEmployeeResponse();
+        BeanUtils.copyProperties(buildingEmployee, response);
+        response.setDateOfBirth(convertTimestampToString(buildingEmployee.getDateOfBirth()));
+        List<MonthSalary> monthSalaryList = buildingEmployee.getMonthSalaryList();
+        Salary salary = new Salary();
+        String time = request.getYear()+ "-" +request.getMonth() + "-1";
+        Timestamp compare = convertStringToTimestamp(time);
+        for (MonthSalary m: monthSalaryList) {
+            if (m.getCreatedAt().before(compare)) {
                 salary = m.getSalary();
             }
         }

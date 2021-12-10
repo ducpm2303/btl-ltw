@@ -10,6 +10,7 @@ import myteam.project4.repository.MonthSalaryRepository;
 import myteam.project4.service.MonthSalaryService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,11 @@ public class MonthSalaryServiceImpl implements MonthSalaryService {
 
     @Override
     public List<BuildingEmployeeResponse> getMonthSalaryByMonth(MonthRequest request) {
-        return null;
+        List<BuildingEmployee> list = repository.findAllByIsDeleted(false);
+        List<BuildingEmployeeResponse> listResponse = new ArrayList<>();
+        for ( BuildingEmployee b : list ) {
+            listResponse.add(mapper.toByMonth(b,request));
+        }
+        return listResponse;
     }
 }
