@@ -29,5 +29,5 @@ public interface UsedServiceRepository extends JpaRepository<UsedService, Long> 
     @Query(value = "UPDATE UsedService u SET u.isDeleted = true WHERE u.service = :service")
     void deleteUsedServiceByService(Service service);
 
-    UsedService findByCompanyIdAndServiceId(Long companyId, Long serviceId);
+    UsedService findByIsDeletedAndCompanyIdAndServiceId(Boolean isDeleted, Long companyId, Long serviceId);
 }

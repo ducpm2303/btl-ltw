@@ -33,7 +33,7 @@ public class UsedServiceBusinessServiceImpl implements UsedServiceBusinessServic
     @Override
     @Transactional
     public String deleteByCompanyIdAndServiceId(Long companyId, Long serviceId) {
-        UsedService usedService = repository.findByCompanyIdAndServiceId(companyId, serviceId);
+        UsedService usedService = repository.findByIsDeletedAndCompanyIdAndServiceId(false,companyId, serviceId);
         usedService.setIsDeleted(true);
         repository.saveAndFlush(usedService);
         return "Deleted";
