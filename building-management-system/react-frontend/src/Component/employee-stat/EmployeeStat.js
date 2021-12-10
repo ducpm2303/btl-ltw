@@ -33,12 +33,12 @@ class EmployeeStat extends Component {
     
     componentDidMount() {
         EmployeeStatService.getAll(this.state.month, this.state.year).then((response) => {
-            if(response.data.data.code === null ) {
+            if(response.data.data[0] === null ) {
                 toast.error('No statitic in this time !!');
                 this.setState({ check: 0 });
             }else{
                 this.setState({ listStatitics: response.data.data });
-                console.log(response);
+                this.setState({ check: 1 });
             }
         });
 
@@ -110,16 +110,17 @@ class EmployeeStat extends Component {
                                         </thead>
                                         <tbody>
                                             {
+                                                this.state.check !== 0 ?
                                                 this.state.listStatitics.map((statitic) => (
-                                                    <tr key={statitic.id} >
-                                                        <td> {statitic.code}</td>
-                                                        <td> {statitic.name}</td>
-                                                        <td> {statitic.salaryResponse.level}</td>
-                                                        <td> {statitic.salaryResponse.position}</td>
-                                                        <td> {statitic.salaryResponse.salary}</td>
-                                                    </tr>
+                                                <tr key={statitic.id} >
+                                                <td> {statitic.code}</td>
+                                                <td> {statitic.name}</td>
+                                                <td> {statitic.salaryResponse.level}</td>
+                                                <td> {statitic.salaryResponse.position}</td>
+                                                <td> {statitic.salaryResponse.salary}</td>
+                                                </tr>
                                                 ))
-
+                                                    : ""
                                             }
                                         </tbody>
                                     </table>
