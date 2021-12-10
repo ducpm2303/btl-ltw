@@ -10,6 +10,7 @@ import java.util.Optional;
 public interface SalaryRepository extends JpaRepository<Salary, Long> {
     List<Salary> findByIsDeletedAndPositionLike(Boolean isDeleted, String position);
     List<Salary> findAllByIsDeleted(boolean isDeleted);
+    Salary findById(int id);
     Optional<Salary> findByPositionAndLevel(String position, String level);
     @Query(value = "SELECT distinct (s.position) FROM Salary s")
     List<String> findAllPosition();

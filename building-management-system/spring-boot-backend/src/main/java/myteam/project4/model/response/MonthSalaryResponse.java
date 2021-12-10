@@ -2,9 +2,9 @@ package myteam.project4.model.response;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class MonthSalaryResponse {
-    private Long id;
-    private Long buildingEmployee_id;
-    private Long salary_id;
+    private List<BuildingEmployeeResponse> buildingEmployeeResponse;
 }

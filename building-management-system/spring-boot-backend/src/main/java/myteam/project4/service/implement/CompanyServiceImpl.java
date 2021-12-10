@@ -66,7 +66,6 @@ public class CompanyServiceImpl implements CompanyService {
         List<CompanyEmployee> companyEmployeeList = companyEmployeeRepository.findCompanyEmployeeByIsDeletedAndCompanyId(false,id);
         company.setCompanyEmployeeList(companyEmployeeList);
         company.setUsedServiceList(usedServiceList);
-
         return companyMapper.toDetail(company);
     }
 

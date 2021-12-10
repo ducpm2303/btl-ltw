@@ -13,7 +13,10 @@ public interface BuildingEmployeeRepository extends JpaRepository<BuildingEmploy
 
     List<BuildingEmployee> findByIsDeletedAndNameLike(boolean isDeleted, String name);
     List<BuildingEmployee> findAllByIsDeleted(boolean isDeleted);
+    BuildingEmployee findById(int id);
 
     @Query(value = "SELECT Max(b.id) FROM BuildingEmployee b")
     Optional<Integer> findLastId();
+
+    List<BuildingEmployee> findActive(boolean isDeleted);
 }
