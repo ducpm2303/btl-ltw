@@ -94,7 +94,7 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
                     check=0;
                 }
             } else {
-                if ( m.getCreatedAt().before(startCompare) || m.getUpdatedAt().after(endCompare)) {
+                if ( (m.getCreatedAt().before(startCompare) && m.getUpdatedAt().after(endCompare)) ) {
                     salary = m.getSalary();
                     check=0;
                 }
