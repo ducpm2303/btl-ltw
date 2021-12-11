@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BuildingEmployeeService from './BuildingEmployeeService';
 import SalaryService from "./SalaryService";
 
@@ -21,14 +22,15 @@ class BuildingEmployee extends Component {
             listLevel : [],
             listPosition: [],
         }
+        toast.configure();
     }
 
     isChange = (event) => {
         let buildingEmployee = this.state.newBuildingEmployee;
         const name = event.target.name;
         const value = event.target.value;
-        console.log(name);
-        console.log(value);
+        // console.log(name);
+        // console.log(value);
         if(name === "name") {
             buildingEmployee.name = value
         } else if(name === "dateOfBirth") {
@@ -47,7 +49,8 @@ class BuildingEmployee extends Component {
         }
         this.setState({
             newBuildingEmployee: buildingEmployee
-        })
+        });
+        // console.log(this.state.newBuildingEmployee);
 
     }
     getName = (nameLike) => {

@@ -271,7 +271,14 @@ class EmployeeDetail extends Component {
                                     </table>
                                 </div>
                             </div>
-
+                            <div className="row">
+                                <div class="col-lg-8">
+                                    
+                                </div>
+                                <div class="col-lg-4">
+                                    <b>Total Service Price: {this.state.company.totalPrice}</b>
+                                </div>
+                            </div>
                             <br />
                             <br />
                             <div className="card mb-4">
