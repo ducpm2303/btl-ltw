@@ -8,25 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Optional;
 
 public interface CompanyEmployeeRepository extends JpaRepository<CompanyEmployee, Long> {
-
-    @Transactional
-    @Modifying
-    @Query(value = "update CompanyEmployee set " +
-            "code = :code, " +
-            "dateOfBirth = :dateOfBirth, " +
-            "identification = :identification, " +
-            "name = :name, " +
-            "phone = :phone, " +
-            "company.id = :company_id " +
-            "where id = :id"
-    )
-    void updateById(Long id, String code, Timestamp dateOfBirth, String identification, String name, String phone, Long company_id);
 
     List<CompanyEmployee> findCompanyEmployeeByIsDeletedAndCompanyId(boolean isDeleted, Long company_id);
 
     List<CompanyEmployee> findAllByIsDeleted(boolean isDeleted);
 
     List<CompanyEmployee> findCompanyEmployeeByCompanyIdAndIsDeletedAndNameLike(Long company_id, boolean isDeleted, String name);
+
+    @Query(value = "SELECT Max(b.id) FROM CompanyEmployee b")
+    Optional<Integer> findLastId();
 }

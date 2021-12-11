@@ -1,5 +1,6 @@
 package myteam.project4.service.implement;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import myteam.project4.entity.Company;
@@ -29,6 +30,7 @@ public class CompanyEmployeeServiceImpl implements CompanyEmployeeService {
     @Transactional
     public CompanyEmployeeResponse save(CompanyEmployeeRequest request) {
         CompanyEmployee companyEmployee = mapper.to(request);
+        companyEmployee.setCode("CE-" + (repository.findLastId().orElse(0)+1));
         return mapper.to(repository.saveAndFlush(companyEmployee));
     }
 

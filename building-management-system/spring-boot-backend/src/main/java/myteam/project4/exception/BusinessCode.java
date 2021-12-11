@@ -23,6 +23,13 @@ public class BusinessCode {
     // Service Error Response
     public static final ErrorResponse NOT_FOUND_CURRENT_SERVICE =
             new ErrorResponse("NOT_FOUND_CURRENT_SERVICE", "Not found current service", HttpStatus.NOT_FOUND);
+
     public static final ErrorResponse NOT_FOUND_SALARY =
             new ErrorResponse("NOT FOUND SALARY", "Not found salary", HttpStatus.NOT_FOUND);
+
+    public static final ErrorResponse COMPANY_EMPLOYEE_EXISTED =
+            new ErrorResponse("COMPANY_EMPLOYEE_EXISTED", "Company employee existed", HttpStatus.BAD_REQUEST);
+
+    public static final ErrorResponse BUILDING_EMPLOYEE_EXISTED =
+            new ErrorResponse("BUILDING_EMPLOYEE_EXISTED", "Building employee existed", HttpStatus.BAD_REQUEST);
 }
