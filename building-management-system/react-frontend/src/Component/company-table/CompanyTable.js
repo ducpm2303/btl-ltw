@@ -57,7 +57,7 @@ class CompanyTable extends Component {
         }
     }
 
-    
+
     getName = (nameLike) => {
         const value = nameLike.target.value;
         // console.log(name);
@@ -68,7 +68,7 @@ class CompanyTable extends Component {
 
     }
 
-    
+
     searchName = () => {
         // console.log(value);
         // console.log(this.state)
@@ -78,31 +78,36 @@ class CompanyTable extends Component {
     }
 
     addNewCompany = (name, taxCode, authorizedCapital, fieldOfActivity, floor, hotline, area, numberOfEmployee) => {
-        var company = {};
-        company.name = name;
-        company.taxCode = taxCode;
-        company.authorizedCapital = parseFloat(authorizedCapital);
-        company.fieldOfActivity = fieldOfActivity;
-        company.floor = floor;
-        company.hotline = hotline;
-        company.area = parseFloat(area);
-        company.numberOfEmployee = parseInt(numberOfEmployee);
-        console.log(company)
-        CompanyService.createCompany(company).then(() => {
-            this.componentDidMount();
-        })
-        toast.success('Added Company successfully!!!');
-        this.setState({
-            id: 0,
-            name: "",
-            taxCode: "",
-            authorizedCapital: 0.0,
-            fieldOfActivity: "",
-            floor: "",
-            hotline: "",
-            area: 0.0,
-            numberOfEmployee : 0
-        });
+        if (name === "" || taxCode == "" || authorizedCapital === "" || fieldOfActivity === "" || floor === "" || hotline === "" || area === "" || numberOfEmployee === "") {
+            toast.error('Please fill all the empty!!')
+        }
+        else {
+            var company = {};
+            company.name = name;
+            company.taxCode = taxCode;
+            company.authorizedCapital = parseFloat(authorizedCapital);
+            company.fieldOfActivity = fieldOfActivity;
+            company.floor = floor;
+            company.hotline = hotline;
+            company.area = parseFloat(area);
+            company.numberOfEmployee = parseInt(numberOfEmployee);
+            console.log(company)
+            CompanyService.createCompany(company).then(() => {
+                this.componentDidMount();
+            })
+            toast.success('Added Company successfully!!!');
+            this.setState({
+                id: 0,
+                name: "",
+                taxCode: "",
+                authorizedCapital: 0.0,
+                fieldOfActivity: "",
+                floor: "",
+                hotline: "",
+                area: 0.0,
+                numberOfEmployee: 0
+            });
+        }
     }
 
     editCompany = (id, name, taxCode, authorizedCapital, fieldOfActivity, floor, hotline, area, numberOfEmployee) => {
@@ -129,11 +134,11 @@ class CompanyTable extends Component {
             floor: "",
             hotline: "",
             area: 0.0,
-            numberOfEmployee : 0
+            numberOfEmployee: 0
         });
     }
 
-    getCompany = (company) =>{
+    getCompany = (company) => {
         this.setState({
             id: company.id,
             name: company.name,
@@ -147,16 +152,16 @@ class CompanyTable extends Component {
         });
     }
 
-    deleteCompany = (id) =>{
-        CompanyService.deleteCompany(parseInt(id)).then( () =>{
+    deleteCompany = (id) => {
+        CompanyService.deleteCompany(parseInt(id)).then(() => {
             this.componentDidMount();
         });
         toast.error('Deleted Company successfully!!!');
     }
 
-    componentDidMount(){
+    componentDidMount() {
         CompanyService.getAllCompany().then((response) => {
-            this.setState({companies: response.data.data})
+            this.setState({ companies: response.data.data })
         })
     }
 
@@ -170,7 +175,7 @@ class CompanyTable extends Component {
                             <div className="modal-content">
                                 <div className="modal-header">
                                     <h5 className="modal-title" id="exampleModalLabel">Company Infomation</h5>
-                                    <br/>
+                                    <br />
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
@@ -214,7 +219,7 @@ class CompanyTable extends Component {
                     </div>
                     <div className="container-fluid px-4">
                         <h1 className="mt-1">Companies Table</h1>
-                        <br/>
+                        <br />
                         <div className="card mb-4">
                             <div className="card-body">
                                 <div className="row">
@@ -233,16 +238,16 @@ class CompanyTable extends Component {
                             </div>
                         </div>
                         <div className="card mb-4">
-                                <div className="card-header">
-                                    <i className="fas fa-table me-1"></i>
-                                    DataTable Company
-                                </div>
-                                <div className="card-body">
-                                    <table className="table table-striped">
+                            <div className="card-header">
+                                <i className="fas fa-table me-1"></i>
+                                DataTable Company
+                            </div>
+                            <div className="card-body">
+                                <table className="table table-striped">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
-                                            <th>Code</th>
+                                            <th>TaxCode</th>
                                             <th>Authorized capital</th>
                                             <th>Activity</th>
                                             <th>Quantity</th>
@@ -254,7 +259,7 @@ class CompanyTable extends Component {
                                     </thead>
                                     <tbody>
                                         {
-                                            this.state.companies.map((company) =>(
+                                            this.state.companies.map((company) => (
                                                 <tr key={company.id}>
                                                     <td> {company.name} </td>
                                                     <td> {company.taxCode} </td>
@@ -268,7 +273,7 @@ class CompanyTable extends Component {
                                                         <button type="button" className="btn btn-danger" onClick={() => this.deleteCompany(company.id)}>Delete</button>
                                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCompany" onClick={() => this.getCompany(company)}>Edit</button>
                                                         <button type="button" className="btn btn-warning">
-                                                                <a id="viewDetail" href={`/company-detail/${company.id}`}>view Detail</a>
+                                                            <a id="viewDetail" href={`/company-detail/${company.id}`}>view Detail</a>
                                                         </button>
                                                     </td>
                                                 </tr>

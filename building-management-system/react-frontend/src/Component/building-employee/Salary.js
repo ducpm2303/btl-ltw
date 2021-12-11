@@ -53,20 +53,24 @@ class BuildingEmployee extends Component {
     }
 
     addNewSalary = (position, level, salary) => {
-        var Salary = {};
-        Salary.position = position;
-        Salary.level = level;
-        Salary.salary = parseFloat(salary);
-        SalaryService.createSalary(Salary).then(() => {
-            this.componentDidMount();
-        });
-        toast.success('Added Salary successfully!!!');
-        this.setState({
-            id: 0,
-            position: "",
-            level: "",
-            salary: ""
-        });
+        if(position==="" || level === "" || salary===""){
+            toast.error('Please fill all the empty!!')
+        }else{
+            var Salary = {};
+            Salary.position = position;
+            Salary.level = level;
+            Salary.salary = parseFloat(salary);
+            SalaryService.createSalary(Salary).then(() => {
+                this.componentDidMount();
+            });
+            toast.success('Added Salary successfully!!!');
+            this.setState({
+                id: 0,
+                position: "",
+                level: "",
+                salary: ""
+            });
+        }
     }
 
     getSalary = (Salary) => {

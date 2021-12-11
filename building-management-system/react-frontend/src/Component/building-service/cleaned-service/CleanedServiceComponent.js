@@ -48,9 +48,13 @@ class CleanedServiceComponent extends Component {
     }
 
     addNewCleanedService() {
-        CleanedServiceService.createCleanedService(this.state.newCleanedService)
-            .then(() => this.componentDidMount());
-        toast.success('Updated Cleaned Service successfully!!!');
+        if(this.state.newCleanedService.name==="" || this.state.newCleanedService.price==="" || this.state.newCleanedService.timesPerWeek===""){
+            toast.error('Please fill all the empty!!');
+        }else{
+            CleanedServiceService.createCleanedService(this.state.newCleanedService)
+                .then(() => this.componentDidMount());
+            toast.success('Updated Cleaned Service successfully!!!');
+        }
     }
 
     render() {
@@ -96,6 +100,7 @@ class CleanedServiceComponent extends Component {
                 <main>
                     <div className="container-fluid px-4">
                         <h1 className="mt-4">Cleaned Service</h1>
+                        <br/>
                         <div className="card mb-4">
                             <div className="card-body">
                                 <button type="button" className="btn btn btn-success" data-bs-toggle="modal"

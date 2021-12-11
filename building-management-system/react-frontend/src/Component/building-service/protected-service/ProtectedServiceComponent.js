@@ -48,9 +48,13 @@ class ProtectedService extends Component {
 
 
     addNewProtectedService() {
+        if (this.state.newProtectedService.name === "" || this.state.newProtectedService.price === "" || this.state.newProtectedService.any === "") {
+            toast.error('Please fill all the empty!!');
+        } else {
         ProtectedServiceService.createProtectedService(this.state.newProtectedService)
             .then(() => this.componentDidMount());
         toast.success('Updated Protected Service successfully!!!');
+        }
     }
 
     render() {
@@ -120,8 +124,8 @@ class ProtectedService extends Component {
                                         <td>{this.state.currentProtectedService.price} vnđ</td>
                                     </tr>
                                     <tr>
-                                        <td><b>Khác</b></td>
-                                        <td>{this.state.currentProtectedService.any}</td>
+                                        <td><b>Tần suất</b></td>
+                                        <td>Luôn luôn</td>
                                     </tr>
                                     <tr>
                                         <td><b>Bắt buộc:</b></td>

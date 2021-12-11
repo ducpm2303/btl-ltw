@@ -12,73 +12,79 @@ class MaintenanceService extends Component {
                 price: 0,
                 period: 0,
             },
-            newMaintenanceService : {
+            newMaintenanceService: {
                 name: "",
                 price: 0,
                 period: 0,
             },
         }
+        toast.configure();
     }
+
     componentDidMount() {
         MaintenanceServiceService.getCurrentMaintenanceService().then((response) => {
-            if(response.data.code !== 404) {
-                this.setState({currentMaintenanceService: response.data.data});
-                this.setState({newMaintenanceService: response.data.data})
+            if (response.data.code !== 404) {
+                this.setState({ currentMaintenanceService: response.data.data });
+                this.setState({ newMaintenanceService: response.data.data })
             }
         });
     }
 
     handleChanged = (event) => {
-        let cleanedService = this.state.newMaintenanceService;
+        let maintenanceService = this.state.newMaintenanceService;
         const name = event.target.name;
         const value = event.target.value;
-        if(name === "name") {
-            cleanedService.name = value;
-        } else if(name === "price"){
-            cleanedService.price = value;
+        if (name === "name") {
+            maintenanceService.name = value;
+        } else if (name === "price") {
+            maintenanceService.price = value;
         }
-        else if(name === "period"){
-            cleanedService.period = value;
+        else if (name === "period") {
+            maintenanceService.period = value;
         }
-        this.setState( {
-            newMaintenanceService: cleanedService
+        this.setState({
+            newMaintenanceService: maintenanceService
         })
     }
 
 
     addNewMaintenanceService() {
-        MaintenanceServiceService.createMaintenanceService(this.state.newMaintenanceService)
-            .then(() => this.componentDidMount());
-        toast.success('Updated Maintenance Service successfully!!!');
+        if (this.state.newMaintenanceService.name === "" || this.state.newMaintenanceService.price === "" || this.state.newMaintenanceService.period === "") {
+            toast.error('Please fill all the empty!!');
+        } else {
+            MaintenanceServiceService.createMaintenanceService(this.state.newMaintenanceService)
+                .then(() => this.componentDidMount());
+            toast.success('Updated Maintenance Service successfully!!!');
+        }
     }
 
     render() {
         return (
             <div>
                 <div className="modal fade" id="formCleanedService" tabIndex="-1" aria-labelledby="exampleModalLabel"
-                     aria-hidden="true">
+                    aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title" id="exampleModalLabel">Maintenance Service Information</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"/>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
                             </div>
                             <div className="modal-body">
                                 <form>
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Tên</label>
                                         <input type="text" onChange={event => this.handleChanged(event)} className="form-control" name="name" id="name"
-                                               value={this.state.newMaintenanceService.name}/>
+                                            value={this.state.newMaintenanceService.name} />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="price" className="form-label">Giá</label>
-                                        <input type="number" onChange={event => this.handleChanged(event)} className="form-control"  name="price" id="price"
-                                         value={this.state.newMaintenanceService.price}/>
+                                        <input type="number" onChange={event => this.handleChanged(event)} className="form-control" name="price" id="price"
+                                            value={this.state.newMaintenanceService.price} />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="times" className="form-label">Tần suất</label>
-                                        <input type="number"  onChange={event => this.handleChanged(event)} className="form-control"  name="period" id="times"
-                                               value={this.state.newMaintenanceService.period}/>
+                                        <input type="number" onChange={event => this.handleChanged(event)} className="form-control" name="period" id="times"
+                                            value={this.state.newMaintenanceService.period} />
                                     </div>
                                 </form>
                             </div>
@@ -86,7 +92,7 @@ class MaintenanceService extends Component {
                                 <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close
                                 </button>
                                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal"
-                                        onClick={(event) => this.addNewMaintenanceService(event)}>Update
+                                    onClick={(event) => this.addNewMaintenanceService(event)}>Update
                                 </button>
                             </div>
                         </div>
@@ -98,7 +104,7 @@ class MaintenanceService extends Component {
                         <div className="card mb-4">
                             <div className="card-body">
                                 <button type="button" className="btn btn btn-success" data-bs-toggle="modal"
-                                        data-bs-target="#formCleanedService">Update
+                                    data-bs-target="#formCleanedService">Update
                                 </button>
                             </div>
                         </div>
@@ -119,11 +125,11 @@ class MaintenanceService extends Component {
                                         </tr>
                                         <tr>
                                             <td><b>Tần suất:</b></td>
-                                            <td>{this.state.currentMaintenanceService.period} lần/tuần</td>
+                                            <td>{this.state.currentMaintenanceService.period} lần/tháng</td>
                                         </tr>
                                         <tr>
                                             <td><b>Bắt buộc:</b></td>
-                                            <td>Có</td>
+                                            <td>Không</td>
                                         </tr>
                                     </tbody>
                                 </table>

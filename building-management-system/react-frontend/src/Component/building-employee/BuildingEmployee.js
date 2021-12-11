@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import BuildingEmployeeService from './BuildingEmployeeService';
 import SalaryService from "./SalaryService";
 
@@ -70,22 +71,27 @@ class BuildingEmployee extends Component {
             this.state.newBuildingEmployee.position = this.state.listPosition[0];
             this.state.newBuildingEmployee.level = this.state.listLevel[0];
         }
-        console.log(this.state.newBuildingEmployee)
-        BuildingEmployeeService.createBuildingEmployee(this.state.newBuildingEmployee).then(() => {
-            this.componentDidMount();
-        });
-        this.setState({
-            newBuildingEmployee: {
-                id: 0,
-                code: "",
-                name: "",
-                dateOfBirth: "",
-                address: "",
-                phone: "",
-                position: "",
-                level: "",
-            }
-        });
+        // console.log(this.state.newBuildingEmployee)
+        if(this.state.newBuildingEmployee.code==="" || this.state.newBuildingEmployee.name==="" || this.state.newBuildingEmployee.dateOfBirth==="" || this.state.newBuildingEmployee.address==="" || this.state.newBuildingEmployee.phone==="" || this.state.newBuildingEmployee.level==="" || this.state.newBuildingEmployee.position==="" ){
+            toast.error('Please fill all the empty!!')
+        }else{
+            BuildingEmployeeService.createBuildingEmployee(this.state.newBuildingEmployee).then(() => {
+                this.componentDidMount();
+            });
+            this.setState({
+                newBuildingEmployee: {
+                    id: 0,
+                    code: "",
+                    name: "",
+                    dateOfBirth: "",
+                    address: "",
+                    phone: "",
+                    position: "",
+                    level: "",
+                }
+            });
+
+        }
     }
 
     getBuildingEmployee = (buildingEmployee) => {

@@ -46,17 +46,16 @@ class EmployeeDetail extends Component {
     }
     changeButton = (id) => {
         if (id === 0) {
-            return <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(code, identification, name, dateOfBirth, phone) => this.addNewCompany(
-                code = this.state.code,
+            return <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(identification, name, dateOfBirth, phone) => this.addNewCompany(
+                
                 identification = this.state.identification,
                 name = this.state.name,
                 dateOfBirth = this.state.dateOfBirth,
                 phone = this.state.phone)
             }>Add New</button>
         } else {
-            return <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(id, code, identification, name, dateOfBirth, phone) => this.editCompany(
+            return <button type="button" className="btn btn-warning" data-bs-dismiss="modal" onClick={(id, identification, name, dateOfBirth, phone) => this.editCompany(
                 id = this.state.id,
-                code = this.state.code,
                 identification = this.state.identification,
                 name = this.state.name,
                 dateOfBirth = this.state.dateOfBirth,
@@ -83,31 +82,33 @@ class EmployeeDetail extends Component {
         });
     }
 
-    addNewCompany = (code, identification, name, dateOfBirth, phone) => {
-        let companyEmployee = {};
-        companyEmployee.code = code;
-        companyEmployee.identification = identification;
-        companyEmployee.name = name;
-        companyEmployee.dateOfBirth = dateOfBirth;
-        companyEmployee.phone = phone;
-        companyEmployee.company_id = this.state.companyId;
-        CompanyEmployeeService.createCompanyEmployee(companyEmployee.company_id, companyEmployee).then(() => {
-            this.componentDidMount();
-        });
-        toast.success('Added Employee successfully!!!');
-        this.setState({
-            id: 0,
-            code: "",
-            identification: "",
-            name: "",
-            dateOfBirth: "",
-            phone: ""
-        });
+    addNewCompany = (identification, name, dateOfBirth, phone) => {
+        if(identification==="" || name==="" || dateOfBirth==="" || phone===""){
+            toast.error('Please fill all the empty!!')
+        }else{
+            let companyEmployee = {};
+            companyEmployee.identification = identification;
+            companyEmployee.name = name;
+            companyEmployee.dateOfBirth = dateOfBirth;
+            companyEmployee.phone = phone;
+            companyEmployee.company_id = this.state.companyId;
+            CompanyEmployeeService.createCompanyEmployee(companyEmployee.company_id, companyEmployee).then(() => {
+                this.componentDidMount();
+            });
+            toast.success('Added Employee successfully!!!');
+            this.setState({
+                id: 0,
+                code: "",
+                identification: "",
+                name: "",
+                dateOfBirth: "",
+                phone: ""
+            });
+        }
     }
 
-    editCompany = (id, code, identification, name, dateOfBirth, phone) => {
+    editCompany = (id, identification, name, dateOfBirth, phone) => {
         let companyEmployee = {};
-        companyEmployee.code = code;
         companyEmployee.identification = identification;
         companyEmployee.name = name;
         companyEmployee.dateOfBirth = dateOfBirth;
@@ -200,10 +201,6 @@ class EmployeeDetail extends Component {
                                     <div className="modal-body">
                                         <form>
                                             <div className="mb-3">
-                                                <label for="code" className="form-label">Code</label>
-                                                <input value={this.state.code} type="text" onChange={(event) => this.isChange(event)} name="code" className="form-control" id="code" />
-                                            </div>
-                                            <div className="mb-3">
                                                 <label for="name" className="form-label">Identification</label>
                                                 <input value={this.state.identification} type="text" onChange={(event) => this.isChange(event)} name="identification" className="form-control" id="identification" />
                                             </div>
@@ -275,13 +272,6 @@ class EmployeeDetail extends Component {
                                 </div>
                             </div>
 
-                            <div className="row">
-                                <div className="col-lg-8">
-                                </div>
-                                <div class="col-lg-4">
-                                    <b>Total Service Price: {this.state.company.totalPrice}</b>
-                                </div>
-                            </div>
                             <br />
                             <br />
                             <div className="card mb-4">
