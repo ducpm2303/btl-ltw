@@ -69,7 +69,7 @@ class BuildingEmployee extends Component {
     addNewBuildingEmployee = () => {
         if(this.state.newBuildingEmployee.position === "" || this.state.newBuildingEmployee.level === "") {
             this.state.newBuildingEmployee.position = this.state.listPosition[0];
-            this.state.newBuildingEmployee.level = this.state.listLevel[0];
+            this.state.newBuildingEmployee.level = 1;
         }
         // console.log(this.state.newBuildingEmployee)
         if(this.state.newBuildingEmployee.name==="" || this.state.newBuildingEmployee.dateOfBirth==="" || this.state.newBuildingEmployee.address==="" || this.state.newBuildingEmployee.phone==="" || this.state.newBuildingEmployee.level==="" || this.state.newBuildingEmployee.position==="" ){
@@ -162,7 +162,12 @@ class BuildingEmployee extends Component {
         }).then( () => {
             SalaryService.getAllLevelByPosition(this.state.listPosition[0]).then((response) => {
                 this.setState({listLevel: response.data.data});
+                if(this.state.newBuildingEmployee.position === "" || this.state.newBuildingEmployee.level === "") {
+                    this.state.newBuildingEmployee.position = this.state.listPosition[0];
+                    this.state.newBuildingEmployee.level = 1;
+                }
             });
+
         })
     }
 
