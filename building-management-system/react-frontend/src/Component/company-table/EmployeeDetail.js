@@ -75,11 +75,11 @@ class EmployeeDetail extends Component {
     }
 
     searchName = () => {
-        // console.log(value);
-        // console.log(this.state)
         CompanyEmployeeService.searchByName(this.state.name, this.state.companyId).then((response) => {
-            this.setState({ companyEmployees: response.data.data })
-            // console.log(this.state.companies);
+            let newCompany = this.state.company;
+            newCompany.companyEmployeeList = response.data.data;
+            this.setState({ company: newCompany })
+
         });
     }
 
@@ -173,12 +173,11 @@ class EmployeeDetail extends Component {
     componentDidMount() {
         CompanyEmployeeService.getServiceNotUsed(this.state.companyId).then((response) => {
             this.setState({serviceNotUsed: response.data.data});
-        }).then(
-            CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
-                this.setState({ company: response.data.data });
-                console.log(this.state.company)
-            })
-        );
+        });
+        CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
+            this.setState({ company: response.data.data });
+            console.log(this.state.company)
+        })
     };
 
 
@@ -325,7 +324,6 @@ class EmployeeDetail extends Component {
                                                         <td> {companyEmployee.dateOfBirth}</td>
                                                         <td> {companyEmployee.identification}</td>
                                                         <td> {companyEmployee.phone}</td>
-
                                                         <td>
                                                             <button type="button" className="btn btn-warning badge-pill" onClick={() => this.deleteCompanyEmployee(companyEmployee.id)}>Delete</button>
                                                             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formEmployee" onClick={() => this.getCompanyEmployee(companyEmployee)}>Edit</button>
