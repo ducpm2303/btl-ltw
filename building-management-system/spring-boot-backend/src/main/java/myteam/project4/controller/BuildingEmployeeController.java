@@ -8,6 +8,7 @@ import myteam.project4.model.response.BuildingEmployeeResponse;
 import myteam.project4.service.BuildingEmployeeService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -29,12 +30,12 @@ public class BuildingEmployeeController {
     }
 
     @PostMapping("/create")
-    BaseResponse<BuildingEmployeeResponse> createBuildingEmployee(@RequestBody BuildingEmployeeRequest buildingEmployeeRequest){
+    BaseResponse<BuildingEmployeeResponse> createBuildingEmployee(@RequestBody @Valid BuildingEmployeeRequest buildingEmployeeRequest){
         return BaseResponse.ofSuccess(buildingEmployeeService.save(buildingEmployeeRequest));
     }
 
     @PutMapping("/update/{id}")
-    BaseResponse<BuildingEmployeeResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody BuildingEmployeeRequest request){
+    BaseResponse<BuildingEmployeeResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody @Valid BuildingEmployeeRequest request){
         return BaseResponse.ofSuccess(buildingEmployeeService.save(id,request));
     }
 

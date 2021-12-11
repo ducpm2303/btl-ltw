@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface MonthUsedServiceRepository extends JpaRepository<MonthUsedService, Long> {
 
-    @Query(value = "SELECT m.* FROM month_used_service m INNER JOIN used_service us ON m.used_service_id = us.id" +
-            " WHERE us.company_id = :companyId and :date >= from_date AND :date <  to_date", nativeQuery = true)
-    List<MonthUsedService> findByCompanyIdAndDate(Long companyId, Timestamp date);
+    @Query(value = "SELECT m.* FROM month_used_service m INNER JOIN used_service us ON m.used_service_id = us.id\n" +
+            "WHERE us.company_id = :companyId and :month = EXTRACT(MONTH FROM m.from_date) AND :year = EXTRACT(YEAR FROM m.from_date)", nativeQuery = true)
+    List<MonthUsedService> findByCompanyIdAndDate(Long companyId, Integer month, Integer year);
 
     @Query(value = "SELECT m.* FROM month_used_service m INNER JOIN used_service us ON m.used_service_id = us.id" +
             " WHERE us.company_id = :companyId " +

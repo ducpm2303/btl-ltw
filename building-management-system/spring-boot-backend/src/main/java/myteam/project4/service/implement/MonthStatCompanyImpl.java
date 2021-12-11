@@ -37,14 +37,7 @@ public class MonthStatCompanyImpl implements MonthStatCompany {
             MonthStatCompanyResponse response = new MonthStatCompanyResponse();
             response.setCompanyResponse(companyMapper.to(company));
             Long companyId = company.getId();
-            String time = "";
-            if ( month < 10 ) {
-                time = year + "-0" + month + "-01";
-            } else {
-                time = year + "-" + month + "-01";
-            }
-            Timestamp date = convertStringToTimestamp(time);
-            List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByCompanyIdAndDate(companyId, date);
+            List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByCompanyIdAndDate(companyId, month, year);
             if(!monthUsedServiceList.isEmpty()) {
                 float servicePrice = 0;
                 for (MonthUsedService monthUsedService : monthUsedServiceList) {

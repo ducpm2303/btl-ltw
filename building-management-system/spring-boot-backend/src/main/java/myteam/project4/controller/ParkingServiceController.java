@@ -9,6 +9,8 @@ import myteam.project4.model.response.ParkingServiceResponse;
 import myteam.project4.service.ParkingServiceBusinessService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("public-api/v1.0.0/parking-service")
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public class ParkingServiceController {
     }
 
     @PostMapping()
-    public BaseResponse<ParkingServiceResponse> createNewParkingService(@RequestBody ParkingServiceRequest request){
+    public BaseResponse<ParkingServiceResponse> createNewParkingService(@RequestBody @Valid ParkingServiceRequest request){
         return BaseResponse.ofSuccess(parkingService.createNewParkingService(request));
     }
 
