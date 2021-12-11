@@ -50,7 +50,7 @@ public class FoodServiceBusinessServiceImpl implements FoodServiceBusinessServic
             FoodService oldService = serviceRepository.findFoodServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(oldService);
             usedServiceRepository.deleteUsedServiceByService(oldService);
-            serviceRepository.deactivateAllProtectedService();
+            serviceRepository.deactivateAllFoodService();
             FoodService newService = serviceRepository.save(foodServiceMapper.to(request));
             usedServiceList = usedServiceList.stream().map(usedService -> {
                 UsedService newUsedService = new UsedService();
