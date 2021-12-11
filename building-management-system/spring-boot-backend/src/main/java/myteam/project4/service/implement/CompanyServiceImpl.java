@@ -16,10 +16,13 @@ import myteam.project4.model.response.CompanyDetailResponse;
 import myteam.project4.model.response.CompanyResponse;
 import myteam.project4.repository.*;
 import myteam.project4.service.CompanyService;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -110,11 +113,19 @@ public class CompanyServiceImpl implements CompanyService {
         UsedService usedService = new UsedService();
         usedService.setCompany(company);
         usedService.setStartDate(new Timestamp(System.currentTimeMillis()));
+
         myteam.project4.entity.Service service = serviceRepository.findCleanedServiceByActiveIs(true).orElseThrow(
                 () -> new BusinessException(BusinessCode.NOT_FOUND_CURRENT_SERVICE)
         );
         usedService.setService(service);
-        usedServiceRepository.saveAndFlush(usedService);
+        usedService = usedServiceRepository.saveAndFlush(usedService);
+        MonthUsedService monthUsedService = new MonthUsedService();
+        Date toDate = Date.valueOf(LocalDate.now().withDayOfMonth(1));
+        monthUsedService.setFromDate(new Timestamp(System.currentTimeMillis()));
+        monthUsedService.setUsedService(usedService);
+        monthUsedService.setToDate(new Timestamp(DateUtils.addMonths(toDate,1).getTime()));
+        monthUsedServiceRepository.saveAndFlush(monthUsedService);
+
 
         usedService = new UsedService();
         usedService.setCompany(company);
@@ -123,6 +134,12 @@ public class CompanyServiceImpl implements CompanyService {
                 () -> new BusinessException(BusinessCode.NOT_FOUND_CURRENT_SERVICE)
         );
         usedService.setService(service);
-        usedServiceRepository.saveAndFlush(usedService);
+        usedService = usedServiceRepository.saveAndFlush(usedService);
+
+        monthUsedService = new MonthUsedService();
+        monthUsedService.setFromDate(new Timestamp(System.currentTimeMillis()));
+        monthUsedService.setUsedService(usedService);
+        monthUsedService.setToDate(new Timestamp(DateUtils.addMonths(toDate,1).getTime()));
+        monthUsedServiceRepository.saveAndFlush(monthUsedService);
     }
 }
