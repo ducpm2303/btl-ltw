@@ -43,6 +43,11 @@ public class MonthSalaryServiceImpl implements MonthSalaryService {
         for ( BuildingEmployee b : list ) {
             listResponse.add(mapper.toByMonth(b,request));
         }
-        return listResponse;
+        List<BuildingEmployeeResponse> ans = new ArrayList<>();
+        for ( BuildingEmployeeResponse b : listResponse ) {
+            if ( b != null )
+                ans.add(b);
+        }
+        return ans;
     }
 }

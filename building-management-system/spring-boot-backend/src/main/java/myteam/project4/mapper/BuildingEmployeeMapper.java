@@ -60,22 +60,48 @@ public class BuildingEmployeeMapper implements Mapper<BuildingEmployee> {
         response.setDateOfBirth(convertTimestampToString(buildingEmployee.getDateOfBirth()));
         List<MonthSalary> monthSalaryList = buildingEmployee.getMonthSalaryList();
         Salary salary = new Salary();
-        String time = "";
-        if ( request.getMonth() < 10 ) {
-            time = request.getYear()+ "-0" +request.getMonth() + "-01";
+        String strartTime = "";
+        int month = request.getMonth();
+        int year = request.getYear();
+        if ( month < 10 ) {
+            strartTime = year+ "-0" +month + "-01";
         } else {
-            time = request.getYear()+ "-" +request.getMonth() + "-01";
+            strartTime = year+ "-" +month + "-01";
+        }
+        if ( month==12 ) {
+            month = 1;
+            year++;
+        } else {
+            month++;
+        }
+        String endTime = "";
+        if ( month < 10 ) {
+            endTime = year+ "-0" +month + "-01";
+        } else {
+            endTime = year + "-" +month + "-01";
         }
         Timestamp current = new Timestamp(System.currentTimeMillis());
-        Timestamp compare = convertStringToTimestamp(time);
-        if ( compare.after(current) ) {
+        Timestamp startCompare = convertStringToTimestamp(strartTime);
+        Timestamp endCompare = convertStringToTimestamp(endTime);
+        if ( startCompare.after(current) ) {
             return null;
         }
+        int check = 1;
         for (MonthSalary m: monthSalaryList) {
-            if (m.getCreatedAt().before(compare)) {
-                salary = m.getSalary();
+            if ( m.getIsDeleted()==false ) {
+                if ( (m.getUpdatedAt().after(startCompare) && m.getCreatedAt().before(endCompare)) || m.getUpdatedAt().before(endCompare)  ) {
+                    salary = m.getSalary();
+                    check=0;
+                }
+            } else {
+                if ( m.getCreatedAt().before(startCompare) || m.getUpdatedAt().after(endCompare)) {
+                    salary = m.getSalary();
+                    check=0;
+                }
             }
         }
+        if ( check==1 )
+            return null;
         response.setSalaryResponse(salaryMapper.to(salary));
         return response;
     }
