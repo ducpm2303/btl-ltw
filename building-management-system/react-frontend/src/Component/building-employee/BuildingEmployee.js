@@ -72,7 +72,7 @@ class BuildingEmployee extends Component {
             this.state.newBuildingEmployee.level = this.state.listLevel[0];
         }
         // console.log(this.state.newBuildingEmployee)
-        if(this.state.newBuildingEmployee.code==="" || this.state.newBuildingEmployee.name==="" || this.state.newBuildingEmployee.dateOfBirth==="" || this.state.newBuildingEmployee.address==="" || this.state.newBuildingEmployee.phone==="" || this.state.newBuildingEmployee.level==="" || this.state.newBuildingEmployee.position==="" ){
+        if(this.state.newBuildingEmployee.name==="" || this.state.newBuildingEmployee.dateOfBirth==="" || this.state.newBuildingEmployee.address==="" || this.state.newBuildingEmployee.phone==="" || this.state.newBuildingEmployee.level==="" || this.state.newBuildingEmployee.position==="" ){
             toast.error('Please fill all the empty!!')
         }else{
             BuildingEmployeeService.createBuildingEmployee(this.state.newBuildingEmployee).then(() => {

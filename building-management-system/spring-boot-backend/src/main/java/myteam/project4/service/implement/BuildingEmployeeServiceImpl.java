@@ -39,7 +39,7 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
 
         buildingEmployee.setCode("BE-" + (repository.findLastId().orElse(0)+1));
         Salary salary = salaryRepository.
-                findByPositionAndLevel(request.getPosition(), request.getLevel()).orElseThrow(
+                findByPositionAndLevelAndIsDeleted(request.getPosition(), request.getLevel(), false).orElseThrow(
                         () -> new BusinessException(BusinessCode.NOT_FOUND_SALARY)
                 );
         MonthSalary monthSalary = new MonthSalary();
@@ -58,7 +58,7 @@ public class BuildingEmployeeServiceImpl implements BuildingEmployeeService {
         );
         buildingEmployee = mapper.to(buildingEmployee, request);
         Salary salary = salaryRepository.
-                findByPositionAndLevel(request.getPosition(), request.getLevel()).orElseThrow(
+                findByPositionAndLevelAndIsDeleted(request.getPosition(), request.getLevel(), false).orElseThrow(
                         () -> new BusinessException(BusinessCode.NOT_FOUND_SALARY)
                 );
         MonthSalary monthSalary = new MonthSalary();

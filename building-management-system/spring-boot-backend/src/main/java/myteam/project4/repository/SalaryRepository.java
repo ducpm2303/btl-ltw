@@ -11,7 +11,7 @@ public interface SalaryRepository extends JpaRepository<Salary, Long> {
     List<Salary> findByIsDeletedAndPositionLike(Boolean isDeleted, String position);
     List<Salary> findAllByIsDeleted(boolean isDeleted);
     Salary findById(int id);
-    Optional<Salary> findByPositionAndLevel(String position, String level);
+    Optional<Salary> findByPositionAndLevelAndIsDeleted(String position, String level, boolean isDeleted);
     @Query(value = "SELECT distinct (s.position) FROM Salary s WHERE s.isDeleted = false")
     List<String> findAllPosition();
     @Query(value = "SELECT s.level FROM Salary  s WHERE s.position = :position AND s.isDeleted = false")
