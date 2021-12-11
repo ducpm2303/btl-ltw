@@ -173,6 +173,7 @@ class EmployeeDetail extends Component {
     componentDidMount() {
         CompanyEmployeeService.getServiceNotUsed(this.state.companyId).then((response) => {
             this.setState({serviceNotUsed: response.data.data});
+            console.log(response);
         });
         CompanyEmployeeService.getCompanyById(this.state.companyId).then((response) => {
             this.setState({ company: response.data.data });
