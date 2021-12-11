@@ -121,7 +121,7 @@ class ProtectedService extends Component {
                                     </tr>
                                     <tr>
                                         <td><b>Khác</b></td>
-                                        <td>{this.state.currentProtectedService.time}</td>
+                                        <td>{this.state.currentProtectedService.any}</td>
                                     </tr>
                                     <tr>
                                         <td><b>Bắt buộc:</b></td>
