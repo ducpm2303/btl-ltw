@@ -46,6 +46,7 @@ public class FoodServiceBusinessServiceImpl implements FoodServiceBusinessServic
     @Override
     @Transactional
     public FoodServiceResponse createNewFoodService(FoodServiceRequest request) {
+        request.setType("food");
         if(serviceRepository.findFoodServiceByActiveIs(true).isPresent()) {
             FoodService oldService = serviceRepository.findFoodServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(oldService);

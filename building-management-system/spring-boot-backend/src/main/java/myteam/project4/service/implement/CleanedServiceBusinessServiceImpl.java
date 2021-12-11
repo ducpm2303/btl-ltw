@@ -42,6 +42,7 @@ public class CleanedServiceBusinessServiceImpl implements CleanedServiceBusiness
     @Override
     @Transactional
     public CleanedResponse createNewCleanedService(CleanedRequest cleanedRequest) {
+        cleanedRequest.setType("cleaned");
         if(serviceRepository.findCleanedServiceByActiveIs(true).isPresent()) {
             CleanedService cleanedService = serviceRepository.findCleanedServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(cleanedService);
