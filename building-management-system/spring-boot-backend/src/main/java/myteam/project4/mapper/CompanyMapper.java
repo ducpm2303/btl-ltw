@@ -44,8 +44,11 @@ public class CompanyMapper implements Mapper<Company> {
     public CompanyDetailResponse toDetail(Company company){
         CompanyDetailResponse companyDetailResponse = new CompanyDetailResponse();
         BeanUtils.copyProperties(company,companyDetailResponse);
+        int numOfEmp = 0;
+        float servicePrice = 0;
         if(company.getCompanyEmployeeList() != null){
             List<CompanyEmployeeResponse> companyEmployeeResponseList = companyEmployeeMapper.toList(company.getCompanyEmployeeList(),companyEmployeeMapper::to);
+            numOfEmp = companyEmployeeResponseList.size();
             companyDetailResponse.setCompanyEmployeeList(companyEmployeeResponseList);
         }
         if(company.getUsedServiceList() != null){
@@ -55,10 +58,15 @@ public class CompanyMapper implements Mapper<Company> {
                 serviceResponse.setId(usedService.getService().getId());
                 serviceResponse.setName(usedService.getService().getName());
                 serviceResponse.setPrice(usedService.getService().getPrice());
+                Timestamp currentDate = new Timestamp(System.currentTimeMillis());
+                long timeUsed = TimeUnit.DAYS.convert(Math.abs(currentDate.getTime() - usedService.getStartDate().getTime()),TimeUnit.MILLISECONDS);
+                servicePrice += (1.0*timeUsed/26) * usedService.getService().getPrice();
                 serviceList.add(serviceResponse);
             }
             companyDetailResponse.setServiceList(serviceList);
         }
+        float totalPrice = servicePrice + servicePrice * (numOfEmp/5 + (int) (company.getArea()/10)) * 5/100;
+        companyDetailResponse.setTotalPrice(totalPrice);
         return companyDetailResponse;
     }
 }
