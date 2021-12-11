@@ -9,6 +9,7 @@ import myteam.project4.model.response.SalaryResponse;
 import myteam.project4.service.implement.SalaryServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -29,12 +30,12 @@ public class SalaryController {
     }
 
     @PostMapping("/create")
-    BaseResponse<SalaryResponse> createBuildingEmployee(@RequestBody SalaryRequest salaryRequest){
+    BaseResponse<SalaryResponse> createBuildingEmployee(@RequestBody @Valid SalaryRequest salaryRequest){
         return BaseResponse.ofSuccess(salaryService.save(salaryRequest));
     }
 
     @PutMapping("/update/{id}")
-    BaseResponse<SalaryResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody SalaryRequest request){
+    BaseResponse<SalaryResponse> updateBuildingEmployee(@PathVariable Long id, @RequestBody @Valid SalaryRequest request){
         return BaseResponse.ofSuccess(salaryService.save(id,request));
     }
 

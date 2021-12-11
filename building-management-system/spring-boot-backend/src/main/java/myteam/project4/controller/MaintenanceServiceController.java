@@ -10,6 +10,8 @@ import myteam.project4.service.CleanedServiceBusinessService;
 import myteam.project4.service.MaintenanceBusinessService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("public-api/v1.0.0/maintenance-service")
 @AllArgsConstructor
@@ -23,7 +25,7 @@ public class MaintenanceServiceController {
     }
 
     @PostMapping()
-    public BaseResponse<MaintenanceResponse> createNewMaintenanceService(@RequestBody MaintenanceRequest maintenanceRequest){
+    public BaseResponse<MaintenanceResponse> createNewMaintenanceService(@RequestBody @Valid MaintenanceRequest maintenanceRequest){
         return BaseResponse.ofSuccess(maintenanceBusinessService.createNewMaintenanceService(maintenanceRequest));
     }
 }

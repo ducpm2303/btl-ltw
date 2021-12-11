@@ -8,6 +8,7 @@ import myteam.project4.model.response.*;
 import myteam.project4.service.*;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins="http://localhost:3000")
@@ -33,12 +34,12 @@ public class CompanyController {
     }
 
     @PutMapping("/update/{id}")
-    BaseResponse<CompanyResponse> updateCompany(@PathVariable Long id, @RequestBody CompanyRequest request){
+    BaseResponse<CompanyResponse> updateCompany(@PathVariable Long id, @RequestBody @Valid CompanyRequest request){
         return BaseResponse.ofSuccess(companyService.updateById(id,request));
     }
 
     @PostMapping("/create")
-    BaseResponse<CompanyResponse> createCompany(@RequestBody CompanyRequest request){
+    BaseResponse<CompanyResponse> createCompany(@RequestBody @Valid CompanyRequest request){
         return BaseResponse.ofSuccess(companyService.save(request));
     }
 
@@ -74,13 +75,13 @@ public class CompanyController {
     }
 
     @PostMapping("/{company_id}/employee/create")
-    public BaseResponse<CompanyEmployeeResponse> createCompanyEmployee(@PathVariable Long company_id, @RequestBody CompanyEmployeeRequest request){
+    public BaseResponse<CompanyEmployeeResponse> createCompanyEmployee(@PathVariable Long company_id, @RequestBody @Valid CompanyEmployeeRequest request){
         request.setCompany_id(company_id);
         return BaseResponse.ofSuccess(companyEmployeeService.save(request));
     }
 
     @PutMapping("/{company_id}/employee/update/{employee_id}")
-    public BaseResponse<CompanyEmployeeResponse> updateCompanyEmployeeById(@PathVariable Long company_id,@PathVariable Long employee_id,@RequestBody CompanyEmployeeRequest request){
+    public BaseResponse<CompanyEmployeeResponse> updateCompanyEmployeeById(@PathVariable Long company_id,@PathVariable  Long employee_id,@RequestBody CompanyEmployeeRequest request){
         request.setCompany_id(company_id);
         return BaseResponse.ofSuccess(companyEmployeeService.updateById(employee_id,request));
     }
@@ -96,7 +97,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{company_id}/employee/list")
-    public BaseResponse<List<CompanyEmployeeResponse>> getAllCompanyEmployee(){
+    public BaseResponse<List<CompanyEmployeeResponse>> getAllCompanyEmployee(@PathVariable String company_id){
         return BaseResponse.ofSuccess(companyEmployeeService.getAllCompanyEmployee());
     }
 

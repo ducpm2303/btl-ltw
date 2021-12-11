@@ -34,7 +34,7 @@ class RouterSystem extends Component {
                     <Route path={"/food-service"}><FoodServiceComponent/></Route>
                     <Route path={"/parking-service"}><ParkingServiceComponent/></Route>
                     <Route path={"/protected-service"}><ProtectedServiceComponent/></Route>
-                    <Route path="/employee-detail/:companyId" component = {EmployeeDetail}></Route>
+                    <Route path="/company-detail/:companyId" component = {EmployeeDetail}></Route>
                 </Switch>
             </div>
         );

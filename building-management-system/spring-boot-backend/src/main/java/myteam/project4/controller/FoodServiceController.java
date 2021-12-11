@@ -8,6 +8,8 @@ import myteam.project4.model.response.FoodServiceResponse;
 import myteam.project4.service.FoodServiceBusinessService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("public-api/v1.0.0/food-service")
 @AllArgsConstructor
@@ -21,7 +23,7 @@ public class FoodServiceController {
     }
 
     @PostMapping()
-    public BaseResponse<FoodServiceResponse> createNewFoodService(@RequestBody FoodServiceRequest request) {
+    public BaseResponse<FoodServiceResponse> createNewFoodService(@RequestBody @Valid FoodServiceRequest request) {
         return BaseResponse.ofSuccess(foodService.createNewFoodService(request));
     }
 }
