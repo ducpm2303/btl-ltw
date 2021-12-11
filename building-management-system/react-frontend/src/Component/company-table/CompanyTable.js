@@ -268,7 +268,7 @@ class CompanyTable extends Component {
                                                         <button type="button" className="btn btn-danger" onClick={() => this.deleteCompany(company.id)}>Delete</button>
                                                         <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#formCompany" onClick={() => this.getCompany(company)}>Edit</button>
                                                         <button type="button" className="btn btn-warning">
-                                                                <a id="viewDetail" href={`/employee-detail/${company.id}`}>view Detail</a>
+                                                                <a id="viewDetail" href={`/company-detail/${company.id}`}>view Detail</a>
                                                         </button>
                                                     </td>
                                                 </tr>
