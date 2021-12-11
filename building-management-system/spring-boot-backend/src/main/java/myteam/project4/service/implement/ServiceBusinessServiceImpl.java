@@ -32,13 +32,19 @@ public class ServiceBusinessServiceImpl implements ServiceBusinessService {
         List<UsedService> usedServiceList = usedServiceRepository.findByIsDeletedAndCompanyId(false, companyId);
         List<Service> serviceNotUsed = new ArrayList<>();
         List<Service> serviceList = serviceRepository.findAllByActive(true);
-        List<Service> serviceUsed = usedServiceList.stream().map(usedService ->
+        List<Service> serviceUsedList = usedServiceList.stream().map(usedService ->
                 usedService.getService()).collect(Collectors.toList());
-        for (Service service : serviceList) {
-            if(!serviceUsed.contains(service)){
-                serviceNotUsed.add(service);
+        for(Service service: serviceList){
+            boolean flag = false;
+            for(Service serviceUsed: serviceUsedList){
+                if(service.getType().equals(serviceUsed.getType())){
+                    flag = true;
+                    break;
+                }
             }
+            if(!flag) serviceNotUsed.add(service);
         }
+
         return serviceNotUsed.stream().map(mapper::to).collect(Collectors.toList());
     }
 }
