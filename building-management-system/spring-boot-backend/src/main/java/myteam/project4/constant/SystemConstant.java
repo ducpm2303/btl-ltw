@@ -7,4 +7,6 @@ public class SystemConstant {
     }
 
     public static Float RENTAL_PRICE = 500000F;
+
+    public static Integer DATE_PER_MONTH = 20;
 }

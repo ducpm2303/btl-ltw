@@ -40,6 +40,7 @@ public class MonthStatCompanyImpl implements MonthStatCompany {
             List<MonthUsedService> monthUsedServiceList = monthUsedServiceRepository.findByCompanyIdAndDate(companyId, month, year);
             if(!monthUsedServiceList.isEmpty()) {
                 float servicePrice = 0;
+                int date = SystemConstant.DATE_PER_MONTH;
                 for (MonthUsedService monthUsedService : monthUsedServiceList) {
                     UsedService usedService = monthUsedService.getUsedService();
                     Service service = usedService.getService();
