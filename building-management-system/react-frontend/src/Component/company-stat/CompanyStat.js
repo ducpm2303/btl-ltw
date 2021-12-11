@@ -36,13 +36,13 @@ class CompanyStat extends Component {
     componentDidMount() {
         CompanyStatService.getAll(this.state.month, this.state.year).then((response) => {
             if(response.data.data[0] === null ) {
-                toast.error('No statitic in this time !!');
                 this.setState({ check: 0 });
                 console.log(response);
             }else{
                 this.setState({ listStatitics: response.data.data });
                 this.setState({ check: 1 });
                 // console.log(this.state.listStatitics);
+                toast.success('Statitic successfully!!')
             }
         });
 
