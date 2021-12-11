@@ -46,6 +46,7 @@ public class ProtectedServiceBusinessServiceImpl implements ProtectedServiceBusi
     @Override
     @Transactional
     public ProtectedServiceResponse createNewProtectedService(ProtectedServiceRequest request) {
+        request.setType("protected");
         if(serviceRepository.findProtectedServiceByActiveIs(true).isPresent()) {
             ProtectedService oldService = serviceRepository.findProtectedServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(oldService);

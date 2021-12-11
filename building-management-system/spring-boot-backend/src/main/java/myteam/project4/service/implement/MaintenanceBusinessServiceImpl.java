@@ -46,6 +46,7 @@ public class MaintenanceBusinessServiceImpl implements MaintenanceBusinessServic
     @Override
     @Transactional
     public MaintenanceResponse createNewMaintenanceService(MaintenanceRequest request) {
+        request.setType("maintenance");
         if(serviceRepository.findMaintenanceServiceByActiveIs(true).isPresent()) {
             MaintenanceService oldService = serviceRepository.findMaintenanceServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(oldService);

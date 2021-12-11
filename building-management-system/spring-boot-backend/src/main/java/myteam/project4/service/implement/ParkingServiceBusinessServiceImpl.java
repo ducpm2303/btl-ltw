@@ -46,6 +46,7 @@ public class ParkingServiceBusinessServiceImpl implements ParkingServiceBusiness
     @Override
     @Transactional
     public ParkingServiceResponse createNewParkingService(ParkingServiceRequest request) {
+        request.setType("parking");
         if(serviceRepository.findParkingServiceByActiveIs(true).isPresent()) {
             ParkingService oldService = serviceRepository.findParkingServiceByActiveIs(true).get();
             List<UsedService> usedServiceList = usedServiceRepository.findByService(oldService);

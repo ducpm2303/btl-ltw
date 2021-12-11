@@ -10,7 +10,8 @@ class CompanyStat extends Component {
         this.state = {
             listStatitics: [],
             month: 12,
-            year: 2021
+            year: 2021,
+            check : 1
         }
         toast.configure();
     }
@@ -34,11 +35,13 @@ class CompanyStat extends Component {
     
     componentDidMount() {
         CompanyStatService.getAll(this.state.month, this.state.year).then((response) => {
-            if(response.data.data.length === 0 ) {
-                // toast.error('No statitic in this time !!');
-                // console.log(response);
+            if(response.data.data[0] === null ) {
+                toast.error('No statitic in this time !!');
+                this.setState({ check: 0 });
+                console.log(response);
             }else{
                 this.setState({ listStatitics: response.data.data });
+                this.setState({ check: 1 });
                 // console.log(this.state.listStatitics);
             }
         });
@@ -113,6 +116,7 @@ class CompanyStat extends Component {
                                         </thead>
                                         <tbody>
                                             {
+                                                this.state.check !== 0 ?
                                                 this.state.listStatitics.map((statitic) => (
                                                     <tr key={statitic.id} >
                                                         <td> {statitic.companyResponse.name}</td>
@@ -123,7 +127,7 @@ class CompanyStat extends Component {
                                                         <td> {statitic.totalPrice}</td>
                                                     </tr>
                                                 ))
-
+                                                : ""
                                             }
                                         </tbody>
                                     </table>

@@ -41,7 +41,6 @@ class EmployeeStat extends Component {
                 this.setState({ check: 1 });
             }
         });
-
     }
 
     render() {
